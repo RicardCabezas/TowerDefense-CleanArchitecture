@@ -4,6 +4,15 @@ namespace States
 {
     public class GameplayState : IStateBase
     {
+        private readonly ScreenMachineImplementation _screenMachine;
+        private readonly WavesService _wavesService;
+
+        public GameplayState(ScreenMachineImplementation screenMachine, WavesService wavesService)
+        {
+            _screenMachine = screenMachine; //TODO: improve this dependency
+            _wavesService = wavesService;
+        }
+
         public string GetId() => "";
 
         public void OnBringToFront()
@@ -16,6 +25,7 @@ namespace States
 
         public void OnCreate()
         {
+            _wavesService.PrepareWaves();
         }
 
         public void OnDestroy()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using ScreenMachine;
+using States;
 
 public class GameInstaller : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class GameInstaller : MonoBehaviour
         
         var spawnCreepUseCase = new SpawnCreepUseCase();
         var spawnWaveUseCase = new SpawnWaveUseCase(spawnCreepUseCase);
-        var levelWavesController = new WavesInLevelUseCase(spawnWaveUseCase);
+        var wavesService = new WavesService(spawnWaveUseCase);
 
         var screenMachine = new ScreenMachineImplementation();
+        
+        screenMachine.PushState(new GameplayState(screenMachine, wavesService));
     }
 }
