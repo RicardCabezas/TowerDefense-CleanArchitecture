@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ScreenMachine
 {
-    public class ScreenMachine
+    public class ScreenMachineImplementation
     {
         private Stack<IStateBase> _screenStack;
 
-        public ScreenMachine()
+        public ScreenMachineImplementation()
         {
             _screenStack = new Stack<IStateBase>();
         }

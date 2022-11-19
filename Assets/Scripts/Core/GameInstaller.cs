@@ -1,4 +1,5 @@
 using UnityEngine;
+using ScreenMachine;
 
 public class GameInstaller : MonoBehaviour
 {
@@ -10,5 +11,7 @@ public class GameInstaller : MonoBehaviour
         var spawnCreepUseCase = new SpawnCreepUseCase();
         var spawnWaveUseCase = new SpawnWaveUseCase(spawnCreepUseCase);
         var levelWavesController = new WavesInLevelUseCase(spawnWaveUseCase);
+
+        var screenMachine = new ScreenMachineImplementation();
     }
 }
