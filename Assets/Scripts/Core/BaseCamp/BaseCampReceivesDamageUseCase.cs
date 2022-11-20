@@ -12,8 +12,8 @@ namespace Core.Base
 
         public BaseCampReceivesDamageUseCase(
             BaseCampRepository baseCampRepository,
-            ScreenMachineImplementation screenMachine,
-            LevelFinishedRepository levelFinishedRepository)
+            LevelFinishedRepository levelFinishedRepository,
+            ScreenMachineImplementation screenMachine)
         {
             _baseCampRepository = baseCampRepository;
             _screenMachine = screenMachine;
