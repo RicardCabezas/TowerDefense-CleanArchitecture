@@ -15,6 +15,7 @@ MonoBehaviour:
   _levelsSpawnerPointsConfig:
     LevelsSpawnerPointsConfigs:
     - LevelId: 0
-      Prefab: {fileID: 0}
+      Prefab: {fileID: 2771012079623472152, guid: d1881f50742f34d69b756809c845114b,
+        type: 3}
     - LevelId: 1
       Prefab: {fileID: 0}

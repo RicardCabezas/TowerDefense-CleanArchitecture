@@ -17,10 +17,14 @@ MonoBehaviour:
     - CreepsConfig:
       - SpawnDelayInMiliseconds: 10000
         CreepId: Big
+        SpawnPointId: 1
       - SpawnDelayInMiliseconds: 10000
         CreepId: Big
+        SpawnPointId: 2
     - CreepsConfig:
       - SpawnDelayInMiliseconds: 5000
         CreepId: Small
+        SpawnPointId: 1
       - SpawnDelayInMiliseconds: 4000
         CreepId: Big
+        SpawnPointId: 2
