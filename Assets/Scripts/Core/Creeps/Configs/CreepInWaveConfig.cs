@@ -4,5 +4,6 @@ using System;
 public class CreepInWaveConfig
 {
     public int SpawnDelayInMiliseconds;
-    public CreepConfig Creep; //TODO: accept an asset
+    public string CreepId; //TODO: accept an asset
+    public string SpawnPointId;
 }

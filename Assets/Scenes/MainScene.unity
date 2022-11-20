@@ -223,6 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 317062232}
+  - component: {fileID: 317062233}
   m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
@@ -248,6 +249,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &317062233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317062231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c77306c88d446c963f4b2922f0efb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawners:
+  - {fileID: 1431058236}
+  - {fileID: 2664209775385113903}
+  - {fileID: 266367352}
+  - {fileID: 1252222132}
 --- !u!1 &625690872
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WavesLocalConfig: {fileID: 11400000, guid: e002ab8bd5f264c4ba734b4b3be5521e, type: 2}
+  CreepsLocalConfig: {fileID: 11400000, guid: 1b800640bb7af4c798cd1854c0c79f36, type: 2}
 --- !u!4 &1189054889
 Transform:
   m_ObjectHideFlags: 0

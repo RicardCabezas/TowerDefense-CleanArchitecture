@@ -16,23 +16,11 @@ MonoBehaviour:
     WaveConfigs:
     - CreepsConfig:
       - SpawnDelayInMiliseconds: 10000
-        Creep:
-          Speed: 0
-          Prefab: {fileID: 0}
-          Id: 
+        CreepId: Big
       - SpawnDelayInMiliseconds: 10000
-        Creep:
-          Speed: 0
-          Prefab: {fileID: 0}
-          Id: 
+        CreepId: Big
     - CreepsConfig:
       - SpawnDelayInMiliseconds: 5000
-        Creep:
-          Speed: 0
-          Prefab: {fileID: 0}
-          Id: 
+        CreepId: Small
       - SpawnDelayInMiliseconds: 4000
-        Creep:
-          Speed: 0
-          Prefab: {fileID: 0}
-          Id: 
+        CreepId: Big

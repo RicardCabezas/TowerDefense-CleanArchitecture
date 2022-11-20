@@ -4,16 +4,20 @@ using UnityEngine.Assertions;
 
 public class GameObjectPool<T> where T : PoolableObject
 {
+    //TODO: is it okay to have different pools? Should it be just one pool and change the visuals?
     private readonly T _prefab;
     
     private readonly HashSet<T> _instantiatedObjects;
     private readonly Queue<T> _pooledInactiveObjects;
+    private readonly GameObject _poolParent;
 
     public GameObjectPool(T prefab, int defaultNumberOfObjects)
     {
         _prefab = prefab;
         _instantiatedObjects = new HashSet<T>();
         _pooledInactiveObjects = new Queue<T>(defaultNumberOfObjects);
+        _poolParent = Object.Instantiate(new GameObject());
+        _poolParent.name = $"Pool-{_prefab.name}";
         
         for (var i = 0; i < defaultNumberOfObjects; i++)
         {
@@ -58,7 +62,7 @@ public class GameObjectPool<T> where T : PoolableObject
     
     private T InstantiateNewPooledObject()
     {
-        var instance = Object.Instantiate(_prefab);
+        var instance = Object.Instantiate(_prefab, _poolParent.transform);
         return instance;
     }
 }
