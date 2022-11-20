@@ -3,14 +3,25 @@ using UnityEngine;
 
 public class CreepRepository
 {
-    private Dictionary<int, CreepModel> _creepModels = new Dictionary<int, CreepModel>();
-    
-    public GameObject CreepPrefab; //TODO: get from config, have different types of creeps
+    private readonly CreepsConfig _creepsConfig;
 
-    public GameObject GetNewCreep()
+    //TODO: create creep factory
+    private Dictionary<int, CreepModel> _creepModels = new Dictionary<int, CreepModel>();
+
+    private Dictionary<string, GameObjectPool<CreepView>> _pools = new Dictionary<string, GameObjectPool<CreepView>>();
+
+    public CreepRepository(CreepsConfig creepsConfig)
     {
-        //TODO: add new creep model
-        return CreepPrefab; //TODO: get new creep from pool
+        _creepsConfig = creepsConfig;
+
+        foreach (var creep in _creepsConfig.Creeps)
+        {
+            _pools[creep.Id] = new GameObjectPool<CreepView>(creep.Prefab, 10);
+        }
+    }
+    public CreepView GetNewCreep(string creepId)
+    {
+        return _pools[creepId].Get();
     }
 
     public void RemoveCreep(int id)

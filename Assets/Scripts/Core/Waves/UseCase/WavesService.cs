@@ -9,10 +9,16 @@ public class WavesService
         _spawnWaveUseCase = spawnWaveUseCase;
     }
 
-    public void PrepareWaves()
+    public void PrepareWave()
     {
-        //TODO: move 
-        //TODO: keep calling when wave is finished (await or coroutine)
-        _spawnWaveUseCase.SpawnWave();
+        var nextWave = _wavesRepository.GetNextWave(); //TODO: create wave factory
+        _spawnWaveUseCase.SpawnWave(nextWave);
+    }
+    
+    //TODO: listen for event of all creeps killed to spawn next wave
+    void OnWaveFinished()
+    {
+        //TODO: check if it was last wave
+        PrepareWave();
     }
 }

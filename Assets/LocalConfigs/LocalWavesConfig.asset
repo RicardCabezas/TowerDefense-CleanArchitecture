@@ -12,3 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961e4cc90fee44519870a7fd04b9b64a, type: 3}
   m_Name: LocalWavesConfig
   m_EditorClassIdentifier: 
+  _wavesConfig:
+    WaveConfigs:
+    - CreepsConfig:
+      - SpawnDelayInMiliseconds: 10000
+        Creep:
+          Speed: 0
+          Prefab: {fileID: 0}
+          Id: 
+      - SpawnDelayInMiliseconds: 10000
+        Creep:
+          Speed: 0
+          Prefab: {fileID: 0}
+          Id: 
+    - CreepsConfig:
+      - SpawnDelayInMiliseconds: 5000
+        Creep:
+          Speed: 0
+          Prefab: {fileID: 0}
+          Id: 
+      - SpawnDelayInMiliseconds: 4000
+        Creep:
+          Speed: 0
+          Prefab: {fileID: 0}
+          Id: 

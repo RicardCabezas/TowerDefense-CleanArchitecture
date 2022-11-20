@@ -1,12 +1,23 @@
 public class WavesRepository
 {
-    //TODO: get configs
+    private readonly WavesConfig _wavesConfig;
+    private readonly WavesModel _model;
+
+    public WavesRepository(WavesConfig wavesConfig)
+    {
+        _wavesConfig = wavesConfig;
+        _model = new WavesModel();
+    }
+
+
+    public void UpdateCurrentWave()
+    {
+        _model.CurrentWave += 1;
+    }
     
     public WaveConfig GetNextWave()
     {
-        var currentWave = new WavesModel().CurrentWave;
-        
-        var wave = new WavesConfig().WaveConfigs[currentWave+1];
+        var wave = _wavesConfig.WaveConfigs[_model.CurrentWave];
 
         return wave;
     }

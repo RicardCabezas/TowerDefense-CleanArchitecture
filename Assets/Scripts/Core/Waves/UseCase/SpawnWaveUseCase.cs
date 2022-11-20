@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Threading.Tasks;
+using UnityEngine;
+
 public class SpawnWaveUseCase
 {
     //TODO: have a wave model
@@ -8,9 +13,18 @@ public class SpawnWaveUseCase
         _spawnCreepUseCase = spawnCreepUseCase;
     }
 
-    public void SpawnWave()
+    public async void SpawnWave(WaveConfig waveConfig)
     {
         //TODO: keep calling every X seconds (await or coroutine)
-        _spawnCreepUseCase.Spawn();
+        await SpawnCreeps(waveConfig);
+    }
+
+    async Task SpawnCreeps(WaveConfig waveConfig)
+    {
+        foreach (var creep in waveConfig.CreepsConfig)
+        {
+            await Task.Delay(creep.SpawnDelayInMiliseconds);
+            _spawnCreepUseCase.Spawn(creep);
+        }
     }
 }

@@ -4,10 +4,13 @@ using States;
 
 public class GameInstaller : MonoBehaviour
 {
+    public WavesLocalConfig WavesLocalConfig;
+    public LocalCreepsConfig CreepsLocalConfig;
+
     void Start()
     {
-        var creepRepository = new CreepRepository();
-        var wavesRepository = new WavesRepository();
+        var creepRepository = new CreepRepository(CreepsLocalConfig.CreepsConfig);
+        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig); //TODO: think how flow would work on server
         
         var spawnCreepUseCase = new SpawnCreepUseCase();
         var spawnWaveUseCase = new SpawnWaveUseCase(spawnCreepUseCase);

@@ -25,7 +25,7 @@ namespace States
 
         public void OnCreate()
         {
-            _wavesService.PrepareWaves();
+            _wavesService.PrepareWave();
         }
 
         public void OnDestroy()
