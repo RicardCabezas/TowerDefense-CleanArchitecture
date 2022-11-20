@@ -52,6 +52,7 @@ namespace ScreenMachine
         private void PushStateLocally(IStateBase state)
         {
             _screenStack.Push(state);
+            state.OnCreate();
         }
 
         private void PopStateLocally()
