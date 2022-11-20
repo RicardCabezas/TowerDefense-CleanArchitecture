@@ -1,9 +1,11 @@
 public class WavesService
 {
+    private readonly WavesRepository _wavesRepository;
     private readonly SpawnWaveUseCase _spawnWaveUseCase;
 
-    public WavesService(SpawnWaveUseCase spawnWaveUseCase)
+    public WavesService(WavesRepository wavesRepository, SpawnWaveUseCase spawnWaveUseCase)
     {
+        _wavesRepository = wavesRepository;
         _spawnWaveUseCase = spawnWaveUseCase;
     }
 

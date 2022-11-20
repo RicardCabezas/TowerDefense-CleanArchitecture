@@ -6,12 +6,12 @@ public class GameInstaller : MonoBehaviour
 {
     void Start()
     {
-        //Waves
         var creepRepository = new CreepRepository();
+        var wavesRepository = new WavesRepository();
         
         var spawnCreepUseCase = new SpawnCreepUseCase();
         var spawnWaveUseCase = new SpawnWaveUseCase(spawnCreepUseCase);
-        var wavesService = new WavesService(spawnWaveUseCase);
+        var wavesService = new WavesService(wavesRepository, spawnWaveUseCase);
 
         var screenMachine = new ScreenMachineImplementation();
         
