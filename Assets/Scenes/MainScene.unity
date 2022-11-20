@@ -426,6 +426,7 @@ MonoBehaviour:
   WavesLocalConfig: {fileID: 11400000, guid: e002ab8bd5f264c4ba734b4b3be5521e, type: 2}
   CreepsLocalConfig: {fileID: 11400000, guid: 1b800640bb7af4c798cd1854c0c79f36, type: 2}
   SpawnerPointsConfig: {fileID: 317062233}
+  UserBasePosition: {fileID: 1655739045}
 --- !u!4 &1189054889
 Transform:
   m_ObjectHideFlags: 0
@@ -586,6 +587,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5371787738081383558, guid: d1881f50742f34d69b756809c845114b,
     type: 3}
   m_PrefabInstance: {fileID: 2771012079327639617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1655739045 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 863164606739977221, guid: 458d7fbe6b08d464f9bbc0ea868876a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1233108153}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2664209775385113903 stripped
 Transform:

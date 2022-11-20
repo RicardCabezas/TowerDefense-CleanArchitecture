@@ -9,6 +9,7 @@ public class CreepRepository
     private Dictionary<int, CreepModel> _creepModels = new Dictionary<int, CreepModel>();
 
     private Dictionary<string, GameObjectPool<CreepView>> _pools = new Dictionary<string, GameObjectPool<CreepView>>();
+    private Dictionary<string, CreepConfig> _creepsById = new Dictionary<string, CreepConfig>();
 
     public CreepRepository(CreepsConfig creepsConfig)
     {
@@ -17,11 +18,17 @@ public class CreepRepository
         foreach (var creep in _creepsConfig.Creeps)
         {
             _pools[creep.Id] = new GameObjectPool<CreepView>(creep.Prefab, 10);
+            _creepsById[creep.Id] = creep;
         }
     }
     public CreepView GetNewCreep(string creepId)
     {
         return _pools[creepId].Get();
+    }
+    
+    public CreepConfig GetCreepConfig(string creepId)
+    {
+        return _creepsById[creepId];
     }
 
     public void RemoveCreep(int id)
