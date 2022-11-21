@@ -19,10 +19,10 @@ MonoBehaviour:
       Prefab: {fileID: 542929757418864410, guid: cc1690cde1bfb49158f54df1062eaf1a,
         type: 3}
       Id: Small
-      Damage: 20
+      Damage: 100
     - Speed: 2
       Health: 100
       Prefab: {fileID: 4781333161706966837, guid: 03dfb865ef6474e68a8586ba6eb0492d,
         type: 3}
       Id: Big
-      Damage: 20
+      Damage: 100
