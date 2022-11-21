@@ -36,6 +36,7 @@ public class CreepRepository
             CurrentPosition = position,
             Health = config.Health,
             Id = config.Id,
+            InstanceId = instanceID,
             CurrentSpeed = config.Speed
         };
 

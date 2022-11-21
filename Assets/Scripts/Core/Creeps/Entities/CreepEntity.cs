@@ -3,6 +3,7 @@ using UnityEngine;
 public class CreepEntity
 {
     public string Id;
+    public int InstanceId;
     public float Health;
     public float Damage;
     public float CurrentSpeed;

@@ -21,8 +21,11 @@ public class CreepPresenter
         _eventDispatcher.Subscribe<CreepMovedEvent>(OnCreepMoved);
     }
 
-    private void OnCreepMoved(CreepMovedEvent eventInfo)
+    private void OnCreepMoved(CreepMovedEvent eventInfo) //TODO: make a presenters container to avoid calling all presenters
     {
+        if(eventInfo.Creep.InstanceId != _view.GetInstanceID())
+            return;
+        
         _view.transform.position = eventInfo.Creep.CurrentPosition;
         _view.transform.LookAt(eventInfo.Creep.TargetPosition);
     }
