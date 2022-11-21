@@ -1,5 +1,6 @@
 
 using System.Threading.Tasks;
+using Core.Waves.Events;
 using Events;
 
 public class SpawnWaveUseCase
@@ -24,6 +25,9 @@ public class SpawnWaveUseCase
     {
         var nextWave = _wavesRepository.GetNextWave();
         
+        var nextWaveIndex = _wavesRepository.GetCurrentWaveIndex();
+        _eventDispatcher.Dispatch(new WaveSpawnedEvent(nextWaveIndex));
+
         foreach (var creep in nextWave.CreepsConfig)
         {
             await Task.Delay(creep.SpawnDelayInMiliseconds);
@@ -34,8 +38,6 @@ public class SpawnWaveUseCase
             _eventDispatcher.Dispatch(new CreepSpawnedEvent(creepEntity));
         }
     }
-    
-    
     
     
     //TODO: listen for event of all creeps killed to spawn next wave

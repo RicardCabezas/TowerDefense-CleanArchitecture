@@ -1,24 +1,32 @@
+using Core.Waves;
+
 public class WavesRepository
 {
     private readonly WavesConfig _wavesConfig;
-    private readonly WavesModel _model;
+    private readonly WavesEntity _entity;
 
-    public WavesRepository(WavesConfig wavesConfig)
+    public WavesRepository(WavesConfig wavesConfig, WavesView wavesView)
     {
         _wavesConfig = wavesConfig;
-        _model = new WavesModel();
-    }
+        _entity = new WavesEntity();
 
+        var presenter = new WavesPresenter(wavesView);
+    }
 
     public void UpdateCurrentWave()
     {
-        _model.CurrentWave += 1;
+        _entity.CurrentWave += 1;
     }
     
     public WaveConfig GetNextWave()
     {
-        var wave = _wavesConfig.WaveConfigs[_model.CurrentWave];
+        var wave = _wavesConfig.WaveConfigs[_entity.CurrentWave];
 
         return wave;
+    }
+    
+    public int GetCurrentWaveIndex()
+    {
+        return _entity.CurrentWave;
     }
 }

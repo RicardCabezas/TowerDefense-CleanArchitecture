@@ -1,5 +1,6 @@
 using Core.Base;
 using Core.LevelFinished;
+using Core.Waves;
 using Events;
 using UnityEngine;
 using ScreenMachine;
@@ -10,9 +11,12 @@ public class GameInstaller : MonoBehaviour
     public WavesLocalConfig WavesLocalConfig;
     public LocalCreepsConfig CreepsLocalConfig;
     public LevelSpawnerPointsLocalConfig SpawnerPointsConfig;
-    public Transform UserBasePosition; //TODO: make a config
     public LocalBaseCampConfig BaseCampLocalConfig;
     public LocalLevelFinishedConfig LevelFinishedLocalConfig;
+    
+    
+    public Transform UserBasePosition; //TODO: make a config
+    public WavesView WavesView; //TODO: move to a new installer
     void Start()
     { 
         IEventDispatcher eventDispatcher = new EventDispatcher();
@@ -23,7 +27,7 @@ public class GameInstaller : MonoBehaviour
         
         //Repositories
         var creepRepository = new CreepRepository(CreepsLocalConfig.CreepsConfig);
-        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig); //TODO: think how flow would work on server
+        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: think how flow would work on server
         var spawnerPointsRepository = new SpawnerPointsRepository(SpawnerPointsConfig.Spawners);
         var baseCampRepository = new BaseCampRepository(BaseCampLocalConfig.BaseCampConfig);
         var levelFinishedRepository = new LevelFinishedRepository(LevelFinishedLocalConfig.LevelFinishedConfig);

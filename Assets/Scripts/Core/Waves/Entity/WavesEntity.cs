@@ -1,4 +1,4 @@
-public class WavesModel
+public class WavesEntity
 {
     public int CurrentWave;
 }

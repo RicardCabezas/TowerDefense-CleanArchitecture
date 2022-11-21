@@ -15,17 +15,17 @@ MonoBehaviour:
   _wavesConfig:
     WaveConfigs:
     - CreepsConfig:
-      - SpawnDelayInMiliseconds: 10000
+      - SpawnDelayInMiliseconds: 0
         CreepId: Big
         SpawnPointId: 1
-      - SpawnDelayInMiliseconds: 10000
+      - SpawnDelayInMiliseconds: 1
         CreepId: Big
         SpawnPointId: 2
     - CreepsConfig:
       - SpawnDelayInMiliseconds: 0
         CreepId: Small
         SpawnPointId: 1
-      - SpawnDelayInMiliseconds: 4000
+      - SpawnDelayInMiliseconds: 200
         CreepId: Big
         SpawnPointId: 2
       - SpawnDelayInMiliseconds: 4000
