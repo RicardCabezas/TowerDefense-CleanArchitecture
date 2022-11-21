@@ -427,6 +427,10 @@ MonoBehaviour:
   CreepsLocalConfig: {fileID: 11400000, guid: 1b800640bb7af4c798cd1854c0c79f36, type: 2}
   SpawnerPointsConfig: {fileID: 317062233}
   UserBasePosition: {fileID: 1655739045}
+  BaseCampLocalConfig: {fileID: 11400000, guid: 91b6bb6d20c2f4a44817d2616088db5d,
+    type: 2}
+  LevelFinishedLocalConfig: {fileID: 11400000, guid: 42651075de67b429f866789043bf42b5,
+    type: 2}
 --- !u!4 &1189054889
 Transform:
   m_ObjectHideFlags: 0

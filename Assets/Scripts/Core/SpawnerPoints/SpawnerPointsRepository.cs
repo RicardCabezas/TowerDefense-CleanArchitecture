@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpawnerPointsRepository
 {
-    private Dictionary<string, Transform> _spawnerPoints = new Dictionary<string, Transform>();
+    private Dictionary<string, Transform> _spawnerPoints = new Dictionary<string, Transform>(); //TODO: create presenters, use Spawner Entity instead of Transform
     
     public SpawnerPointsRepository(SpawnerPointsConfig[] spawnerPointsConfigs)
     {

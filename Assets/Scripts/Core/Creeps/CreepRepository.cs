@@ -5,10 +5,11 @@ public class CreepRepository
 {
     private readonly CreepsConfig _creepsConfig;
 
-    //TODO: create creep factory
-    private Dictionary<int, CreepModel> _creepModels = new Dictionary<int, CreepModel>();
+    private Dictionary<int, CreepEntity> _creepEntities = new Dictionary<int, CreepEntity>();
+    private Dictionary<int, CreepPresenter> _creepPresenters = new Dictionary<int, CreepPresenter>();
 
     private Dictionary<string, GameObjectPool<CreepView>> _pools = new Dictionary<string, GameObjectPool<CreepView>>();
+
     private Dictionary<string, CreepConfig> _creepsById = new Dictionary<string, CreepConfig>();
 
     public CreepRepository(CreepsConfig creepsConfig)
@@ -21,7 +22,27 @@ public class CreepRepository
             _creepsById[creep.Id] = creep;
         }
     }
-    public CreepView GetNewCreep(string creepId)
+    
+    public CreepEntity SpawnNewCreep(string creepId, Vector3 position)
+    {
+        var config = _creepsById[creepId];
+
+        var view = GetNewCreepView(creepId);
+        var instanceID = view.GetInstanceID();
+        _creepPresenters[instanceID] = new CreepPresenter(view);
+        
+        _creepEntities[instanceID] = new CreepEntity
+        {
+            CurrentPosition = position,
+            Health = config.Health,
+            Id = config.Id,
+            CurrentSpeed = config.Speed
+        };
+
+        return _creepEntities[instanceID];
+    }
+    
+    public CreepView GetNewCreepView(string creepId) //TODO: move to presenter
     {
         return _pools[creepId].Get();
     }
@@ -34,11 +55,11 @@ public class CreepRepository
     public void RemoveCreep(int id)
     {
         //TODO: call when creep died or whatever
-        _creepModels.Remove(id);
+        _creepEntities.Remove(id);
     }
 
     public void UpdateCreepState(float health, int creepId)
     {
-        _creepModels[creepId].Health = health;
+        _creepEntities[creepId].Health = health;
     }
 }

@@ -5,12 +5,12 @@ namespace States
     public class GameplayState : IStateBase
     {
         private readonly ScreenMachineImplementation _screenMachine;
-        private readonly WavesService _wavesService;
+        private readonly SpawnWaveUseCase _spawnWaveUseCase;
 
-        public GameplayState(ScreenMachineImplementation screenMachine, WavesService wavesService)
+        public GameplayState(ScreenMachineImplementation screenMachine, SpawnWaveUseCase spawnWaveUseCase)
         {
             _screenMachine = screenMachine; //TODO: improve this dependency
-            _wavesService = wavesService;
+            _spawnWaveUseCase = spawnWaveUseCase;
         }
 
         public string GetId() => "";
@@ -25,7 +25,7 @@ namespace States
 
         public void OnCreate()
         {
-            _wavesService.PrepareWave();
+            _spawnWaveUseCase.SpawnCreepsInWave();
         }
 
         public void OnDestroy()

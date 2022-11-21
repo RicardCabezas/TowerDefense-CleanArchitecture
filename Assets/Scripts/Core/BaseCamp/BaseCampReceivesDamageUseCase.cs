@@ -1,4 +1,5 @@
 using Core.LevelFinished;
+using Events;
 using ScreenMachine;
 using States;
 
@@ -8,25 +9,40 @@ namespace Core.Base
     {
         private readonly BaseCampRepository _baseCampRepository;
         private readonly ScreenMachineImplementation _screenMachine;
+        private readonly IEventDispatcher _eventDispatcher;
         private readonly LevelFinishedRepository _levelFinishedRepository;
 
-        public BaseCampReceivesDamageUseCase(
-            BaseCampRepository baseCampRepository,
+        public BaseCampReceivesDamageUseCase(BaseCampRepository baseCampRepository,
             LevelFinishedRepository levelFinishedRepository,
-            ScreenMachineImplementation screenMachine)
+            ScreenMachineImplementation screenMachine, 
+            IEventDispatcher eventDispatcher)
         {
             _baseCampRepository = baseCampRepository;
             _screenMachine = screenMachine;
+            _eventDispatcher = eventDispatcher;
             _levelFinishedRepository = levelFinishedRepository;
+            
+            eventDispatcher.Subscribe<BaseCampReceivedDamageEvent>(OnBaseCampReceivesDamage);
         }
-        void ReceiveDamage(float damage) //TODO: subscribe to enemy dmg event
-        { 
-            _baseCampRepository.UpdateBaseHealth(damage);
+
+        private void OnBaseCampReceivesDamage(BaseCampReceivedDamageEvent damageReceivedEvent)
+        {
+            _baseCampRepository.UpdateBaseHealth(damageReceivedEvent.Damage);
             
             if (_baseCampRepository.GetBaseHealth() <= 0)
             {
                 _screenMachine.PushState(new LevelFailState(_levelFinishedRepository));
             }
+        }
+    }
+
+    public class BaseCampReceivedDamageEvent : BaseEvent
+    {
+        public float Damage { get; }
+
+        public BaseCampReceivedDamageEvent(float damage)
+        {
+            Damage = damage;
         }
     }
 }

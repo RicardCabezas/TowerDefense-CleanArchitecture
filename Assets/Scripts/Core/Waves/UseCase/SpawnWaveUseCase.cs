@@ -1,30 +1,47 @@
-using System;
-using System.Collections;
+
 using System.Threading.Tasks;
-using UnityEngine;
+using Events;
 
 public class SpawnWaveUseCase
 {
-    //TODO: have a wave model
-    private readonly SpawnCreepUseCase _spawnCreepUseCase;
+    private readonly IEventDispatcher _eventDispatcher;
+    private readonly WavesRepository _wavesRepository;
+    private readonly CreepRepository _creepRepository;
+    private readonly SpawnerPointsRepository _spawnerPointsRepository;
 
-    public SpawnWaveUseCase(SpawnCreepUseCase spawnCreepUseCase)
+    public SpawnWaveUseCase(
+        IEventDispatcher eventDispatcher,
+        WavesRepository wavesRepository,
+        CreepRepository creepRepository, SpawnerPointsRepository spawnerPointsRepository)
     {
-        _spawnCreepUseCase = spawnCreepUseCase;
+        _eventDispatcher = eventDispatcher;
+        _wavesRepository = wavesRepository;
+        _creepRepository = creepRepository;
+        _spawnerPointsRepository = spawnerPointsRepository;
     }
 
-    public async void SpawnWave(WaveConfig waveConfig)
+    public async void SpawnCreepsInWave()
     {
-        //TODO: keep calling every X seconds (await or coroutine)
-        await SpawnCreeps(waveConfig);
-    }
-
-    async Task SpawnCreeps(WaveConfig waveConfig)
-    {
-        foreach (var creep in waveConfig.CreepsConfig)
+        var nextWave = _wavesRepository.GetNextWave();
+        
+        foreach (var creep in nextWave.CreepsConfig)
         {
             await Task.Delay(creep.SpawnDelayInMiliseconds);
-            _spawnCreepUseCase.Spawn(creep);
+            
+            var spawnerPosition = _spawnerPointsRepository.GetSpawnerPoint(creep.SpawnPointId);
+            var creepEntity = _creepRepository.SpawnNewCreep(creep.CreepId, spawnerPosition.position);
+            
+            _eventDispatcher.Dispatch(new CreepSpawnedEvent(creepEntity));
         }
+    }
+    
+    
+    
+    
+    //TODO: listen for event of all creeps killed to spawn next wave
+    void OnWaveFinished()
+    {
+        //TODO: check if it was last wave
+        SpawnCreepsInWave();
     }
 }

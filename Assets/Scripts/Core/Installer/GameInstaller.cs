@@ -1,5 +1,6 @@
 using Core.Base;
 using Core.LevelFinished;
+using Events;
 using UnityEngine;
 using ScreenMachine;
 using States;
@@ -13,7 +14,11 @@ public class GameInstaller : MonoBehaviour
     public LocalBaseCampConfig BaseCampLocalConfig;
     public LocalLevelFinishedConfig LevelFinishedLocalConfig;
     void Start()
-    {
+    { 
+        IEventDispatcher eventDispatcher = new EventDispatcher();
+        ServiceLocator.Instance.RegisterService(eventDispatcher);
+        //TODO: move global services to a context
+        
         var screenMachine = new ScreenMachineImplementation();
         
         //Repositories
@@ -24,18 +29,17 @@ public class GameInstaller : MonoBehaviour
         var levelFinishedRepository = new LevelFinishedRepository(LevelFinishedLocalConfig.LevelFinishedConfig);
         
         //UseCase
-        var moveCreepUseCase = new MoveCreepUseCase(UserBasePosition);
-        var spawnCreepUseCase = new SpawnCreepUseCase(moveCreepUseCase, creepRepository, spawnerPointsRepository);
-        var spawnWaveUseCase = new SpawnWaveUseCase(spawnCreepUseCase);
-        var wavesService = new WavesService(wavesRepository, spawnWaveUseCase);
-        var baseCampReceivesDamageUseCase =
-            new BaseCampReceivesDamageUseCase(baseCampRepository,  levelFinishedRepository, screenMachine);
+        var moveCreepsUseCase = new MoveCreepsUseCase(creepRepository, UserBasePosition);
+        var spawnWaveUseCase = new SpawnWaveUseCase(eventDispatcher, wavesRepository, creepRepository, spawnerPointsRepository);
         
-        StartGame(screenMachine, wavesService);
+        var baseCampReceivesDamageUseCase =
+            new BaseCampReceivesDamageUseCase(baseCampRepository, levelFinishedRepository, screenMachine, eventDispatcher);
+        
+        StartGame(screenMachine, spawnWaveUseCase);
     }
 
-    private void StartGame(ScreenMachineImplementation screenMachine, WavesService wavesService)
+    private void StartGame(ScreenMachineImplementation screenMachine, SpawnWaveUseCase spawnWaveUseCase)
     {
-        screenMachine.PushState(new GameplayState(screenMachine, wavesService));
+        screenMachine.PushState(new GameplayState(screenMachine, spawnWaveUseCase));
     }
 }
