@@ -5,27 +5,27 @@ namespace Core.Base
     public class BaseCampRepository
     {
         private readonly BaseCampConfig _baseCampConfig;
-        private readonly BaseCampModel _baseCampModel;
+        private readonly BaseCampEntity _baseCampEntity;
 
         public BaseCampRepository(BaseCampConfig baseCampConfig)
         {
             _baseCampConfig = baseCampConfig;
-            _baseCampModel = new BaseCampModel();
+            _baseCampEntity = new BaseCampEntity();
             
-            _baseCampModel.CurrentHealth = _baseCampConfig.InitialHealth;
+            _baseCampEntity.CurrentHealth = _baseCampConfig.InitialHealth;
         }
 
         public float GetBaseHealth()
         {
-            return _baseCampModel.CurrentHealth;
+            return _baseCampEntity.CurrentHealth;
         }
 
         public void UpdateBaseHealth(float damage)
         {
-            var newHealth = _baseCampModel.CurrentHealth -= damage;
+            var newHealth = _baseCampEntity.CurrentHealth -= damage;
             var newHealthClamped = Mathf.Max(newHealth, 0);
 
-            _baseCampModel.CurrentHealth = newHealthClamped;
+            _baseCampEntity.CurrentHealth = newHealthClamped;
         }
     }
 }

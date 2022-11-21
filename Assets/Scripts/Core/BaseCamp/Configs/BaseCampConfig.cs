@@ -3,7 +3,7 @@ using System;
 namespace Core.Base
 {
     [Serializable]
-    public class BaseCampConfig //TODO: rename base feature
+    public class BaseCampConfig
     {
         public float InitialHealth;
     }

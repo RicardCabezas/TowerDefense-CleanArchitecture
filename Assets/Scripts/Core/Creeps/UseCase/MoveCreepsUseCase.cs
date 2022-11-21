@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Core.Base;
 using Events;
 using UnityEngine;
 
@@ -22,11 +23,11 @@ public class MoveCreepsUseCase
         Move(eventInfo.Creep);
     }
 
-    public async void Move(CreepEntity creep)
+    async void Move(CreepEntity creep)
     {
         creep.TargetPosition = _userBaseTransform.position;
         
-        while (Vector3.Distance(creep.CurrentPosition, _userBaseTransform.position) >= 1)
+        while (Vector3.Distance(creep.CurrentPosition, _userBaseTransform.position) >= 1) //TODO: remove magic number
         {
             var newCreepPosition = Vector3.MoveTowards(
                 creep.CurrentPosition, creep.TargetPosition, creep.CurrentSpeed * Time.deltaTime);
@@ -35,7 +36,8 @@ public class MoveCreepsUseCase
             _eventDispatcher.Dispatch(new CreepMovedEvent(creep));
             await Task.Yield();
         }
-        
-        //TODO: call event of creep arrived to Target
+
+        var damage = _creepRepository.GetCreepConfig(creep.Id).Damage;
+        _eventDispatcher.Dispatch(new BaseCampReceivedDamageEvent(damage)); //TODO: change event name
     }
 }

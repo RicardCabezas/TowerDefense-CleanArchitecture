@@ -11,4 +11,5 @@ public class CreepConfig
     public float Health;
     public CreepView Prefab;
     public string Id;
+    public float Damage;
 }

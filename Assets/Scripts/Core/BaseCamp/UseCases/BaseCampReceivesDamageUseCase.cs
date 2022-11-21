@@ -28,21 +28,12 @@ namespace Core.Base
         private void OnBaseCampReceivesDamage(BaseCampReceivedDamageEvent damageReceivedEvent)
         {
             _baseCampRepository.UpdateBaseHealth(damageReceivedEvent.Damage);
-            
+            //TODO: fire event updating health
+
             if (_baseCampRepository.GetBaseHealth() <= 0)
             {
                 _screenMachine.PushState(new LevelFailState(_levelFinishedRepository));
             }
-        }
-    }
-
-    public class BaseCampReceivedDamageEvent : BaseEvent
-    {
-        public float Damage { get; }
-
-        public BaseCampReceivedDamageEvent(float damage)
-        {
-            Damage = damage;
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace Core.Base
 {
-    public class BaseCampModel
+    public class BaseCampEntity
     {
         public float CurrentHealth;
     }

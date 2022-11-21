@@ -656,7 +656,7 @@ MonoBehaviour:
   WavesLocalConfig: {fileID: 11400000, guid: e002ab8bd5f264c4ba734b4b3be5521e, type: 2}
   CreepsLocalConfig: {fileID: 11400000, guid: 1b800640bb7af4c798cd1854c0c79f36, type: 2}
   SpawnerPointsConfig: {fileID: 317062233}
-  BaseCampLocalConfig: {fileID: 11400000, guid: 91b6bb6d20c2f4a44817d2616088db5d,
+  BaseCampLocalConfig: {fileID: 11400000, guid: 04a5512ecf47043568f1ea2c92c5612f,
     type: 2}
   LevelFinishedLocalConfig: {fileID: 11400000, guid: 42651075de67b429f866789043bf42b5,
     type: 2}

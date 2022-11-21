@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412007c8d2d842c382b510df44928e10, type: 3}
+  m_Script: {fileID: 11500000, guid: a6801a7bd6a2d4747a19143b3a15a3ab, type: 3}
   m_Name: LocalBaseCampConfig
   m_EditorClassIdentifier: 
   baseCampConfig:
-    InitialHealth: 0
+    InitialHealth: 40
