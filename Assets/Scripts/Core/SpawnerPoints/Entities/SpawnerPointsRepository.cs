@@ -1,20 +1,27 @@
 using System.Collections.Generic;
+using Core.SpawnerPoints.Entities;
+using Core.SpawnerPoints.Views;
 using UnityEngine;
 
 public class SpawnerPointsRepository
 {
-    private Dictionary<string, Transform> _spawnerPoints = new Dictionary<string, Transform>(); //TODO: create presenters, use Spawner Entity instead of Transform
+    private Dictionary<string, SpawnerPointEntity> _spawnerPoints = new Dictionary<string, SpawnerPointEntity>(); 
     
     public SpawnerPointsRepository(SpawnerPointsConfig[] spawnerPointsConfigs)
     {
         foreach (var spawner in spawnerPointsConfigs)
         {
-            _spawnerPoints[spawner.Id] = spawner.Transform;
+            _spawnerPoints[spawner.Id] = new SpawnerPointEntity
+            {
+                Position = spawner.View.transform.position
+            };
+
+            new SpawnerPresenter(spawner.View);
         }
     }
 
-    public Transform GetSpawnerPoint(string id)
+    public Vector3 GetSpawnerPointPosition(string id)
     {
-        return _spawnerPoints[id];
+        return _spawnerPoints[id].Position;
     }
 }

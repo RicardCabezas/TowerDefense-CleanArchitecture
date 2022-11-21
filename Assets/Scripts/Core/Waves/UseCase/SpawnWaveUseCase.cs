@@ -32,8 +32,8 @@ public class SpawnWaveUseCase
         {
             await Task.Delay(creep.SpawnDelayInMiliseconds);
             
-            var spawnerPosition = _spawnerPointsRepository.GetSpawnerPoint(creep.SpawnPointId);
-            var creepEntity = _creepRepository.SpawnNewCreep(creep.CreepId, spawnerPosition.position);
+            var spawnerPosition = _spawnerPointsRepository.GetSpawnerPointPosition(creep.SpawnPointId);
+            var creepEntity = _creepRepository.SpawnNewCreep(creep.CreepId, spawnerPosition);
             
             _eventDispatcher.Dispatch(new CreepSpawnedEvent(creepEntity));
         }
