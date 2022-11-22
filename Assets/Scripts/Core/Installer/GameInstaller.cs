@@ -21,8 +21,9 @@ public class GameInstaller : MonoBehaviour
 
         var assetCatalog = new AssetCatalog();
         ServiceLocator.Instance.RegisterService(assetCatalog);
-
-        //TODO: move global services to a context
+        
+        IEconomySystem<SoftCurrency> softCurrencySystem = new EconomySystemSoftCurrency();
+        ServiceLocator.Instance.RegisterService(softCurrencySystem);
         
         CreepsInstaller.Install(ref _repositories);
         WavesInstaller.Install(ref _repositories);
