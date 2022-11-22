@@ -588,6 +588,7 @@ MonoBehaviour:
   CreepsInstaller: {fileID: 291077629}
   WavesInstaller: {fileID: 554247678}
   BaseCampInstaller: {fileID: 1958538029}
+  CatalogConfig: {fileID: 11400000, guid: c631bedb4ea9b437c8fb0768f11c6909, type: 2}
 --- !u!4 &722581904
 Transform:
   m_ObjectHideFlags: 0
@@ -796,6 +797,7 @@ MonoBehaviour:
   CreepsInstaller: {fileID: 0}
   WavesInstaller: {fileID: 0}
   BaseCampInstaller: {fileID: 0}
+  CatalogConfig: {fileID: 0}
 --- !u!4 &1189054889
 Transform:
   m_ObjectHideFlags: 0

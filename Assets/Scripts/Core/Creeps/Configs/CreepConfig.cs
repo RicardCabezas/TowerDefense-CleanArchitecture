@@ -9,7 +9,7 @@ public class CreepConfig
     //TODO: use config instance instead of prefab instance
     public float Speed;
     public float Health;
-    public CreepView Prefab;
+    public string PrefabId;
     public string Id;
     public float Damage;
 }

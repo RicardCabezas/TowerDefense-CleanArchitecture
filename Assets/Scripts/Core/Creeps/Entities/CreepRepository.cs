@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Core.AssetCatalog;
+using Events;
 using UnityEngine;
 
 public class CreepRepository
@@ -16,9 +18,13 @@ public class CreepRepository
     {
         _creepsConfig = creepsConfig;
 
+        var assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog>();
+        
         foreach (var creep in _creepsConfig.Creeps)
         {
-            _pools[creep.Id] = new GameObjectPool<CreepView>(creep.Prefab, 10);
+            var prefab = assetCatalog.LoadResource<CreepView>($"{AssetCatalog.Creeps}{creep.PrefabId}");
+
+            _pools[creep.Id] = new GameObjectPool<CreepView>(prefab, 10);
             _creepsById[creep.Id] = creep;
         }
     }
