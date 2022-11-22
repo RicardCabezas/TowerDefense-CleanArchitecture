@@ -1,6 +1,6 @@
 using Events;
 
-public class CreepSpawnedEvent : BaseEvent
+public struct CreepSpawnedEvent : BaseEvent
 {
     public CreepEntity Creep { get; }
 

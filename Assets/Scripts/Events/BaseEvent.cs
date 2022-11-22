@@ -1,6 +1,6 @@
 namespace Events
 {
-    public abstract class BaseEvent
+    public interface BaseEvent
     {
     }
 }

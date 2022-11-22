@@ -2,7 +2,7 @@ using Events;
 
 namespace Core.Waves.Events
 {
-    public class WaveSpawnedEvent : BaseEvent
+    public struct WaveSpawnedEvent : BaseEvent
     {
         public int Wave { get; }
 
