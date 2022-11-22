@@ -11,11 +11,10 @@ public class SpawnWaveUseCase
     private readonly SpawnerPointsRepository _spawnerPointsRepository;
 
     public SpawnWaveUseCase(
-        IEventDispatcher eventDispatcher,
         WavesRepository wavesRepository,
         CreepRepository creepRepository, SpawnerPointsRepository spawnerPointsRepository)
     {
-        _eventDispatcher = eventDispatcher;
+        _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
         _wavesRepository = wavesRepository;
         _creepRepository = creepRepository;
         _spawnerPointsRepository = spawnerPointsRepository;

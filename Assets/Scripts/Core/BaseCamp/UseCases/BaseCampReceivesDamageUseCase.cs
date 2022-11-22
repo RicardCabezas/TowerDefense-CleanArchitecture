@@ -14,15 +14,14 @@ namespace Core.Base
 
         public BaseCampReceivesDamageUseCase(BaseCampRepository baseCampRepository,
             LevelFinishedRepository levelFinishedRepository,
-            ScreenMachineImplementation screenMachine, 
-            IEventDispatcher eventDispatcher)
+            ScreenMachineImplementation screenMachine)
         {
             _baseCampRepository = baseCampRepository;
             _screenMachine = screenMachine;
-            _eventDispatcher = eventDispatcher;
+            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _levelFinishedRepository = levelFinishedRepository;
             
-            eventDispatcher.Subscribe<BaseCampReceivedDamageEvent>(OnBaseCampReceivesDamage);
+            _eventDispatcher.Subscribe<BaseCampReceivedDamageEvent>(OnBaseCampReceivesDamage);
         }
 
         private void OnBaseCampReceivesDamage(BaseCampReceivedDamageEvent damageReceivedEvent)
