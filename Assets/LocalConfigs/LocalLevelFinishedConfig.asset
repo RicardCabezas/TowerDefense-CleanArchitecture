@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LocalLevelFinishedConfig
   m_EditorClassIdentifier: 
   _levelFinishedConfig:
-    LevelFailPopup: {fileID: 0}
-    LevelWinPopup: {fileID: 0}
+    LevelFailedScreenPath: UI/LosePopup
+    LevelCompletedScreenPath: UI/WonPopup

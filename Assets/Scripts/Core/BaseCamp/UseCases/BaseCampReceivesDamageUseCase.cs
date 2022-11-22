@@ -26,8 +26,7 @@ namespace Core.Base
 
             if (_baseCampRepository.GetBaseHealth() <= 0)
             {
-                //TODO: call level fail
-                //_screenMachine.PushState(new LevelFailState(_levelFinishedRepository));
+                _eventDispatcher.Dispatch(new BaseCampDestroyed());
             }
         }
     }
