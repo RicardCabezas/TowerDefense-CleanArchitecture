@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Core.AssetCatalog;
 using Events;
 using UnityEngine;
-using ScreenMachine;
-using States;
 
 public class GameInstaller : MonoBehaviour
 {
@@ -24,16 +22,9 @@ public class GameInstaller : MonoBehaviour
 
         //TODO: move global services to a context
         
-        var screenMachine = new ScreenMachineImplementation();
-        
         //Repositories
         CreepsInstaller.Install(ref _repositories);
         WavesInstaller.Install(ref _repositories);
-        BaseCampInstaller.Install(ref _repositories, screenMachine);
-    }
-
-    private void StartGame(ScreenMachineImplementation screenMachine, SpawnWaveUseCase spawnWaveUseCase)
-    {
-        screenMachine.PushState(new GameplayState(screenMachine, spawnWaveUseCase));
+        BaseCampInstaller.Install(ref _repositories);
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Core.Base;
 using Core.LevelFinished;
-using ScreenMachine;
 using UnityEngine;
 
 public class BaseCampInstaller : MonoBehaviour
@@ -10,7 +9,7 @@ public class BaseCampInstaller : MonoBehaviour
     public LocalBaseCampConfig BaseCampLocalConfig;
     public LocalLevelFinishedConfig LevelFinishedLocalConfig;
 
-    public void Install(ref Dictionary<Type, object> repositories, ScreenMachineImplementation screenMachine)
+    public void Install(ref Dictionary<Type, object> repositories)
     {
         
         var baseCampRepository = new BaseCampRepository(BaseCampLocalConfig.BaseCampConfig);
@@ -20,6 +19,6 @@ public class BaseCampInstaller : MonoBehaviour
         repositories[typeof(LevelFinishedRepository)] = levelFinishedRepository;
         
         var baseCampReceivesDamageUseCase =
-            new BaseCampReceivesDamageUseCase(baseCampRepository, levelFinishedRepository, screenMachine);
+            new BaseCampReceivesDamageUseCase(baseCampRepository, levelFinishedRepository);
     }
 }
