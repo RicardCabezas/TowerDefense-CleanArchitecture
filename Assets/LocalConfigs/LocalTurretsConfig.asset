@@ -18,18 +18,20 @@ MonoBehaviour:
       RegularProjectile:
         Damage: 20
         Speed: 3
+        PrefabPath: 
       FrozenProjectile:
         Damage: 0
         Speed: 5
+        PrefabPath: 
         SpeedDebuff: 0.7
     Turrets:
     - Cost: 2
-      Id: 
+      Id: Turret-regular
       ThumbnailColor: {r: 1, g: 0, b: 0, a: 0}
-      PrefabId: 
+      PrefabId: Turret-regular
       Cooldown: 0
     - Cost: 5
-      Id: 
+      Id: Turret-freezing
       ThumbnailColor: {r: 0, g: 0.92101526, b: 1, a: 0}
-      PrefabId: 
+      PrefabId: Turret-freezing
       Cooldown: 0

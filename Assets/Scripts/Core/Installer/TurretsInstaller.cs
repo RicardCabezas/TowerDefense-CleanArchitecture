@@ -10,7 +10,7 @@ public class TurretsInstaller : MonoBehaviour
 {
     public LocalTurretsConfig TurretsLocalConfig;
     public Transform ThumnailTurretsParent;
-
+    public TurretSpawnerPreviewerController SpawnerPreviewerController;
     public void Install()
     {
         var turretsRepository = new TurretsRepository(TurretsLocalConfig.TurretsConfig, ThumnailTurretsParent);
@@ -18,6 +18,6 @@ public class TurretsInstaller : MonoBehaviour
         var spawnTurretThumbnailsUseCase = new SpawnTurretSelectorUseCase();
 
         var turretShootingController = new TurretShootingController(turretsRepository);
-        spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig);
+        spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig, SpawnerPreviewerController);
     }
 }

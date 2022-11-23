@@ -1,6 +1,7 @@
 using Core.Turrets.Configs;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
+using Core.Turrets.Views;
 using Events;
 
 namespace Core.Turrets.UseCases
@@ -15,11 +16,12 @@ namespace Core.Turrets.UseCases
             //TODO: subscribe on game initialized
         }
         
-        public void Spawn(TurretsRepository turretsRepository, TurretsConfig turretsConfig)
+        public void Spawn(TurretsRepository turretsRepository, TurretsConfig turretsConfig,
+            TurretSpawnerPreviewerController turretSpawnerPreviewerController)
         {
             foreach (var turret in turretsConfig.Turrets)
             {
-                turretsRepository.SpawnNewTurretThumbnail(turret.Id);
+                turretsRepository.SpawnNewTurretThumbnail(turret.Id, turretSpawnerPreviewerController); //TODO: remove controller, move to group
                 _eventDispatcher.Dispatch(new TurretSelectorSpawned(turret));
             }
         }

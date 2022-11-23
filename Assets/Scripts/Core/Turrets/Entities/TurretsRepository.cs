@@ -41,9 +41,12 @@ namespace Core.Turrets.Entities
         {
             var config = _turretsById[turretId];
 
-            var view = GetNewTurretView(turretId);
+            //var view = GetNewTurretView(turretId);
+            
+            var prefab = _assetCatalog.LoadResource<TurretView>(config.PrefabId); //TODO: pool
+            var view = Object.Instantiate(prefab);
             var instanceID = view.GetInstanceID();
-            _turretPresenters[instanceID] = new TurretPresenter(view);
+            _turretPresenters[instanceID] = new TurretPresenter(view, position);
 
             _turretEntities[instanceID] = new TurretEntity();
 
@@ -59,7 +62,7 @@ namespace Core.Turrets.Entities
             new ProjectileController(view);
         }
         
-        public void SpawnNewTurretThumbnail(string turretId)
+        public void SpawnNewTurretThumbnail(string turretId, TurretSpawnerPreviewerController controller) //TODO: remove controller, move to group
         {
             var config = _turretsById[turretId];
             var prefab = _assetCatalog.LoadResource<TurretThumbnailView>(_turretsConfig.ThumbnailPrefabId);
@@ -68,7 +71,7 @@ namespace Core.Turrets.Entities
 
             var instanceID = view.GetInstanceID();
             _turretThumbnailPresenters[instanceID] = new TurretThumbnailPresenter(view);
-            _turretThumbnailControllers[instanceID] = new TurretThumbnailController(this, view, turretId);
+            _turretThumbnailControllers[instanceID] = new TurretThumbnailController(this, view, turretId, controller);
         }
     
         public TurretView GetNewTurretView(string turretId) //TODO: move to presenter

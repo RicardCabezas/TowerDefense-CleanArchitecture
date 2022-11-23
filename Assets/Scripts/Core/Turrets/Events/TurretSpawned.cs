@@ -1,13 +1,14 @@
 using Core.Turrets.Configs;
+using Core.Turrets.Entities;
 using Events;
 
 namespace Core.Turrets.Events
 {
     public struct TurretSpawned : BaseEvent
     {
-        public TurretConfig Turret { get; }
+        public TurretEntity Turret { get; }
 
-        public TurretSpawned(TurretConfig turret)
+        public TurretSpawned(TurretEntity turret)
         {
             Turret = turret;
         }

@@ -22,5 +22,9 @@ namespace Core.Turrets.Views
 
             _view.Price.text = turret.Cost.ToString(CultureInfo.InvariantCulture);
         }
+        
+        //TODO: create thumbnail Entity that store the Instance ID
+        //TODO: react to money spent and disable button
+        //TODO: create Thumbnail PresenterContainer
     }
 }

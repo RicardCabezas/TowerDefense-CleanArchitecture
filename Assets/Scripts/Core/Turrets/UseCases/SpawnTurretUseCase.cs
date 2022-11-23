@@ -1,6 +1,7 @@
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
 using Events;
+using UnityEngine;
 
 namespace Core.Turrets.UseCases
 {
@@ -16,10 +17,10 @@ namespace Core.Turrets.UseCases
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
 
-        public void Spawn(string turretId)
+        public void Spawn(string turretId, Vector3 position)
         {
-            _repository.GetNewTurretView(turretId); //TODO: get world position
-            _eventDispatcher.Dispatch<TurretSpawned>();
+            var turret = _repository.SpawnNewTurret(turretId, position); //TODO: get world position
+            _eventDispatcher.Dispatch(new TurretSpawned(turret));
         }
     }
 }
