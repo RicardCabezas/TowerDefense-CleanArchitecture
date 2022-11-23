@@ -6,6 +6,8 @@ namespace Core.Turrets.Configs
     public class TurretsConfig
     {
         public string ThumbnailPrefabId;
+
+        public ProjectilesConfiguration ProjectilesConfiguration;
         
         public TurretConfig[] Turrets;
     }

@@ -14,6 +14,7 @@ namespace Core.Turrets.Entities
         private Dictionary<int, TurretEntity> _turretEntities = new Dictionary<int, TurretEntity>();
         private Dictionary<int, TurretPresenter> _turretPresenters = new Dictionary<int, TurretPresenter>();
         private Dictionary<int, TurretThumbnailPresenter> _turretThumbnailPresenters = new Dictionary<int, TurretThumbnailPresenter>();
+        private Dictionary<int, TurretThumbnailController> _turretThumbnailControllers = new Dictionary<int, TurretThumbnailController>();
 
         private Dictionary<string, GameObjectPool<TurretView>> _pools = new Dictionary<string, GameObjectPool<TurretView>>();
 
@@ -43,10 +44,8 @@ namespace Core.Turrets.Entities
             var view = GetNewTurretView(turretId);
             var instanceID = view.GetInstanceID();
             _turretPresenters[instanceID] = new TurretPresenter(view);
-        
-            _turretEntities[instanceID] = new TurretEntity()
-            {
-            };
+
+            _turretEntities[instanceID] = new TurretEntity();
 
             return _turretEntities[instanceID];
         }
@@ -58,7 +57,18 @@ namespace Core.Turrets.Entities
 
             var view = Object.Instantiate(prefab, _thumbnailTurretsParent); //TODO: extract from Repository
             var instanceID = view.GetInstanceID();
+            new ProjectilePresenter(view);
+            new ProjectileController(view);
+        }
+        
+        public void SpawnNewProjectile(string turretId)
+        {
+            //TODO: get from factory
+            var prefab = _assetCatalog.LoadResource<ProjectileView>(_turretsConfig.ProjectilesConfiguration.RegularProjectile.PrefabPath);
+            var view = Object.Instantiate(prefab); //TODO: pool
+            var instanceID = view.GetInstanceID();
             _turretThumbnailPresenters[instanceID] = new TurretThumbnailPresenter(view);
+            _turretThumbnailControllers[instanceID] = new TurretThumbnailController(this, view, turretId);
         }
     
         public TurretView GetNewTurretView(string turretId) //TODO: move to presenter

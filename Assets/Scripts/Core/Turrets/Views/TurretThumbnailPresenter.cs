@@ -21,13 +21,6 @@ namespace Core.Turrets.Views
             var turret = eventInfo.Turret;
 
             _view.Price.text = turret.Cost.ToString(CultureInfo.InvariantCulture);
-            
-            _view.Button.onClick.AddListener(OnClick);
-        }
-
-        private void OnClick()
-        {
-            //TODO: send event of turret clicked
         }
     }
 }

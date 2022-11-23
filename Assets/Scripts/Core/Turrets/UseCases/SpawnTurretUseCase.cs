@@ -1,4 +1,5 @@
 using Core.Turrets.Entities;
+using Core.Turrets.Events;
 using Events;
 
 namespace Core.Turrets.UseCases
@@ -18,7 +19,7 @@ namespace Core.Turrets.UseCases
         public void Spawn(string turretId)
         {
             _repository.GetNewTurretView(turretId);
-            
+            _eventDispatcher.Dispatch<TurretSpawned>();
         }
     }
 }

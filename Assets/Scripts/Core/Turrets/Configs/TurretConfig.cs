@@ -13,5 +13,6 @@ namespace Core.Turrets.Configs
         public Color ThumbnailColor;
         
         public string PrefabId;
+        public float Cooldown;
     }
 }

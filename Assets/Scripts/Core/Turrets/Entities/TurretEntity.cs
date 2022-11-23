@@ -1,6 +1,6 @@
 namespace Core.Turrets.Entities
 {
-    public class TurretEntity
+    public class TurretEntity //TODO: create frozen turret entity, etc
     {
         
     }

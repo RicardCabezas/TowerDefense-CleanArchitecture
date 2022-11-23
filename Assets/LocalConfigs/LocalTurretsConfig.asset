@@ -14,12 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _turretsConfig:
     ThumbnailPrefabId: UI/TurretThumbnail
+    ProjectilesConfiguration:
+      RegularProjectile:
+        Damage: 20
+        Speed: 3
+      FrozenProjectile:
+        Damage: 0
+        Speed: 5
+        SpeedDebuff: 0.7
     Turrets:
     - Cost: 2
       Id: 
       ThumbnailColor: {r: 1, g: 0, b: 0, a: 0}
       PrefabId: 
+      Cooldown: 0
     - Cost: 5
       Id: 
       ThumbnailColor: {r: 0, g: 0.92101526, b: 1, a: 0}
       PrefabId: 
+      Cooldown: 0

@@ -1,6 +1,6 @@
 namespace Core.Turrets.UseCases
 {
-    public interface ITurretShot
+    public interface ITurretShoot
     {
         void Shoot();
     }
