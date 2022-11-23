@@ -9,34 +9,38 @@ namespace Core.Turrets.Entities
     public class TurretsRepository
     {
         private readonly TurretsConfig _turretsConfig;
+        private readonly Transform _thumbnailTurretsParent;
 
         private Dictionary<int, TurretEntity> _turretEntities = new Dictionary<int, TurretEntity>();
         private Dictionary<int, TurretPresenter> _turretPresenters = new Dictionary<int, TurretPresenter>();
+        private Dictionary<int, TurretThumbnailPresenter> _turretThumbnailPresenters = new Dictionary<int, TurretThumbnailPresenter>();
 
         private Dictionary<string, GameObjectPool<TurretView>> _pools = new Dictionary<string, GameObjectPool<TurretView>>();
 
         private Dictionary<string, TurretConfig> _turretsById = new Dictionary<string, TurretConfig>();
+        private readonly AssetCatalog.AssetCatalog _assetCatalog;
 
-        public TurretsRepository(TurretsConfig turretsConfig)
+        public TurretsRepository(TurretsConfig turretsConfig, Transform thumbnailTurretsParent)
         {
             _turretsConfig = turretsConfig;
+            _thumbnailTurretsParent = thumbnailTurretsParent;
 
-            var assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
+            _assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
         
             foreach (var turret in _turretsConfig.Turrets)
             {
-                var prefab = assetCatalog.LoadResource<TurretView>($"{AssetCatalog.AssetCatalog.Creeps}{turret.PrefabId}");
+                //var prefab = _assetCatalog.LoadResource<TurretView>($"{AssetCatalog.AssetCatalog.Creeps}{turret.PrefabId}");
 
-                _pools[turret.Id] = new GameObjectPool<TurretView>(prefab, 10);
+                //_pools[turret.Id] = new GameObjectPool<TurretView>(prefab, 10);
                 _turretsById[turret.Id] = turret;
             }
         }
     
-        public TurretEntity SpawnNewTurret(string creepId, Vector3 position)
+        public TurretEntity SpawnNewTurret(string turretId, Vector3 position)
         {
-            var config = _turretsById[creepId];
+            var config = _turretsById[turretId];
 
-            var view = GetNewTurretView(creepId);
+            var view = GetNewTurretView(turretId);
             var instanceID = view.GetInstanceID();
             _turretPresenters[instanceID] = new TurretPresenter(view);
         
@@ -45,6 +49,16 @@ namespace Core.Turrets.Entities
             };
 
             return _turretEntities[instanceID];
+        }
+
+        public void SpawnNewTurretThumbnail(string turretId)
+        {
+            var config = _turretsById[turretId];
+            var prefab = _assetCatalog.LoadResource<TurretThumbnailView>(_turretsConfig.ThumbnailPrefabId);
+
+            var view = Object.Instantiate(prefab, _thumbnailTurretsParent); //TODO: extract from Repository
+            var instanceID = view.GetInstanceID();
+            _turretThumbnailPresenters[instanceID] = new TurretThumbnailPresenter(view);
         }
     
         public TurretView GetNewTurretView(string turretId) //TODO: move to presenter

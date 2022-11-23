@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Core.Turrets.Configs
 {
@@ -6,7 +7,11 @@ namespace Core.Turrets.Configs
     public class TurretConfig
     {
         public float Cost;
+        
         public string Id;
-        public string PrefabId { get; set; }
+        
+        public Color ThumbnailColor;
+        
+        public string PrefabId;
     }
 }

@@ -1,4 +1,5 @@
 using Core.Turrets.Configs;
+using Core.Turrets.Entities;
 using Core.Turrets.Events;
 using Events;
 
@@ -14,10 +15,11 @@ namespace Core.Turrets.UseCases
             //TODO: subscribe on game initialized
         }
         
-        public void Spawn(TurretsConfig turretsConfig)
+        public void Spawn(TurretsRepository turretsRepository, TurretsConfig turretsConfig)
         {
             foreach (var turret in turretsConfig.Turrets)
             {
+                turretsRepository.SpawnNewTurretThumbnail(turret.Id);
                 _eventDispatcher.Dispatch(new TurretSelectorSpawned(turret));
             }
         }

@@ -20,7 +20,7 @@ namespace Core.Turrets.Views
         {
             var turret = eventInfo.Turret;
 
-            _view.Price = turret.Cost.ToString(CultureInfo.InvariantCulture);
+            _view.Price.text = turret.Cost.ToString(CultureInfo.InvariantCulture);
             
             _view.Button.onClick.AddListener(OnClick);
         }
@@ -28,7 +28,6 @@ namespace Core.Turrets.Views
         private void OnClick()
         {
             //TODO: send event of turret clicked
-            throw new System.NotImplementedException();
         }
     }
 }

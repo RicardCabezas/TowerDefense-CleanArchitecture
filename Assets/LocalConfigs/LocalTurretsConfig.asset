@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: LocalTurretsConfig
   m_EditorClassIdentifier: 
   _turretsConfig:
+    ThumbnailPrefabId: UI/TurretThumbnail
     Turrets:
-    - Cost: 0
+    - Cost: 2
       Id: 
-      Damage: 0
+      ThumbnailColor: {r: 1, g: 0, b: 0, a: 0}
+      PrefabId: 
+    - Cost: 5
+      Id: 
+      ThumbnailColor: {r: 0, g: 0.92101526, b: 1, a: 0}
+      PrefabId: 
