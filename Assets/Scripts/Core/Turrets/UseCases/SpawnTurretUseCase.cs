@@ -18,7 +18,7 @@ namespace Core.Turrets.UseCases
 
         public void Spawn(string turretId)
         {
-            _repository.GetNewTurretView(turretId);
+            _repository.GetNewTurretView(turretId); //TODO: get world position
             _eventDispatcher.Dispatch<TurretSpawned>();
         }
     }

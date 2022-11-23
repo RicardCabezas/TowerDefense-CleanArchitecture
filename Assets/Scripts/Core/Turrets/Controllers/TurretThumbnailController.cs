@@ -23,12 +23,12 @@ namespace Core.Turrets.Views
             _spawnTurretUseCase = new SpawnTurretUseCase(_repository);
             
             _view.Button.onClick.AddListener(OnClick);
-
         }
 
         private void OnClick()
         {
-            _spawnTurretUseCase.Spawn(_turretId);
+            //TODO: first spawn TurretPreviewer View -> on click call controller and call spawn turret usecase
+            _spawnTurretUseCase.Spawn(_turretId); 
         }
     }
 }

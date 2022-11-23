@@ -50,22 +50,22 @@ namespace Core.Turrets.Entities
             return _turretEntities[instanceID];
         }
 
+        public void SpawnNewProjectile(string turretId)
+        {
+            var prefab = _assetCatalog.LoadResource<ProjectileView>(_turretsConfig.ProjectilesConfiguration.RegularProjectile.PrefabPath);
+            var view = Object.Instantiate(prefab); //TODO: pool
+            var instanceID = view.GetInstanceID();
+            new ProjectilePresenter(view);
+            new ProjectileController(view);
+        }
+        
         public void SpawnNewTurretThumbnail(string turretId)
         {
             var config = _turretsById[turretId];
             var prefab = _assetCatalog.LoadResource<TurretThumbnailView>(_turretsConfig.ThumbnailPrefabId);
 
             var view = Object.Instantiate(prefab, _thumbnailTurretsParent); //TODO: extract from Repository
-            var instanceID = view.GetInstanceID();
-            new ProjectilePresenter(view);
-            new ProjectileController(view);
-        }
-        
-        public void SpawnNewProjectile(string turretId)
-        {
-            //TODO: get from factory
-            var prefab = _assetCatalog.LoadResource<ProjectileView>(_turretsConfig.ProjectilesConfiguration.RegularProjectile.PrefabPath);
-            var view = Object.Instantiate(prefab); //TODO: pool
+
             var instanceID = view.GetInstanceID();
             _turretThumbnailPresenters[instanceID] = new TurretThumbnailPresenter(view);
             _turretThumbnailControllers[instanceID] = new TurretThumbnailController(this, view, turretId);
