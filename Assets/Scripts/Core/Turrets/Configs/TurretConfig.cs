@@ -1,9 +1,12 @@
+using System;
+
 namespace Core.Turrets.Configs
 {
+    [Serializable]
     public class TurretConfig
     {
         public float Cost;
         public string Id;
-        public float Damage;
+        public string PrefabId { get; set; }
     }
 }
