@@ -13,7 +13,6 @@ namespace Core.Turrets.UseCases
         public SpawnTurretSelectorUseCase()
         {
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            //TODO: subscribe on game initialized
         }
         
         public void Spawn(TurretsRepository turretsRepository, TurretsConfig turretsConfig,

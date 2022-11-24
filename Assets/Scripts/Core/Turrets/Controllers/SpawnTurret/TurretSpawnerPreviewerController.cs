@@ -16,9 +16,13 @@ namespace Core.Turrets.Views
             gameObject.SetActive(false);
         }
 
-        public void Init(SpawnTurretUseCase spawnTurretUseCase, string turretId)
+        public void Init(SpawnTurretUseCase spawnTurretUseCase)
         {
             _spawnTurretUseCase = spawnTurretUseCase;
+        }
+
+        public void ThumbnailPressed(string turretId)
+        {
             _turretId = turretId;
         }
         

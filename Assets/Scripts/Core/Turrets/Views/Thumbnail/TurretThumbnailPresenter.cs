@@ -16,7 +16,6 @@ namespace Core.Turrets.Views
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned);
 
-
             _view.Dispose += OnViewDisposed;
         }
 
@@ -28,15 +27,14 @@ namespace Core.Turrets.Views
             _view = null;
         }
 
-        private void OnTurretSelectorSpawned(TurretSelectorSpawned eventInfo)
+        private void OnTurretSelectorSpawned(TurretSelectorSpawned eventInfo) //TODO: remove, add init method
         {
             var turret = eventInfo.Turret;
 
             _view.Price.text = turret.Cost.ToString(CultureInfo.InvariantCulture);
+            _view.Button.image.color = turret.ThumbnailColor;
+
+            _eventDispatcher.Unsubscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned);
         }
-        
-        //TODO: create thumbnail Entity that store the Instance ID
-        //TODO: react to money spent and disable button
-        //TODO: create Thumbnail PresenterContainer
     }
 }

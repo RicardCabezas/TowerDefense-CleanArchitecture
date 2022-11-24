@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public interface IEconomySystem<T> where T: Currency
 {
-    float CurrentAmount { get; }
-    void AddCurrency(float amount);
-    void SubtractCurrency(float amount);
+    int CurrentAmount { get; }
+    void AddCurrency(int amount);
+    void SubtractCurrency(int amount);
 }

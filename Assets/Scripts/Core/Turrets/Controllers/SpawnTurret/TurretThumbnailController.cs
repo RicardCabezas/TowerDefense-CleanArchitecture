@@ -1,5 +1,7 @@
+using Core.Currencies.Events;
 using Core.Turrets.Entities;
 using Core.Turrets.UseCases;
+using Events;
 
 namespace Core.Turrets.Views
 {
@@ -9,6 +11,7 @@ namespace Core.Turrets.Views
         private TurretThumbnailView _view;
         private string _turretId;
         private TurretSpawnerPreviewerController _previewerController;
+        private readonly IEventDispatcher _eventDispatcher;
 
         public TurretThumbnailController(
             TurretsRepository repository, 
@@ -18,20 +21,28 @@ namespace Core.Turrets.Views
         {
             _repository = repository;
             _view = view;
+            _turretId = turretId;
             _previewerController = previewerController;
+            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+
+            _view.Button.onClick.AddListener(OnClick);
+            _eventDispatcher.Subscribe<UpdateSoftCurrencyEvent>(OnSoftCurrencyUpdated);
+            _view.Dispose += OnViewDisposed;
 
             var spawnTurretUseCase = new SpawnTurretUseCase(_repository);
-            
-            _view.Button.onClick.AddListener(OnClick);
-            
-            _previewerController.Init(spawnTurretUseCase, turretId);
+            _previewerController.Init(spawnTurretUseCase);
+        }
 
-            _view.Dispose += OnViewDisposed;
+        private void OnSoftCurrencyUpdated(UpdateSoftCurrencyEvent eventInfo)
+        {
+            //TODO: call a use case to control the interactability of the buttons
+            //Avoid purchases if not enough currency
         }
 
         private void OnViewDisposed()
         {
             _view.Button.onClick.RemoveAllListeners();
+            _eventDispatcher.Unsubscribe<UpdateSoftCurrencyEvent>(OnSoftCurrencyUpdated);
             _view = null;
             _previewerController = null;
             _repository = null;
@@ -40,8 +51,8 @@ namespace Core.Turrets.Views
 
         private void OnClick()
         {
-            _previewerController.gameObject.SetActive(true); //TODO: move to container
-            //TODO: first spawn TurretPreviewer View -> on click call controller and call spawn turret usecase
+            _previewerController.gameObject.SetActive(true);
+            _previewerController.ThumbnailPressed(_turretId);
         }
     }
 }

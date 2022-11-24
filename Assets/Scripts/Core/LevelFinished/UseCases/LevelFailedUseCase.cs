@@ -2,6 +2,7 @@ using Core.Base;
 using Core.LevelFinished.Events;
 using Core.LevelFinished.Views;
 using Events;
+using UnityEngine;
 
 namespace Core.LevelFinished.UseCases
 {
@@ -16,7 +17,7 @@ namespace Core.LevelFinished.UseCases
             _repository = repository;
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             
-            _eventDispatcher.Subscribe<BaseCampDestroyedEvent>(OnBaseCampDestroyed);            
+            _eventDispatcher.Subscribe<BaseCampDestroyedEvent>(OnBaseCampDestroyed);     //TODO: move to controller        
         }
 
         private void OnBaseCampDestroyed(BaseCampDestroyedEvent obj)
@@ -28,7 +29,11 @@ namespace Core.LevelFinished.UseCases
         {
             _repository.CreateLevelFailedScreen();
 
-            _eventDispatcher.Dispatch(new LevelFailedScreenCreatedEvent()); //TODO: subscribe time controller to set time scale to 0
+            _eventDispatcher.Dispatch(
+                new LevelFailedScreenCreatedEvent()); //TODO: subscribe time controller to set time scale to 0
+            _eventDispatcher.Unsubscribe<BaseCampDestroyedEvent>(OnBaseCampDestroyed);
+            
+            Time.timeScale = 0; //Stop gameplay
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Core.Turrets.Configs
     [Serializable]
     public class TurretConfig
     {
-        public float Cost;
+        public int Cost;
         
         public string Id;
         

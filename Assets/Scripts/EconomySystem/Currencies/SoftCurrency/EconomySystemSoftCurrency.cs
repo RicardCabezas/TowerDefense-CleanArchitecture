@@ -1,13 +1,13 @@
 public class EconomySystemSoftCurrency : IEconomySystem<SoftCurrency>
 {
-    public float CurrentAmount { get; private set; }
+    public int CurrentAmount { get; private set; }
 
-    public void AddCurrency(float amount)
+    public void AddCurrency(int amount)
     {
         CurrentAmount += amount;
     }
 
-    public void SubtractCurrency(float amount)
+    public void SubtractCurrency(int amount)
     {
         CurrentAmount -= amount;
     }

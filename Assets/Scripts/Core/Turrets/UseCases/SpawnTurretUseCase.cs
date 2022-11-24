@@ -1,3 +1,4 @@
+using Core.Currencies.Events;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
 using Events;
@@ -9,18 +10,23 @@ namespace Core.Turrets.UseCases
     {
         private readonly TurretsRepository _repository;
         private readonly IEventDispatcher _eventDispatcher;
+        private readonly IEconomySystem<SoftCurrency> _softCurrency;
 
         public SpawnTurretUseCase(TurretsRepository repository)
         {
             _repository = repository;
             
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _softCurrency = ServiceLocator.Instance.GetService<IEconomySystem<SoftCurrency>>();
         }
 
         public void Spawn(string turretId, Vector3 position)
         {
             var turret = _repository.SpawnNewTurret(turretId, position);
             _eventDispatcher.Dispatch(new TurretSpawned(turret));
+            
+            _softCurrency.SubtractCurrency(turret.Cost);
+            _eventDispatcher.Dispatch(new UpdateSoftCurrencyEvent(_softCurrency.CurrentAmount));
         }
     }
 }

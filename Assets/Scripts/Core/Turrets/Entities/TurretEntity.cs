@@ -2,12 +2,13 @@ using UnityEngine;
 
 namespace Core.Turrets.Entities
 {
-    public class TurretEntity //TODO: create frozen turret entity, etc
+    public class TurretEntity
     {
         public CreepEntity Target;
         public string ProjectileId;
-        public float TurretShootCooldown; //TODO: replace with datetime
+        public float TurretShootCooldown;
         public float TimeSinceLastShot;
         public Vector3 Position;
+        public int Cost;
     }
 }

@@ -36,6 +36,7 @@ public class CreepRepository
         {
             CurrentPosition = position,
             Health = config.Health,
+            Reward = config.Reward,
             Id = config.Id,
             InstanceId = instanceID,
             CurrentSpeed = config.Speed
@@ -59,16 +60,5 @@ public class CreepRepository
     public CreepConfig GetCreepConfig(string creepId)
     {
         return _creepsById[creepId];
-    }
-
-    public void RemoveCreep(int id)
-    {
-        //TODO: call when creep died or whatever
-        _creepEntities.Remove(id);
-    }
-
-    public void UpdateCreepState(float health, int creepId)
-    {
-        _creepEntities[creepId].Health = health;
     }
 }

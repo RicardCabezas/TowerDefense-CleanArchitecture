@@ -41,7 +41,7 @@ namespace Core.Turrets.Entities
         public TurretEntity SpawnNewTurret(string turretId, Vector3 position)
         {
             var config = _turretsById[turretId];
-            var prefab = _assetCatalog.LoadResource<TurretView>(config.PrefabId); //TODO: pool
+            var prefab = _assetCatalog.LoadResource<TurretView>(config.PrefabId);
 
             var turretGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<TurretGameElementRepresentation>(prefab);
             turretGameRepresentation.SetInitialPosition(position);
@@ -56,6 +56,7 @@ namespace Core.Turrets.Entities
                 ProjectileId = config.ProjectileId,
                 Target = null,
                 TimeSinceLastShot = 0,
+                Cost = config.Cost
             };
 
             return _turretEntities[instanceID];

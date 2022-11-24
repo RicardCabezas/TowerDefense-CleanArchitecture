@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.AssetCatalog;
+using Core.Currencies;
 using Core.LevelFinished;
 using Events;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class GameInstaller : MonoBehaviour
     public BaseCampInstaller BaseCampInstaller;
     public LevelFinishedInstaller LevelFinishedInstaller;
     public TurretsInstaller TurretsInstaller;
-    private Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
+    public CurrenciesInstaller CurrenciesInstaller;
 
     void Start()
     { 
@@ -30,5 +31,6 @@ public class GameInstaller : MonoBehaviour
         BaseCampInstaller.Install();
         LevelFinishedInstaller.Install();
         TurretsInstaller.Install();
+        CurrenciesInstaller.Install();
     }
 }

@@ -28,14 +28,14 @@ MonoBehaviour:
         SpeedDebuff: 0.04
     Turrets:
     - Cost: 2
-      Id: Turret-freezing
-      ThumbnailColor: {r: 1, g: 0, b: 0, a: 0}
+      Id: Regular
+      ThumbnailColor: {r: 1, g: 0, b: 0, a: 1}
+      PrefabId: Turret-regular
+      Cooldown: 1
+      ProjectileId: Regular
+    - Cost: 3
+      Id: Frozen
+      ThumbnailColor: {r: 0, g: 0.92101526, b: 1, a: 1}
       PrefabId: Turret-freezing
-      Cooldown: 0.4
-      ProjectileId: Frozen
-    - Cost: 5
-      Id: Turret-freezing
-      ThumbnailColor: {r: 0, g: 0.92101526, b: 1, a: 0}
-      PrefabId: Turret-freezing
-      Cooldown: 0.4
+      Cooldown: 1
       ProjectileId: Frozen

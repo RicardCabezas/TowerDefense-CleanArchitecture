@@ -6,6 +6,7 @@ public class CreepEntity
     public int InstanceId;
     public float Health;
     public float Damage;
+    public int Reward;
     public float CurrentSpeed;
     public Vector3 CurrentPosition;
     public Vector3 TargetPosition;
