@@ -7,16 +7,17 @@ public class CreepsInstaller : MonoBehaviour
 {
     public LocalCreepsConfig CreepsLocalConfig;
     public LevelSpawnerPointsLocalConfig SpawnerPointsConfig;
-    public Transform UserBasePosition; //TODO: make a config?
+    public Transform UserBasePosition;
 
-    public void Install(ref Dictionary<Type, object> repositories)
+    public void Install()
     {
+        var serviceLocator = ServiceLocator.Instance;
+        
         var creepRepository = new CreepRepository(CreepsLocalConfig.CreepsConfig);
-        repositories[typeof(CreepRepository)] = creepRepository;
+        serviceLocator.RegisterService(creepRepository);
         
         var spawnerPointsRepository = new SpawnerPointsRepository(SpawnerPointsConfig.Spawners);
-        repositories[typeof(SpawnerPointsRepository)] = spawnerPointsRepository;
-        
+        serviceLocator.RegisterService(spawnerPointsRepository);
         
         ServiceLocator.Instance.RegisterService(creepRepository);
 

@@ -25,8 +25,8 @@ public class CreepRepository
     {
         var config = _creepsById[creepId];
         var assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog>();
-        var prefab = assetCatalog.LoadResource<CreepView>($"{AssetCatalog.Creeps}{config.PrefabId}");
-        var creepGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<CreepGameRepresentation>(prefab);
+        var prefab = assetCatalog.LoadResource<CreepView>(config.PrefabId);
+        var creepGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<CreepGameElementRepresentation>(prefab);
         
         var view = creepGameRepresentation.GameView as CreepView;
         var instanceID = view.GetInstanceID();

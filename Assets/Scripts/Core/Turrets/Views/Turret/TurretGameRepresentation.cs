@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core.Turrets.Views
 {
-    public class TurretGameRepresentation : IGameRepresentationInitializer
+    public class TurretGameElementRepresentation : IGameElementRepresentation
     {
         public GameView GameView { get; set; }
         public BasePresenter Presenter { get; set; }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CreepGameRepresentation :  IGameRepresentationInitializer
+public class CreepGameElementRepresentation :  IGameElementRepresentation
 {
     public GameView GameView { get; set; }
     public BasePresenter Presenter { get; set; }

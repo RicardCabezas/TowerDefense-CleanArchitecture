@@ -43,7 +43,7 @@ namespace Core.Turrets.Entities
             var config = _turretsById[turretId];
             var prefab = _assetCatalog.LoadResource<TurretView>(config.PrefabId); //TODO: pool
 
-            var turretGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<TurretGameRepresentation>(prefab);
+            var turretGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<TurretGameElementRepresentation>(prefab);
             turretGameRepresentation.SetInitialPosition(position);
             
             var view = turretGameRepresentation.GameView as TurretView;

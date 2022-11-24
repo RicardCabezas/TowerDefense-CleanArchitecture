@@ -1,6 +1,6 @@
 namespace Core.BaseCamp.Views
 {
-    public class BaseCampPresenter
+    public class BaseCampPresenter : BasePresenter
     {
         
     }

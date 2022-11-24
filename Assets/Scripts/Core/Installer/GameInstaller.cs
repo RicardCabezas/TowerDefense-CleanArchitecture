@@ -25,10 +25,10 @@ public class GameInstaller : MonoBehaviour
         IEconomySystem<SoftCurrency> softCurrencySystem = new EconomySystemSoftCurrency();
         ServiceLocator.Instance.RegisterService(softCurrencySystem);
         
-        CreepsInstaller.Install(ref _repositories); //TODO: remove this
-        WavesInstaller.Install(ref _repositories);
-        BaseCampInstaller.Install(ref _repositories);
+        CreepsInstaller.Install();
+        WavesInstaller.Install();
+        BaseCampInstaller.Install();
         LevelFinishedInstaller.Install();
-        TurretsInstaller.Install((CreepRepository)_repositories[typeof(CreepRepository)]);
+        TurretsInstaller.Install();
     }
 }

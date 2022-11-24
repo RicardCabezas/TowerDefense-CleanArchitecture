@@ -30,7 +30,7 @@ namespace Core.Turrets.Entities
             var config = (ProjectileConfiguration)_projectilesById[turretEntity.ProjectileId];
 
             var prefab = _assetCatalog.LoadResource<ProjectileView>(_projectilesConfiguration.RegularProjectile.PrefabPath);
-            var creepGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<ProjectileGameRepresentation>(prefab);
+            var creepGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<ProjectileGameElementRepresentation>(prefab);
 
             var view = creepGameRepresentation.GameView as ProjectileView;
             var instanceID = view.GetInstanceID();

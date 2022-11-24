@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core.Base;
 using Core.LevelFinished;
+using Events;
 using UnityEngine;
 
 public class BaseCampInstaller : MonoBehaviour
@@ -9,15 +10,16 @@ public class BaseCampInstaller : MonoBehaviour
     public LocalBaseCampConfig BaseCampLocalConfig;
     public LocalLevelFinishedConfig LevelFinishedLocalConfig;
 
-    public void Install(ref Dictionary<Type, object> repositories)
+    public void Install()
     {
-        
+        var serviceLocator = ServiceLocator.Instance;
+
         var baseCampRepository = new BaseCampRepository(BaseCampLocalConfig.BaseCampConfig);
-        repositories[typeof(BaseCampRepository)] = baseCampRepository;
-        
+        serviceLocator.RegisterService(baseCampRepository);
+
         var levelFinishedRepository = new LevelFinishedRepository(LevelFinishedLocalConfig.LevelFinishedConfig);
-        repositories[typeof(LevelFinishedRepository)] = levelFinishedRepository;
-        
+        serviceLocator.RegisterService(levelFinishedRepository);
+
         var baseCampReceivesDamageUseCase =
             new BaseCampReceivesDamageUseCase(baseCampRepository, levelFinishedRepository);
     }

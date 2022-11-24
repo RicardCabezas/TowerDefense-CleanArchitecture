@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Waves;
+using Events;
 using UnityEngine;
 
 public class WavesInstaller : MonoBehaviour
@@ -8,15 +9,14 @@ public class WavesInstaller : MonoBehaviour
     public WavesLocalConfig WavesLocalConfig;
     public WavesView WavesView;
 
-    public void Install(ref Dictionary<Type, object> repositories)
+    public void Install()
     {
-        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: think how flow would work on server
-        repositories[typeof(WavesRepository)] = wavesRepository;
+        var serviceLocator = ServiceLocator.Instance;
 
-        var creepRepository = (CreepRepository)repositories[typeof(CreepRepository)];
-        var spawnerPointsRepository = (SpawnerPointsRepository)repositories[typeof(SpawnerPointsRepository)];
-        
-        var spawnWaveUseCase = new SpawnWaveUseCase(wavesRepository, creepRepository, spawnerPointsRepository);
+        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: think how flow would work on server
+        serviceLocator.RegisterService(wavesRepository);
+
+        var spawnWaveUseCase = new SpawnWaveUseCase(wavesRepository);
         
         StartGameplay(spawnWaveUseCase);
     }

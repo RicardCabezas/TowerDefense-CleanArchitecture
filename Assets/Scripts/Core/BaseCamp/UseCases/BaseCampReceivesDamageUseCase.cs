@@ -26,7 +26,7 @@ namespace Core.Base
 
             if (_baseCampRepository.GetBaseHealth() <= 0)
             {
-                _eventDispatcher.Dispatch(new BaseCampDestroyed());
+                _eventDispatcher.Dispatch(new BaseCampDestroyedEvent());
             }
         }
     }

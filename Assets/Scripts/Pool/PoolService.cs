@@ -6,10 +6,10 @@ using Object = UnityEngine.Object;
 
 public static class PoolService
 {
-    private static readonly Dictionary<Type, Stack<IGameRepresentationInitializer>> _pooledObjects = new Dictionary<Type, Stack<IGameRepresentationInitializer>>();
+    private static readonly Dictionary<Type, Stack<IGameElementRepresentation>> _pooledObjects = new Dictionary<Type, Stack<IGameElementRepresentation>>();
     private static readonly GameObject _poolParent;
 
-    public static IGameRepresentationInitializer Get<T>()
+    public static IGameElementRepresentation Get<T>()
     {
         if (!_pooledObjects.TryGetValue(typeof(T), out var gameRepresentationObjectOfTypeT))
         {
@@ -24,19 +24,19 @@ public static class PoolService
         return gameRepresentationObjectOfTypeT.Pop();
     }
     
-    public static void StoreGameRepresentationObject(Type objectType, IGameRepresentationInitializer gameRepresentationObject)
+    public static void StoreGameRepresentationObject(Type objectType, IGameElementRepresentation gameElementRepresentationObject)
     {
-        gameRepresentationObject.GameView.gameObject.SetActive(false);
+        gameElementRepresentationObject.GameView.gameObject.SetActive(false);
             
         if (!_pooledObjects.TryGetValue(objectType, out var controllerViewPairStackOfTypeT))
         {
-            var stack = new Stack<IGameRepresentationInitializer>();
-            stack.Push(gameRepresentationObject);
+            var stack = new Stack<IGameElementRepresentation>();
+            stack.Push(gameElementRepresentationObject);
             _pooledObjects.Add(objectType, stack);
         }
         else
         {
-            controllerViewPairStackOfTypeT.Push(gameRepresentationObject);
+            controllerViewPairStackOfTypeT.Push(gameElementRepresentationObject);
         }
     }
 

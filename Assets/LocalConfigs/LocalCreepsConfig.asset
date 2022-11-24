@@ -16,11 +16,11 @@ MonoBehaviour:
     Creeps:
     - Speed: 3
       Health: 100
-      PrefabId: Creep-small
+      PrefabId: Creeps/Creep-small
       Id: Small
       Damage: 100
     - Speed: 2
       Health: 100
-      PrefabId: Creep-big
+      PrefabId: Creeps/Creep-big
       Id: Big
       Damage: 100

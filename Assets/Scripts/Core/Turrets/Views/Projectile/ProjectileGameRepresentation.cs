@@ -1,6 +1,6 @@
 namespace Core.Turrets.Views
 {
-    public class ProjectileGameRepresentation : IGameRepresentationInitializer
+    public class ProjectileGameElementRepresentation : IGameElementRepresentation
     {
         public GameView GameView { get; set; }
         public BasePresenter Presenter { get; set; }

@@ -2,7 +2,7 @@ using Events;
 
 namespace Core.SpawnerPoints.Views
 {
-    public class SpawnerPresenter
+    public class SpawnerPresenter : BasePresenter
     {
         private readonly SpawnerView _view;
         private readonly IEventDispatcher _eventDispatcher;

@@ -16,10 +16,10 @@ namespace Core.LevelFinished.UseCases
             _repository = repository;
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             
-            _eventDispatcher.Subscribe<BaseCampDestroyed>(OnBaseCampDestroyed);            
+            _eventDispatcher.Subscribe<BaseCampDestroyedEvent>(OnBaseCampDestroyed);            
         }
 
-        private void OnBaseCampDestroyed(BaseCampDestroyed obj)
+        private void OnBaseCampDestroyed(BaseCampDestroyedEvent obj)
         {
             ShowLevelFailScreen();
         }
@@ -28,7 +28,7 @@ namespace Core.LevelFinished.UseCases
         {
             _repository.CreateLevelFailedScreen();
 
-            _eventDispatcher.Dispatch(new LevelFailedScreenCreated()); //TODO: subscribe time controller to set time scale to 0
+            _eventDispatcher.Dispatch(new LevelFailedScreenCreatedEvent()); //TODO: subscribe time controller to set time scale to 0
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public static class GameRepresentationObjectFactory
 {
     public static T GameRepresentationObject<T>(GameView gameplayViewBase, object args = null) 
-        where T : IGameRepresentationInitializer, new()
+        where T : IGameElementRepresentation, new()
     {
         var gameRepresentationObject = PoolService.Get<T>();
         if (gameRepresentationObject != null)

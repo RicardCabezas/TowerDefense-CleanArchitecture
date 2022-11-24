@@ -3,7 +3,7 @@ using Events;
 
 namespace Core.Waves
 {
-    public class WavesPresenter
+    public class WavesPresenter : BasePresenter
     {
         private readonly WavesView _view;
         private readonly IEventDispatcher _eventDispatcher;

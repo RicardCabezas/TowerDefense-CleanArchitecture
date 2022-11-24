@@ -3,7 +3,7 @@ public class GameRepresentationObject
   
 }
 
-public interface IGameRepresentationInitializer
+public interface IGameElementRepresentation
 {
     public GameView GameView { get; set; }
     public BasePresenter Presenter { get; set; }

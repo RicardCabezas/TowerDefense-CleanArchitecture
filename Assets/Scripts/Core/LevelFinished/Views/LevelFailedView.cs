@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core.LevelFinished.Views
 {
-    public class LevelFailedView : MonoBehaviour
+    public class LevelFailedView : GameView
     {
         
     }

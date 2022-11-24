@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Core.Turrets.Views
 {
-    public class TurretThumbnailView : MonoBehaviour
+    public class TurretThumbnailView : GameView
     {
         public Text Price;
         public Button Button;

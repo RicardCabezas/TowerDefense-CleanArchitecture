@@ -15,16 +15,18 @@ public class TurretsInstaller : MonoBehaviour
     private TurretShootingController _turretShootingController;
     private MovingProjectilesController _projectilesMovingController;
 
-    public void Install(CreepRepository creepRepository)
+    public void Install()
     {
+        var serviceLocator = ServiceLocator.Instance;
         var turretsRepository = new TurretsRepository(TurretsLocalConfig.TurretsConfig, ThumnailTurretsParent);
-        ServiceLocator.Instance.RegisterService(turretsRepository);
+        serviceLocator.RegisterService(turretsRepository);
 
         var projectilesRepository = new ProjectilesRepository(TurretsLocalConfig.TurretsConfig);
-        ServiceLocator.Instance.RegisterService(projectilesRepository);
+        serviceLocator.RegisterService(projectilesRepository);
 
         var spawnTurretThumbnailsUseCase = new SpawnTurretSelectorUseCase();
 
+        var creepRepository = serviceLocator.GetService<CreepRepository>();
         var updateTurretTargetUseCase = new UpdateTurretTargetUseCase(creepRepository, turretsRepository); 
         var updateTurretTargetController = new UpdateTurretTargetController(updateTurretTargetUseCase);
         

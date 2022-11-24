@@ -4,7 +4,7 @@ using Events;
 
 namespace Core.LevelFinished.Views
 {
-    public class LevelFailedPresenter
+    public class LevelFailedPresenter : BasePresenter
     {
         private readonly LevelFailedView _view;
         private readonly IEventDispatcher _eventDispatcher;
@@ -15,10 +15,10 @@ namespace Core.LevelFinished.Views
             _view.gameObject.SetActive(false);
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             
-            _eventDispatcher.Subscribe<LevelFailedScreenCreated>(OnLevelFailedScreenCreated);   
+            _eventDispatcher.Subscribe<LevelFailedScreenCreatedEvent>(OnLevelFailedScreenCreated);   
         }
 
-        private void OnLevelFailedScreenCreated(LevelFailedScreenCreated obj)
+        private void OnLevelFailedScreenCreated(LevelFailedScreenCreatedEvent obj)
         {
             _view.gameObject.SetActive(true);
         }
