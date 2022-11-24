@@ -17,17 +17,12 @@ public class SpawnWaveUseCase
         _wavesRepository = wavesRepository;
         _creepRepository = ServiceLocator.Instance.GetService<CreepRepository>();
         _spawnerPointsRepository = ServiceLocator.Instance.GetService<SpawnerPointsRepository>();
-        
-        
     }
 
     public async void SpawnCreepsInWave()
     {
         var nextWave = _wavesRepository.GetNextWave();
         
-        var nextWaveIndex = _wavesRepository.GetCurrentWaveIndex();
-        _eventDispatcher.Dispatch(new WaveSpawnedEvent(nextWaveIndex));
-
         foreach (var creep in nextWave.CreepsConfig)
         {
             await Task.Delay(creep.SpawnDelayInMiliseconds);
@@ -37,13 +32,5 @@ public class SpawnWaveUseCase
             
             _eventDispatcher.Dispatch(new CreepSpawnedEvent(creepEntity));
         }
-    }
-    
-    
-    //TODO: listen for event of all creeps killed to spawn next wave
-    void OnWaveFinished()
-    {
-        //TODO: check if it was last wave
-        SpawnCreepsInWave();
     }
 }

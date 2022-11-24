@@ -2,7 +2,7 @@ using Events;
 
 namespace Core.LevelFinished.Events
 {
-    public struct LevelFailedScreenCreatedEvent : BaseEvent
+    public struct LevelCompletedScreenCreatedEvent : BaseEvent
     {
     }
 }

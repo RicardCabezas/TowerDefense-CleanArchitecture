@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelFinishedConfig:
     LevelFailedScreenPath: UI/LosePopup
-    LevelCompletedScreenPath: UI/WonPopup
+    LevelCompletedScreenPath: UI/WinPopup

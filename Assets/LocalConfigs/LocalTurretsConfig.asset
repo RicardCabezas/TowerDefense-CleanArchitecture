@@ -17,7 +17,7 @@ MonoBehaviour:
     ProjectilesConfiguration:
       RegularProjectile:
         Id: Regular
-        Damage: 20
+        Damage: 1000
         Speed: 80
         PrefabPath: Bullet
       FrozenProjectile:
@@ -29,7 +29,7 @@ MonoBehaviour:
     Turrets:
     - Cost: 2
       Id: Regular
-      ThumbnailColor: {r: 1, g: 0, b: 0, a: 1}
+      ThumbnailColor: {r: 1, g: 1, b: 1, a: 1}
       PrefabId: Turret-regular
       Cooldown: 1
       ProjectileId: Regular

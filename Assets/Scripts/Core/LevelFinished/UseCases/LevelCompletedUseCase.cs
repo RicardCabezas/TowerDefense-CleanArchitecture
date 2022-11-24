@@ -1,29 +1,27 @@
-using Core.Base;
 using Core.LevelFinished.Events;
-using Core.LevelFinished.Views;
 using Events;
 using UnityEngine;
 
 namespace Core.LevelFinished.UseCases
 {
-    public class LevelFailedUseCase
+    public class LevelCompletedUseCase
     {
         private readonly LevelFinishedRepository _repository;
         private readonly AssetCatalog.AssetCatalog _assetCatalog;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public LevelFailedUseCase(LevelFinishedRepository repository)
+        public LevelCompletedUseCase(LevelFinishedRepository repository)
         {
             _repository = repository;
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
 
-        public void ShowLevelFailScreen()
+        public void ShowLevelCompletedScreen()
         {
             Time.timeScale = 0; //Stop gameplay
 
-            _repository.CreateLevelFailedScreen();
-            _eventDispatcher.Dispatch(new LevelFailedScreenCreatedEvent());
+            _repository.CreateLevelCompletedScreen();
+            _eventDispatcher.Dispatch(new LevelCompletedScreenCreatedEvent());
         }
     }
 }

@@ -18,16 +18,11 @@ MonoBehaviour:
       - SpawnDelayInMiliseconds: 0
         CreepId: Big
         SpawnPointId: 1
-      - SpawnDelayInMiliseconds: 1500
-        CreepId: Big
-        SpawnPointId: 2
     - CreepsConfig:
       - SpawnDelayInMiliseconds: 0
-        CreepId: Small
+        CreepId: Big
         SpawnPointId: 1
-      - SpawnDelayInMiliseconds: 200
+    - CreepsConfig:
+      - SpawnDelayInMiliseconds: 0
         CreepId: Big
-        SpawnPointId: 2
-      - SpawnDelayInMiliseconds: 4000
-        CreepId: Big
-        SpawnPointId: 3
+        SpawnPointId: 1

@@ -29,8 +29,8 @@ public class GameInstaller : MonoBehaviour
         CreepsInstaller.Install();
         WavesInstaller.Install();
         BaseCampInstaller.Install();
-        LevelFinishedInstaller.Install();
         TurretsInstaller.Install();
         CurrenciesInstaller.Install();
+        LevelFinishedInstaller.Install();
     }
 }

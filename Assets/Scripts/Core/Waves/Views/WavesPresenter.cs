@@ -16,19 +16,19 @@ namespace Core.Waves
 
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
         
-            _eventDispatcher.Subscribe<WaveSpawnedEvent>(OnWaveSpawned);
+            _eventDispatcher.Subscribe<WaveUpdatedEvent>(OnWaveSpawned);
 
             _view.Dispose += OnViewDisposed;
         }
 
-        private void OnWaveSpawned(WaveSpawnedEvent eventInfo)
+        private void OnWaveSpawned(WaveUpdatedEvent eventInfo)
         {
             _view.CurrentWave.text = (eventInfo.Wave + 1).ToString();
         }
         
         private void OnViewDisposed()
         {
-            _eventDispatcher.Unsubscribe<WaveSpawnedEvent>(OnWaveSpawned);
+            _eventDispatcher.Unsubscribe<WaveUpdatedEvent>(OnWaveSpawned);
 
             _view = null;
             _eventDispatcher = null;

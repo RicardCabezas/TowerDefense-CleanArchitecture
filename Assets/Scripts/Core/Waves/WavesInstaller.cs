@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Waves;
+using Core.Waves.Controllers;
 using Events;
 using UnityEngine;
 
@@ -13,16 +14,14 @@ public class WavesInstaller : MonoBehaviour
     {
         var serviceLocator = ServiceLocator.Instance;
 
-        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: think how flow would work on server
+        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: change this
         serviceLocator.RegisterService(wavesRepository);
 
         var spawnWaveUseCase = new SpawnWaveUseCase(wavesRepository);
-        
-        StartGameplay(spawnWaveUseCase);
-    }
+        var updateWaveUseCase = new UpdateWaveUseCase(wavesRepository, spawnWaveUseCase);
 
-    private static void StartGameplay(SpawnWaveUseCase spawnWaveUseCase)
-    {
-        spawnWaveUseCase.SpawnCreepsInWave(); //TODO: change by a star game event and subscribe in UseCase
+        var wavesController = new WavesController(updateWaveUseCase);
+        
+        spawnWaveUseCase.SpawnCreepsInWave();
     }
 }

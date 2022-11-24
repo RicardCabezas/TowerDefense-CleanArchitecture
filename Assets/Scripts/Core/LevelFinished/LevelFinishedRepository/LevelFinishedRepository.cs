@@ -17,10 +17,15 @@ public class LevelFinishedRepository
 
     public void CreateLevelFailedScreen()
     {
-        var screen = _assetCatalog.LoadResource<LevelFailedView>($"{_levelFinishedConfig.LevelFailedScreenPath}");
+        var screen = _assetCatalog.LoadResource<LevelFailedView>(_levelFinishedConfig.LevelFailedScreenPath);
         var view = Object.Instantiate(screen);
         var presenter = new LevelFailedPresenter(view);
     }
     
-    //TODO: add close screen method
+    public void CreateLevelCompletedScreen()
+    {
+        var screen = _assetCatalog.LoadResource<LevelCompletedView>(_levelFinishedConfig.LevelCompletedScreenPath);
+        var view = Object.Instantiate(screen);
+        var presenter = new LevelCompletedPresenter(view);
+    }
 }

@@ -2,15 +2,20 @@ using Core.Waves;
 
 public class WavesRepository
 {
-    private readonly WavesConfig _wavesConfig;
+    private readonly WaveConfig[] _wavesConfig;
     private readonly WavesEntity _entity;
 
     public WavesRepository(WavesConfig wavesConfig, WavesView wavesView)
     {
-        _wavesConfig = wavesConfig;
-        _entity = new WavesEntity();
-
         var presenter = new WavesPresenter(wavesView);
+
+        _wavesConfig = wavesConfig.WaveConfigs;
+        _entity = new WavesEntity
+        {
+            CurrentWave = 0,
+            RemainingCreeps = _wavesConfig[0].CreepsConfig.Length
+        };
+
     }
 
     public void UpdateCurrentWave()
@@ -20,7 +25,7 @@ public class WavesRepository
     
     public WaveConfig GetNextWave()
     {
-        var wave = _wavesConfig.WaveConfigs[_entity.CurrentWave];
+        var wave = _wavesConfig[_entity.CurrentWave];
 
         return wave;
     }
@@ -28,5 +33,31 @@ public class WavesRepository
     public int GetCurrentWaveIndex()
     {
         return _entity.CurrentWave;
+    }
+
+    public bool IsLastWave()
+    {
+        return _entity.CurrentWave >= _wavesConfig.Length - 1;
+    }
+    
+    public bool IsWaveCompleted()
+    {
+        return _entity.RemainingCreeps == 0;
+    }
+
+    public int DecreaseRemainingCreeps()
+    {
+            _entity.RemainingCreeps -= 1;
+        return _entity.RemainingCreeps;
+    }
+
+    public void ResetRemainingCreeps()
+    {
+        _entity.RemainingCreeps = _wavesConfig[_entity.CurrentWave].CreepsConfig.Length;
+    }
+
+    public object GetRemainingCreeps()
+    {
+        return _entity.RemainingCreeps;
     }
 }
