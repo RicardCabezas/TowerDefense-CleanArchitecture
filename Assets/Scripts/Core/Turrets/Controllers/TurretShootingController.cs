@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
+using Core.Creeps.Events;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
 using Core.Turrets.UseCases;
 using Events;
 using UnityEngine;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Controllers
 {
     public class TurretShootingController
     {
@@ -18,7 +18,7 @@ namespace Core.Turrets.Views
         public TurretShootingController(TurretsRepository repository, ProjectilesRepository projectilesRepository)
         {
             _repository = repository;
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             
             _eventDispatcher.Subscribe<TurretTargetUpdated>(OnTargetUpdated);
             _eventDispatcher.Subscribe<CreepDestroyedEvent>(OnCreepDestroyed);

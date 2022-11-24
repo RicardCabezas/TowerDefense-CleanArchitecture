@@ -1,27 +1,30 @@
-using System;
-using System.Collections.Generic;
-using Core.Waves;
+using Core.Waves.Config;
 using Core.Waves.Controllers;
-using Events;
+using Core.Waves.Entity;
+using Core.Waves.UseCase;
+using Core.Waves.Views;
 using UnityEngine;
 
-public class WavesInstaller : MonoBehaviour
+namespace Core.Waves
 {
-    public WavesLocalConfig WavesLocalConfig;
-    public WavesView WavesView;
-
-    public void Install()
+    public class WavesInstaller : MonoBehaviour
     {
-        var serviceLocator = ServiceLocator.Instance;
+        public WavesLocalConfig WavesLocalConfig;
+        public WavesView WavesView;
 
-        var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: change this
-        serviceLocator.RegisterService(wavesRepository);
+        public void Install()
+        {
+            var serviceLocator = ServiceLocator.ServiceLocator.Instance;
 
-        var spawnWaveUseCase = new SpawnWaveUseCase(wavesRepository);
-        var updateWaveUseCase = new UpdateWaveUseCase(wavesRepository, spawnWaveUseCase);
+            var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: change this
+            serviceLocator.RegisterService(wavesRepository);
 
-        var wavesController = new WavesController(updateWaveUseCase);
+            var spawnWaveUseCase = new SpawnWaveUseCase(wavesRepository);
+            var updateWaveUseCase = new UpdateWaveUseCase(wavesRepository, spawnWaveUseCase);
+
+            var wavesController = new WavesController(updateWaveUseCase);
         
-        spawnWaveUseCase.SpawnCreepsInWave();
+            spawnWaveUseCase.SpawnCreepsInWave();
+        }
     }
 }

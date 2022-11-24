@@ -1,4 +1,3 @@
-using Core.Turrets.Configs;
 using Core.Turrets.Entities;
 using Events;
 

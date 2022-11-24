@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.AssetCatalog
+namespace AssetCatalog
 {
     public class AssetCatalog
     {

@@ -1,31 +1,32 @@
-using Core.AssetCatalog;
 using Core.LevelFinished.Configs;
 using Core.LevelFinished.Views;
-using Events;
 using UnityEngine;
 
-public class LevelFinishedRepository
+namespace Core.LevelFinished.LevelFinishedRepository
 {
-    private readonly LevelFinishedConfig _levelFinishedConfig;
-    private readonly AssetCatalog _assetCatalog;
-
-    public LevelFinishedRepository(LevelFinishedConfig levelFinishedConfig)
+    public class LevelFinishedRepository
     {
-        _levelFinishedConfig = levelFinishedConfig;
-        _assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog>();
-    }
+        private readonly LevelFinishedConfig _levelFinishedConfig;
+        private readonly AssetCatalog.AssetCatalog _assetCatalog;
 
-    public void CreateLevelFailedScreen()
-    {
-        var screen = _assetCatalog.LoadResource<LevelFailedView>(_levelFinishedConfig.LevelFailedScreenPath);
-        var view = Object.Instantiate(screen);
-        var presenter = new LevelFailedPresenter(view);
-    }
+        public LevelFinishedRepository(LevelFinishedConfig levelFinishedConfig)
+        {
+            _levelFinishedConfig = levelFinishedConfig;
+            _assetCatalog = ServiceLocator.ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
+        }
+
+        public void CreateLevelFailedScreen()
+        {
+            var screen = _assetCatalog.LoadResource<LevelFailedView>(_levelFinishedConfig.LevelFailedScreenPath);
+            var view = Object.Instantiate(screen);
+            var presenter = new LevelFailedPresenter(view);
+        }
     
-    public void CreateLevelCompletedScreen()
-    {
-        var screen = _assetCatalog.LoadResource<LevelCompletedView>(_levelFinishedConfig.LevelCompletedScreenPath);
-        var view = Object.Instantiate(screen);
-        var presenter = new LevelCompletedPresenter(view);
+        public void CreateLevelCompletedScreen()
+        {
+            var screen = _assetCatalog.LoadResource<LevelCompletedView>(_levelFinishedConfig.LevelCompletedScreenPath);
+            var view = Object.Instantiate(screen);
+            var presenter = new LevelCompletedPresenter(view);
+        }
     }
 }

@@ -11,9 +11,9 @@ namespace Core.Turrets.UseCases
 
         public DestroyProjectileUseCase()
         {
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
 
-            _repository = ServiceLocator.Instance.GetService<ProjectilesRepository>();
+            _repository = ServiceLocator.ServiceLocator.Instance.GetService<ProjectilesRepository>();
         }
 
         public void Destroy(int instanceId)

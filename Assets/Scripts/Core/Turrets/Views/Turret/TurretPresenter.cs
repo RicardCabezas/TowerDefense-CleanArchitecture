@@ -1,8 +1,9 @@
 using Core.Turrets.Events;
 using Events;
+using Pool.BaseObjectRepresentation;
 using UnityEngine;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Views.Turret
 {
     public class TurretPresenter : BasePresenter
     {
@@ -13,7 +14,7 @@ namespace Core.Turrets.Views
         {
             _view = view;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned); //TODO: subscribe to turret spawned
 
             _view.Dispose += OnViewDisposed;

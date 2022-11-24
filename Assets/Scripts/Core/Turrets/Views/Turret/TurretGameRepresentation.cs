@@ -1,6 +1,7 @@
+using Pool.BaseObjectRepresentation;
 using UnityEngine;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Views.Turret
 {
     public class TurretGameElementRepresentation : IGameElementRepresentation
     {

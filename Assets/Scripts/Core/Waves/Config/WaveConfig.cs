@@ -1,7 +1,11 @@
 using System;
+using Core.Creeps.Configs;
 
-[Serializable]
-public class WaveConfig
+namespace Core.Waves.Config
 {
-    public CreepInWaveConfig[] CreepsConfig;
+    [Serializable]
+    public class WaveConfig
+    {
+        public CreepInWaveConfig[] CreepsConfig;
+    }
 }

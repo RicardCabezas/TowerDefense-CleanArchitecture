@@ -1,8 +1,9 @@
 using Core.Creeps.UseCase;
 using Core.Turrets.UseCases;
-using UnityEngine;
+using Core.Turrets.Views.Projectile;
+using Pool.BaseObjectRepresentation;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Controllers.Projectiles
 {
     public class ProjectileController : BaseViewController
     {

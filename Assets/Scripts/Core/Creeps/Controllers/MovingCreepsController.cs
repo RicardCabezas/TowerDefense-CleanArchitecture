@@ -1,5 +1,9 @@
 using System.Collections.Generic;
+using Core.Creeps.Entities;
+using Core.Creeps.Events;
+using Core.Creeps.UseCase;
 using Events;
+using Pool.BaseObjectRepresentation;
 
 namespace Core.Creeps.Controllers
 {
@@ -13,7 +17,7 @@ namespace Core.Creeps.Controllers
         public MovingCreepsController(MoveCreepsUseCase moveCreepsUseCase)
         {
             _moveCreepsUseCase = moveCreepsUseCase;
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<CreepSpawnedEvent>(OnCreepSpawned);
             _eventDispatcher.Subscribe<CreepDestroyedEvent>(OnCreepDestroyed);
         }

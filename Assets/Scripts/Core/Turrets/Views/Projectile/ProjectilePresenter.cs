@@ -1,7 +1,8 @@
 using Core.Turrets.Events;
 using Events;
+using Pool.BaseObjectRepresentation;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Views.Projectile
 {
     public class ProjectilePresenter : BasePresenter
     {
@@ -12,7 +13,7 @@ namespace Core.Turrets.Views
         {
             _view = view;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         
             _eventDispatcher.Subscribe<ProjectilesMoved>(OnProjectilesMoved);
             

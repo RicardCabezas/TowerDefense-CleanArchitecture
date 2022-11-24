@@ -1,63 +1,67 @@
-using Core.Waves;
+using Core.Waves.Config;
+using Core.Waves.Views;
 
-public class WavesRepository
+namespace Core.Waves.Entity
 {
-    private readonly WaveConfig[] _wavesConfig;
-    private readonly WavesEntity _entity;
-
-    public WavesRepository(WavesConfig wavesConfig, WavesView wavesView)
+    public class WavesRepository
     {
-        var presenter = new WavesPresenter(wavesView);
+        private readonly WaveConfig[] _wavesConfig;
+        private readonly WavesEntity _entity;
 
-        _wavesConfig = wavesConfig.WaveConfigs;
-        _entity = new WavesEntity
+        public WavesRepository(WavesConfig wavesConfig, WavesView wavesView)
         {
-            CurrentWave = 0,
-            RemainingCreeps = _wavesConfig[0].CreepsConfig.Length
-        };
+            var presenter = new WavesPresenter(wavesView);
 
-    }
+            _wavesConfig = wavesConfig.WaveConfigs;
+            _entity = new WavesEntity
+            {
+                CurrentWave = 0,
+                RemainingCreeps = _wavesConfig[0].CreepsConfig.Length
+            };
 
-    public void UpdateCurrentWave()
-    {
-        _entity.CurrentWave += 1;
-    }
+        }
+
+        public void UpdateCurrentWave()
+        {
+            _entity.CurrentWave += 1;
+        }
     
-    public WaveConfig GetNextWave()
-    {
-        var wave = _wavesConfig[_entity.CurrentWave];
+        public WaveConfig GetNextWave()
+        {
+            var wave = _wavesConfig[_entity.CurrentWave];
 
-        return wave;
-    }
+            return wave;
+        }
     
-    public int GetCurrentWaveIndex()
-    {
-        return _entity.CurrentWave;
-    }
+        public int GetCurrentWaveIndex()
+        {
+            return _entity.CurrentWave;
+        }
 
-    public bool IsLastWave()
-    {
-        return _entity.CurrentWave >= _wavesConfig.Length - 1;
-    }
+        public bool IsLastWave()
+        {
+            return _entity.CurrentWave >= _wavesConfig.Length - 1;
+        }
     
-    public bool IsWaveCompleted()
-    {
-        return _entity.RemainingCreeps == 0;
-    }
+        public bool IsWaveCompleted()
+        {
+            return _entity.RemainingCreeps == 0;
+        }
 
-    public int DecreaseRemainingCreeps()
-    {
+        public int DecreaseRemainingCreeps()
+        {
             _entity.RemainingCreeps -= 1;
-        return _entity.RemainingCreeps;
-    }
+            return _entity.RemainingCreeps;
+        }
 
-    public void ResetRemainingCreeps()
-    {
-        _entity.RemainingCreeps = _wavesConfig[_entity.CurrentWave].CreepsConfig.Length;
-    }
+        public void ResetRemainingCreeps()
+        {
+            _entity.RemainingCreeps = _wavesConfig[_entity.CurrentWave].CreepsConfig.Length;
+        }
 
-    public object GetRemainingCreeps()
-    {
-        return _entity.RemainingCreeps;
+        public object GetRemainingCreeps()
+        {
+            return _entity.RemainingCreeps;
+        }
     }
 }

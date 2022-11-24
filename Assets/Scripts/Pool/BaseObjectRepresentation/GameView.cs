@@ -1,16 +1,19 @@
 using System;
 using UnityEngine;
 
-public class GameView : MonoBehaviour
+namespace Pool.BaseObjectRepresentation
 {
-    public Action Dispose;
+    public class GameView : MonoBehaviour
+    {
+        public Action Dispose;
 
-    public void Init()
-    {
-    }
+        public void Init()
+        {
+        }
     
-    private void OnDestroy()
-    {
-        Dispose?.Invoke();
+        private void OnDestroy()
+        {
+            Dispose?.Invoke();
+        }
     }
 }

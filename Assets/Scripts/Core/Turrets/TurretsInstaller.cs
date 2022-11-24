@@ -1,44 +1,47 @@
-using System;
-using System.Collections.Generic;
+using Core.Creeps.Entities;
 using Core.Turrets.Configs;
+using Core.Turrets.Controllers;
+using Core.Turrets.Controllers.Projectiles;
+using Core.Turrets.Controllers.SpawnTurret;
 using Core.Turrets.Entities;
 using Core.Turrets.UseCases;
-using Core.Turrets.Views;
-using Events;
 using UnityEngine;
 
-public class TurretsInstaller : MonoBehaviour
+namespace Core.Turrets
 {
-    public LocalTurretsConfig TurretsLocalConfig;
-    public Transform ThumnailTurretsParent;
-    public TurretSpawnerPreviewerController SpawnerPreviewerController;
-    private TurretShootingController _turretShootingController;
-    private MovingProjectilesController _projectilesMovingController;
-
-    public void Install()
+    public class TurretsInstaller : MonoBehaviour
     {
-        var serviceLocator = ServiceLocator.Instance;
-        var turretsRepository = new TurretsRepository(TurretsLocalConfig.TurretsConfig, ThumnailTurretsParent);
-        serviceLocator.RegisterService(turretsRepository);
+        public LocalTurretsConfig TurretsLocalConfig;
+        public Transform ThumnailTurretsParent;
+        public TurretSpawnerPreviewerController SpawnerPreviewerController;
+        private TurretShootingController _turretShootingController;
+        private MovingProjectilesController _projectilesMovingController;
 
-        var projectilesRepository = new ProjectilesRepository(TurretsLocalConfig.TurretsConfig);
-        serviceLocator.RegisterService(projectilesRepository);
+        public void Install()
+        {
+            var serviceLocator = ServiceLocator.ServiceLocator.Instance;
+            var turretsRepository = new TurretsRepository(TurretsLocalConfig.TurretsConfig, ThumnailTurretsParent);
+            serviceLocator.RegisterService(turretsRepository);
 
-        var spawnTurretThumbnailsUseCase = new SpawnTurretSelectorUseCase();
+            var projectilesRepository = new ProjectilesRepository(TurretsLocalConfig.TurretsConfig);
+            serviceLocator.RegisterService(projectilesRepository);
 
-        var creepRepository = serviceLocator.GetService<CreepRepository>();
-        var updateTurretTargetUseCase = new UpdateTurretTargetUseCase(creepRepository, turretsRepository); 
-        var updateTurretTargetController = new UpdateTurretTargetController(updateTurretTargetUseCase);
+            var spawnTurretThumbnailsUseCase = new SpawnTurretSelectorUseCase();
+
+            var creepRepository = serviceLocator.GetService<CreepRepository>();
+            var updateTurretTargetUseCase = new UpdateTurretTargetUseCase(creepRepository, turretsRepository); 
+            var updateTurretTargetController = new UpdateTurretTargetController(updateTurretTargetUseCase);
         
-        _turretShootingController = new TurretShootingController(turretsRepository, projectilesRepository);
-        _projectilesMovingController = new MovingProjectilesController();
+            _turretShootingController = new TurretShootingController(turretsRepository, projectilesRepository);
+            _projectilesMovingController = new MovingProjectilesController();
         
-        spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig, SpawnerPreviewerController);
-    }
+            spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig, SpawnerPreviewerController);
+        }
 
-    private void Update()
-    {
-        _turretShootingController.Update();
-        _projectilesMovingController.Update();
+        private void Update()
+        {
+            _turretShootingController.Update();
+            _projectilesMovingController.Update();
+        }
     }
 }

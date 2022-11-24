@@ -1,4 +1,4 @@
-namespace Core.Base
+namespace Core.BaseCamp.Entities
 {
     public class BaseCampEntity
     {

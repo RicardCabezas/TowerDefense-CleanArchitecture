@@ -1,10 +1,11 @@
-using System;
-
-public class BaseViewController
+namespace Pool.BaseObjectRepresentation
 {
-    public void Init(GameView view, object args)
+    public class BaseViewController
     {
-    }
+        public void Init(GameView view, object args)
+        {
+        }
 
-    public virtual void Dispose() { }
+        public virtual void Dispose() { }
+    }
 }

@@ -1,26 +1,29 @@
-using System;
-using System.Collections.Generic;
-using Core.Base;
-using Core.LevelFinished;
-using Events;
+using Core.BaseCamp.Configs;
+using Core.BaseCamp.Entities;
+using Core.BaseCamp.UseCases;
+using Core.LevelFinished.Configs;
+using Core.LevelFinished.LevelFinishedRepository;
 using UnityEngine;
 
-public class BaseCampInstaller : MonoBehaviour
+namespace Core.BaseCamp
 {
-    public LocalBaseCampConfig BaseCampLocalConfig;
-    public LocalLevelFinishedConfig LevelFinishedLocalConfig;
-
-    public void Install()
+    public class BaseCampInstaller : MonoBehaviour
     {
-        var serviceLocator = ServiceLocator.Instance;
+        public LocalBaseCampConfig BaseCampLocalConfig;
+        public LocalLevelFinishedConfig LevelFinishedLocalConfig;
 
-        var baseCampRepository = new BaseCampRepository(BaseCampLocalConfig.BaseCampConfig);
-        serviceLocator.RegisterService(baseCampRepository);
+        public void Install()
+        {
+            var serviceLocator = ServiceLocator.ServiceLocator.Instance;
 
-        var levelFinishedRepository = new LevelFinishedRepository(LevelFinishedLocalConfig.LevelFinishedConfig);
-        serviceLocator.RegisterService(levelFinishedRepository);
+            var baseCampRepository = new BaseCampRepository(BaseCampLocalConfig.BaseCampConfig);
+            serviceLocator.RegisterService(baseCampRepository);
 
-        var baseCampReceivesDamageUseCase =
-            new BaseCampReceivesDamageUseCase(baseCampRepository, levelFinishedRepository);
+            var levelFinishedRepository = new LevelFinishedRepository(LevelFinishedLocalConfig.LevelFinishedConfig);
+            serviceLocator.RegisterService(levelFinishedRepository);
+
+            var baseCampReceivesDamageUseCase =
+                new BaseCampReceivesDamageUseCase(baseCampRepository, levelFinishedRepository);
+        }
     }
 }

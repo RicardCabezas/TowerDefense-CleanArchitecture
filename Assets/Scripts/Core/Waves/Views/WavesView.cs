@@ -1,8 +1,7 @@
-using System;
-using UnityEngine;
+using Pool.BaseObjectRepresentation;
 using UnityEngine.UI;
 
-namespace Core.Waves
+namespace Core.Waves.Views
 {
     public class WavesView : GameView
     {

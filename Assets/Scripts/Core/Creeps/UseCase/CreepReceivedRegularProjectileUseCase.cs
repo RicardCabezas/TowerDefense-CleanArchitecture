@@ -1,7 +1,6 @@
-using Core.Turrets.Configs;
+using Core.Creeps.Entities;
+using Core.Turrets.Configs.Projectiles;
 using Core.Turrets.Entities;
-using Events;
-using UnityEngine;
 
 namespace Core.Creeps.UseCase
 {
@@ -13,8 +12,8 @@ namespace Core.Creeps.UseCase
 
         public CreepReceivedRegularProjectileUseCase()
         {
-            _turretsRepository = ServiceLocator.Instance.GetService<ProjectilesRepository>();
-            _creepRepository = ServiceLocator.Instance.GetService<CreepRepository>();
+            _turretsRepository = ServiceLocator.ServiceLocator.Instance.GetService<ProjectilesRepository>();
+            _creepRepository = ServiceLocator.ServiceLocator.Instance.GetService<CreepRepository>();
             _destroyCreepUseCase = new DestroyCreepUseCase();
         }
 

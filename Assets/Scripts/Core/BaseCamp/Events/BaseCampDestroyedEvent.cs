@@ -1,6 +1,6 @@
 using Events;
 
-namespace Core.Base
+namespace Core.BaseCamp.Events
 {
     public struct BaseCampDestroyedEvent : BaseEvent
     {

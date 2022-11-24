@@ -1,6 +1,8 @@
 using Core.Currencies.Events;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
+using EconomySystem;
+using EconomySystem.Currencies.SoftCurrency;
 using Events;
 using UnityEngine;
 
@@ -16,8 +18,8 @@ namespace Core.Turrets.UseCases
         {
             _repository = repository;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            _softCurrency = ServiceLocator.Instance.GetService<IEconomySystem<SoftCurrency>>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _softCurrency = ServiceLocator.ServiceLocator.Instance.GetService<IEconomySystem<SoftCurrency>>();
         }
 
         public void Spawn(string turretId, Vector3 position)

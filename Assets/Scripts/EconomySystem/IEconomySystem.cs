@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using EconomySystem.Currencies;
 
-public interface IEconomySystem<T> where T: Currency
+namespace EconomySystem
 {
-    int CurrentAmount { get; }
-    void AddCurrency(int amount);
-    void SubtractCurrency(int amount);
+    public interface IEconomySystem<T> where T: Currency
+    {
+        int CurrentAmount { get; }
+        void AddCurrency(int amount);
+        void SubtractCurrency(int amount);
+    }
 }

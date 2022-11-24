@@ -14,7 +14,7 @@ namespace Core.Turrets.UseCases
         {
             _repository = repository;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
         public void Move(ProjectileEntity projectile)
         {

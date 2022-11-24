@@ -1,6 +1,6 @@
-using Core.Turrets.Configs;
+using Core.Creeps.Entities;
+using Core.Turrets.Configs.Projectiles;
 using Core.Turrets.Entities;
-using Events;
 
 namespace Core.Creeps.UseCase
 {
@@ -11,8 +11,8 @@ namespace Core.Creeps.UseCase
 
         public CreepReceivedFrozenProjectileUseCase()
         {
-            _turretsRepository = ServiceLocator.Instance.GetService<ProjectilesRepository>();
-            _creepRepository = ServiceLocator.Instance.GetService<CreepRepository>();
+            _turretsRepository = ServiceLocator.ServiceLocator.Instance.GetService<ProjectilesRepository>();
+            _creepRepository = ServiceLocator.ServiceLocator.Instance.GetService<CreepRepository>();
         }
 
         public void Execute(int creepInstanceId, int projectileInstanceId)

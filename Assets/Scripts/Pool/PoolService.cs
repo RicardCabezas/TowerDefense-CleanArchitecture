@@ -1,44 +1,46 @@
 using System;
 using System.Collections.Generic;
+using Pool.BaseObjectRepresentation;
 using UnityEngine;
-using UnityEngine.Assertions;
-using Object = UnityEngine.Object;
 
-public static class PoolService
+namespace Pool
 {
-    private static readonly Dictionary<Type, Stack<IGameElementRepresentation>> _pooledObjects = new Dictionary<Type, Stack<IGameElementRepresentation>>();
-    private static readonly GameObject _poolParent;
-
-    public static IGameElementRepresentation Get<T>()
+    public static class PoolService
     {
-        if (!_pooledObjects.TryGetValue(typeof(T), out var gameRepresentationObjectOfTypeT))
+        private static readonly Dictionary<Type, Stack<IGameElementRepresentation>> _pooledObjects = new Dictionary<Type, Stack<IGameElementRepresentation>>();
+        private static readonly GameObject _poolParent;
+
+        public static IGameElementRepresentation Get<T>()
         {
-            return null;
-        }
+            if (!_pooledObjects.TryGetValue(typeof(T), out var gameRepresentationObjectOfTypeT))
+            {
+                return null;
+            }
         
-        if (gameRepresentationObjectOfTypeT.Count <= 0)
-        {
-            return null;
-        }
+            if (gameRepresentationObjectOfTypeT.Count <= 0)
+            {
+                return null;
+            }
         
-        return gameRepresentationObjectOfTypeT.Pop();
-    }
+            return gameRepresentationObjectOfTypeT.Pop();
+        }
     
-    public static void StoreGameRepresentationObject<T>(IGameElementRepresentation gameElementRepresentationObject)
-    {
-        gameElementRepresentationObject.GameView.gameObject.SetActive(false);
-        gameElementRepresentationObject.Controller.Dispose();
-        gameElementRepresentationObject.Presenter.Dispose();
-        if (!_pooledObjects.TryGetValue(typeof(T), out var controllerViewPairStackOfTypeT))
+        public static void StoreGameRepresentationObject<T>(IGameElementRepresentation gameElementRepresentationObject)
         {
-            var stack = new Stack<IGameElementRepresentation>();
-            stack.Push(gameElementRepresentationObject);
-            _pooledObjects.Add(typeof(T), stack);
+            gameElementRepresentationObject.GameView.gameObject.SetActive(false);
+            gameElementRepresentationObject.Controller.Dispose();
+            gameElementRepresentationObject.Presenter.Dispose();
+            if (!_pooledObjects.TryGetValue(typeof(T), out var controllerViewPairStackOfTypeT))
+            {
+                var stack = new Stack<IGameElementRepresentation>();
+                stack.Push(gameElementRepresentationObject);
+                _pooledObjects.Add(typeof(T), stack);
+            }
+            else
+            {
+                controllerViewPairStackOfTypeT.Push(gameElementRepresentationObject);
+            }
         }
-        else
-        {
-            controllerViewPairStackOfTypeT.Push(gameElementRepresentationObject);
-        }
-    }
 
+    }
 }

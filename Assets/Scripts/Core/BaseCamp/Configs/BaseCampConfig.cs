@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Base
+namespace Core.BaseCamp.Configs
 {
     [Serializable]
     public class BaseCampConfig

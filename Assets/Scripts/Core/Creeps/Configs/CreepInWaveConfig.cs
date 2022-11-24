@@ -1,9 +1,12 @@
 using System;
 
-[Serializable]
-public class CreepInWaveConfig
+namespace Core.Creeps.Configs
 {
-    public int SpawnDelayInMiliseconds;
-    public string CreepId; //TODO: accept an asset
-    public string SpawnPointId;
+    [Serializable]
+    public class CreepInWaveConfig
+    {
+        public int SpawnDelayInMiliseconds;
+        public string CreepId; //TODO: accept an asset
+        public string SpawnPointId;
+    }
 }

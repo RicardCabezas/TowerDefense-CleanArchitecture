@@ -1,7 +1,9 @@
 using System;
+using Core.Creeps.Views;
+using Pool.BaseObjectRepresentation;
 using UnityEngine;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Views.Projectile
 {
     public class ProjectileView : GameView
     {

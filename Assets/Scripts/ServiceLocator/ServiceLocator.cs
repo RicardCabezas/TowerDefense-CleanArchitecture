@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 
-namespace Events
+namespace ServiceLocator
 {
     public class ServiceLocator
     {

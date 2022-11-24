@@ -1,4 +1,5 @@
 using Events;
+using Pool.BaseObjectRepresentation;
 
 namespace Core.SpawnerPoints.Views
 {

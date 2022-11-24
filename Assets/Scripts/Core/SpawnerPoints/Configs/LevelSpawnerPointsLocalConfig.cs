@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class LevelSpawnerPointsLocalConfig : MonoBehaviour //TODO: renma as prefab config
+namespace Core.SpawnerPoints.Configs
 {
-    public SpawnerPointsConfig[] Spawners;
+    public class LevelSpawnerPointsLocalConfig : MonoBehaviour //TODO: renma as prefab config
+    {
+        public SpawnerPointsConfig[] Spawners;
+    }
 }

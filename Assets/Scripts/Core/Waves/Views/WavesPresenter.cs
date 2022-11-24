@@ -1,9 +1,8 @@
-using System;
 using Core.Waves.Events;
 using Events;
-using Object = UnityEngine.Object;
+using Pool.BaseObjectRepresentation;
 
-namespace Core.Waves
+namespace Core.Waves.Views
 {
     public class WavesPresenter : BasePresenter
     {
@@ -14,7 +13,7 @@ namespace Core.Waves
         {
             _view = view;
 
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         
             _eventDispatcher.Subscribe<WaveUpdatedEvent>(OnWaveSpawned);
 

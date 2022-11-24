@@ -1,8 +1,10 @@
 using System;
 
-[Serializable]
-
-public class CreepsConfig
+namespace Core.Creeps.Configs
 {
-    public CreepConfig[] Creeps;
+    [Serializable]
+    public class CreepsConfig
+    {
+        public CreepConfig[] Creeps;
+    }
 }

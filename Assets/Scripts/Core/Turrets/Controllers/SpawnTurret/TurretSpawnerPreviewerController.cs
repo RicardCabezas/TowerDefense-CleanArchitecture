@@ -1,8 +1,7 @@
-using System;
 using Core.Turrets.UseCases;
 using UnityEngine;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Controllers.SpawnTurret
 {
     public class TurretSpawnerPreviewerController : MonoBehaviour
     {

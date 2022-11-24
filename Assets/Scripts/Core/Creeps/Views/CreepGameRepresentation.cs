@@ -1,15 +1,18 @@
-using UnityEngine;
+using Pool.BaseObjectRepresentation;
 
-public class CreepGameElementRepresentation :  IGameElementRepresentation
+namespace Core.Creeps.Views
 {
-    public GameView GameView { get; set; }
-    public BasePresenter Presenter { get; set; }
-    public BaseViewController Controller { get; set; }
-
-    public void Init(GameView view)
+    public class CreepGameElementRepresentation :  IGameElementRepresentation
     {
-        GameView = view;
-        Controller = new BaseViewController();
-        Presenter = new CreepPresenter(GameView as CreepView);
+        public GameView GameView { get; set; }
+        public BasePresenter Presenter { get; set; }
+        public BaseViewController Controller { get; set; }
+
+        public void Init(GameView view)
+        {
+            GameView = view;
+            Controller = new BaseViewController();
+            Presenter = new CreepPresenter(GameView as CreepView);
+        }
     }
 }

@@ -1,5 +1,8 @@
-public class WavesEntity
+namespace Core.Waves.Entity
 {
-    public int CurrentWave;
-    public int RemainingCreeps;
+    public class WavesEntity
+    {
+        public int CurrentWave;
+        public int RemainingCreeps;
+    }
 }

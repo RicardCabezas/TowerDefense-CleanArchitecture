@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
+using Core.Turrets.UseCases;
 using Events;
 
-namespace Core.Turrets.UseCases
+namespace Core.Turrets.Controllers.Projectiles
 {
     public class MovingProjectilesController
     {
@@ -13,10 +14,10 @@ namespace Core.Turrets.UseCases
 
         public MovingProjectilesController()
         {
-            var turretsRepository = ServiceLocator.Instance.GetService<TurretsRepository>();
+            var turretsRepository = ServiceLocator.ServiceLocator.Instance.GetService<TurretsRepository>();
             _moveProjectileUseCase = new MoveProjectileUseCase(turretsRepository);
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<ProjectileSpawned>(OnProjectileSpawned);
             _eventDispatcher.Subscribe<ProjectileDestroyed>(OnProjectileDestroyed);
         }

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Core.Turrets.Configs;
+using Core.Turrets.Configs.Projectiles;
 using Core.Turrets.UseCases;
-using Core.Turrets.Views;
-using Events;
-using UnityEngine;
+using Core.Turrets.Views.Projectile;
+using Pool;
+using Pool.BaseObjectRepresentation;
 
 namespace Core.Turrets.Entities
 {
@@ -18,7 +19,7 @@ namespace Core.Turrets.Entities
 
         public ProjectilesRepository(TurretsConfig turretsConfig)
         {
-            _assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
+            _assetCatalog = ServiceLocator.ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
 
             _projectilesConfiguration = turretsConfig.ProjectilesConfiguration;
             _projectileFactory = new ProjectileFactory(_projectilesConfiguration);

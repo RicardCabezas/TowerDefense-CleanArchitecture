@@ -1,7 +1,7 @@
 using Core.Turrets.Configs;
+using Core.Turrets.Controllers.SpawnTurret;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
-using Core.Turrets.Views;
 using Events;
 
 namespace Core.Turrets.UseCases
@@ -12,7 +12,7 @@ namespace Core.Turrets.UseCases
 
         public SpawnTurretSelectorUseCase()
         {
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
         
         public void Spawn(TurretsRepository turretsRepository, TurretsConfig turretsConfig,

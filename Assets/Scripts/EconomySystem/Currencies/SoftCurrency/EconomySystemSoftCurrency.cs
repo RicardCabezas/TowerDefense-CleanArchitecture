@@ -1,14 +1,17 @@
-public class EconomySystemSoftCurrency : IEconomySystem<SoftCurrency>
+namespace EconomySystem.Currencies.SoftCurrency
 {
-    public int CurrentAmount { get; private set; }
-
-    public void AddCurrency(int amount)
+    public class EconomySystemSoftCurrency : IEconomySystem<SoftCurrency>
     {
-        CurrentAmount += amount;
-    }
+        public int CurrentAmount { get; private set; }
 
-    public void SubtractCurrency(int amount)
-    {
-        CurrentAmount -= amount;
+        public void AddCurrency(int amount)
+        {
+            CurrentAmount += amount;
+        }
+
+        public void SubtractCurrency(int amount)
+        {
+            CurrentAmount -= amount;
+        }
     }
 }

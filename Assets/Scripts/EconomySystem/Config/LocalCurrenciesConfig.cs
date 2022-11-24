@@ -1,9 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LocalCurrenciesConfig", menuName = "LocalConfigs/LocalCurrenciesConfig", order = 1)]
-public class LocalCurrenciesConfig : ScriptableObject
+namespace EconomySystem.Config
 {
-    public CurrenciesConfig CurrenciesConfig => _currenciesConfig;
+    [CreateAssetMenu(fileName = "LocalCurrenciesConfig", menuName = "LocalConfigs/LocalCurrenciesConfig", order = 1)]
+    public class LocalCurrenciesConfig : ScriptableObject
+    {
+        public CurrenciesConfig CurrenciesConfig => _currenciesConfig;
 
-    [SerializeField] CurrenciesConfig _currenciesConfig;
+        [SerializeField] CurrenciesConfig _currenciesConfig;
+    }
 }

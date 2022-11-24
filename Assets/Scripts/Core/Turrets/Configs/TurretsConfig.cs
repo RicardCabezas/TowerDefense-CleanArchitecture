@@ -1,4 +1,5 @@
 using System;
+using Core.Turrets.Configs.Projectiles;
 
 namespace Core.Turrets.Configs
 {

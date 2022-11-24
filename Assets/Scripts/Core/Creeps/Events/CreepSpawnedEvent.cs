@@ -1,11 +1,15 @@
+using Core.Creeps.Entities;
 using Events;
 
-public struct CreepSpawnedEvent : BaseEvent
+namespace Core.Creeps.Events
 {
-    public CreepEntity Creep { get; }
-
-    public CreepSpawnedEvent(CreepEntity creep)
+    public struct CreepSpawnedEvent : BaseEvent
     {
-        Creep = creep;
+        public CreepEntity Creep { get; }
+
+        public CreepSpawnedEvent(CreepEntity creep)
+        {
+            Creep = creep;
+        }
     }
 }

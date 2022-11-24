@@ -1,8 +1,9 @@
 using System.Globalization;
 using Core.Turrets.Events;
 using Events;
+using Pool.BaseObjectRepresentation;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Views.Thumbnail
 {
     public class TurretThumbnailPresenter : BasePresenter
     {
@@ -13,7 +14,7 @@ namespace Core.Turrets.Views
         {
             _view = view;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned);
 
             _view.Dispose += OnViewDisposed;

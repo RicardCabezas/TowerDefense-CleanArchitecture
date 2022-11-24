@@ -1,4 +1,7 @@
-namespace Core.Turrets.Views
+using Core.Turrets.Controllers.Projectiles;
+using Pool.BaseObjectRepresentation;
+
+namespace Core.Turrets.Views.Projectile
 {
     public class ProjectileRegularGameElementRepresentation : IGameElementRepresentation
     {

@@ -1,4 +1,6 @@
-using Core.Base;
+using Core.Creeps.Events;
+using Core.Waves.Entity;
+using Core.Waves.UseCase;
 using Events;
 
 namespace Core.Waves.Controllers
@@ -12,7 +14,7 @@ namespace Core.Waves.Controllers
         public WavesController(UpdateWaveUseCase updateWaveUseCase)
         {
             _updateWaveUseCase = updateWaveUseCase;
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
 
             _eventDispatcher.Subscribe<CreepDestroyedEvent>(OnCreepDestroyed);
         }

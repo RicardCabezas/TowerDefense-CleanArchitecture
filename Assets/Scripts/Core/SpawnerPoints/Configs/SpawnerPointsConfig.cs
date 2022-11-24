@@ -1,10 +1,12 @@
 using System;
 using Core.SpawnerPoints.Views;
-using UnityEngine;
 
-[Serializable]
-public class SpawnerPointsConfig
+namespace Core.SpawnerPoints.Configs
 {
-    public string Id;
-    public SpawnerView View;
+    [Serializable]
+    public class SpawnerPointsConfig
+    {
+        public string Id;
+        public SpawnerView View;
+    }
 }

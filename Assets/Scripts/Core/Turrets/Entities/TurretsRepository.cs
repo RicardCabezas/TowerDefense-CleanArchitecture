@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Core.Turrets.Configs;
-using Core.Turrets.Views;
-using Events;
+using Core.Turrets.Controllers.SpawnTurret;
+using Core.Turrets.Views.Thumbnail;
+using Core.Turrets.Views.Turret;
+using Pool.BaseObjectRepresentation;
 using UnityEngine;
 
 namespace Core.Turrets.Entities
@@ -28,7 +30,7 @@ namespace Core.Turrets.Entities
             _turretsConfig = turretsConfig;
             _thumbnailTurretsParent = thumbnailTurretsParent;
 
-            _assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
+            _assetCatalog = ServiceLocator.ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
         
             foreach (var turret in _turretsConfig.Turrets)
             {

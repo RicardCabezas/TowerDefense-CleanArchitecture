@@ -1,36 +1,40 @@
+using Core.Waves.Entity;
 using Core.Waves.Events;
 using Events;
 
-public class UpdateWaveUseCase
+namespace Core.Waves.UseCase
 {
-    private readonly WavesRepository _wavesRepository;
-    private readonly SpawnWaveUseCase _spawnWaveUseCase;
-    private readonly IEventDispatcher _eventDispatcher;
-
-    public UpdateWaveUseCase(WavesRepository wavesRepository, SpawnWaveUseCase spawnWaveUseCase)
+    public class UpdateWaveUseCase
     {
-        _wavesRepository = wavesRepository;
-        _spawnWaveUseCase = spawnWaveUseCase;
-        
-        _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-    }
+        private readonly WavesRepository _wavesRepository;
+        private readonly SpawnWaveUseCase _spawnWaveUseCase;
+        private readonly IEventDispatcher _eventDispatcher;
 
-    public void UpdateWave()
-    {
-        var remainingCreeps = _wavesRepository.DecreaseRemainingCreeps();
-
-        if (remainingCreeps <= 0)
+        public UpdateWaveUseCase(WavesRepository wavesRepository, SpawnWaveUseCase spawnWaveUseCase)
         {
-            if (!_wavesRepository.IsLastWave())
-            {
-                _wavesRepository.UpdateCurrentWave();
-                _spawnWaveUseCase.SpawnCreepsInWave();
-                _wavesRepository.ResetRemainingCreeps();
-            }
+            _wavesRepository = wavesRepository;
+            _spawnWaveUseCase = spawnWaveUseCase;
+        
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
 
-        var updateRemainingCreeps = _wavesRepository.GetRemainingCreeps();
-        var waveIndex = _wavesRepository.GetCurrentWaveIndex();
-        _eventDispatcher.Dispatch(new WaveUpdatedEvent(waveIndex, remainingCreeps));
+        public void UpdateWave()
+        {
+            var remainingCreeps = _wavesRepository.DecreaseRemainingCreeps();
+
+            if (remainingCreeps <= 0)
+            {
+                if (!_wavesRepository.IsLastWave())
+                {
+                    _wavesRepository.UpdateCurrentWave();
+                    _spawnWaveUseCase.SpawnCreepsInWave();
+                    _wavesRepository.ResetRemainingCreeps();
+                }
+            }
+
+            var updateRemainingCreeps = _wavesRepository.GetRemainingCreeps();
+            var waveIndex = _wavesRepository.GetCurrentWaveIndex();
+            _eventDispatcher.Dispatch(new WaveUpdatedEvent(waveIndex, remainingCreeps));
+        }
     }
 }

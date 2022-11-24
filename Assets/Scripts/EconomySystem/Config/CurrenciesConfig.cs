@@ -1,7 +1,11 @@
 using System;
+using EconomySystem.Currencies;
 
-[Serializable]
-public class CurrenciesConfig
+namespace EconomySystem.Config
 {
-    public Currency[] Currencies;
+    [Serializable]
+    public class CurrenciesConfig
+    {
+        public Currency[] Currencies;
+    }
 }

@@ -1,9 +1,10 @@
 using Core.Currencies.Events;
 using Core.Turrets.Entities;
 using Core.Turrets.UseCases;
+using Core.Turrets.Views.Thumbnail;
 using Events;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Controllers.SpawnTurret
 {
     public class TurretThumbnailController
     {
@@ -23,7 +24,7 @@ namespace Core.Turrets.Views
             _view = view;
             _turretId = turretId;
             _previewerController = previewerController;
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
 
             _view.Button.onClick.AddListener(OnClick);
             _eventDispatcher.Subscribe<UpdateSoftCurrencyEvent>(OnSoftCurrencyUpdated);

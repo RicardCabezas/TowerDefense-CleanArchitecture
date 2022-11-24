@@ -1,20 +1,24 @@
-using Core.Turrets.Views;
+using Core.Turrets.Views.Projectile;
+using Pool.BaseObjectRepresentation;
 using UnityEngine;
 
-public class CreepView : GameView
+namespace Core.Creeps.Views
 {
-    public string RemainingHealth;
-    public Vector3 Position;
-    public Color Color;
-    
-    private void OnTriggerEnter(Collider other)
+    public class CreepView : GameView
     {
-        if (other.gameObject.GetComponent<ProjectileView>()) //TODO: make sure it works for all views
+        public string RemainingHealth;
+        public Vector3 Position;
+        public Color Color;
+    
+        private void OnTriggerEnter(Collider other)
         {
-            //TODO: call release of projectile view so it can go back to the pool
+            if (other.gameObject.GetComponent<ProjectileView>()) //TODO: make sure it works for all views
+            {
+                //TODO: call release of projectile view so it can go back to the pool
             
             
-            //TODO: call received damage use case?
+                //TODO: call received damage use case?
+            }
         }
     }
 }

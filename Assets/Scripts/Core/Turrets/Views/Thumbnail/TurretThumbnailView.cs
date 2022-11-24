@@ -1,8 +1,7 @@
-using System;
-using UnityEngine;
+using Pool.BaseObjectRepresentation;
 using UnityEngine.UI;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Views.Thumbnail
 {
     public class TurretThumbnailView : GameView
     {

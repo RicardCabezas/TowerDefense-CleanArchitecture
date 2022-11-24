@@ -1,12 +1,13 @@
-using System;
-
-public class BasePresenter
+namespace Pool.BaseObjectRepresentation
 {
-    public void Init(GameView view, object args)
+    public class BasePresenter
     {
-    }
+        public void Init(GameView view, object args)
+        {
+        }
 
-    public virtual void Dispose()
-    {
+        public virtual void Dispose()
+        {
+        }
     }
 }

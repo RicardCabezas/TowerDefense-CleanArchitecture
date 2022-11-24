@@ -1,9 +1,10 @@
-using System;
+using Core.Creeps.Views;
 using Core.Turrets.Events;
+using Core.Turrets.Views.Turret;
 using Events;
 using UnityEngine;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Controllers
 {
     public class CreepEnteredOnTurretRange : MonoBehaviour
     {
@@ -12,7 +13,7 @@ namespace Core.Turrets.Views
 
         private void Start()
         {
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
 
         private void OnTriggerEnter(Collider other)

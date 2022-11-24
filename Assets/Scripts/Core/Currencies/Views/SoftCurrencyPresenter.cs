@@ -1,7 +1,6 @@
 using Core.Currencies.Events;
-using Core.Turrets.Events;
 using Events;
-using UnityEngine;
+using Pool.BaseObjectRepresentation;
 
 namespace Core.Currencies.Views
 {
@@ -16,7 +15,7 @@ namespace Core.Currencies.Views
             
             view.CurrentAmount.text = "0";
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<UpdateSoftCurrencyEvent>(OnSoftCurrencyAdded);
 
             _view.Dispose += OnViewDisposed;

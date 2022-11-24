@@ -1,3 +1,4 @@
+using Core.Creeps.Entities;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
 using Events;
@@ -18,7 +19,7 @@ namespace Core.Turrets.UseCases
             _creepRepository = creepRepository;
             _turretsRepository = turretsRepository;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
 
         public void UpdateTarget(int creepInstanceId, int turretInstanceId) //TODO: find Entity

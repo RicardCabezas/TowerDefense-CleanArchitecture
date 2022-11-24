@@ -1,7 +1,8 @@
 using Core.Creeps.UseCase;
 using Core.Turrets.UseCases;
+using Core.Turrets.Views.Projectile;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Controllers.Projectiles
 {
     public class ProjectileFrozenController : ProjectileController
     {

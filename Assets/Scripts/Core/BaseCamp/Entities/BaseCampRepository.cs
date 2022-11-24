@@ -1,6 +1,7 @@
+using Core.BaseCamp.Configs;
 using UnityEngine;
 
-namespace Core.Base
+namespace Core.BaseCamp.Entities
 {
     public class BaseCampRepository
     {

@@ -1,6 +1,4 @@
-using Core.Base;
 using Core.LevelFinished.Events;
-using Core.LevelFinished.Views;
 using Events;
 using UnityEngine;
 
@@ -8,14 +6,14 @@ namespace Core.LevelFinished.UseCases
 {
     public class LevelFailedUseCase
     {
-        private readonly LevelFinishedRepository _repository;
+        private readonly LevelFinishedRepository.LevelFinishedRepository _repository;
         private readonly AssetCatalog.AssetCatalog _assetCatalog;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public LevelFailedUseCase(LevelFinishedRepository repository)
+        public LevelFailedUseCase(LevelFinishedRepository.LevelFinishedRepository repository)
         {
             _repository = repository;
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
 
         public void ShowLevelFailScreen()

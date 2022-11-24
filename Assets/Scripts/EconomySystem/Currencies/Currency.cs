@@ -1,7 +1,10 @@
 using System;
 
-[Serializable]
-public class Currency
+namespace EconomySystem.Currencies
 {
-    public string IconSpritePath;
+    [Serializable]
+    public class Currency
+    {
+        public string IconSpritePath;
+    }
 }

@@ -2,7 +2,7 @@ using Core.Turrets.Events;
 using Core.Turrets.UseCases;
 using Events;
 
-namespace Core.Turrets.Views
+namespace Core.Turrets.Controllers
 {
     public class UpdateTurretTargetController
     {
@@ -13,7 +13,7 @@ namespace Core.Turrets.Views
         {
             _updateTurretTargetUseCase = updateTurretTargetUseCase;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<CreepEnteredTurretRange>(OnCreepEnteredOnTurretRange);
         }
 

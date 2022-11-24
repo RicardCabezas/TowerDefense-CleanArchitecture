@@ -1,7 +1,9 @@
-using Core.LevelFinished;
+using Core.BaseCamp.Entities;
+using Core.BaseCamp.Events;
+using Core.LevelFinished.LevelFinishedRepository;
 using Events;
 
-namespace Core.Base
+namespace Core.BaseCamp.UseCases
 {
     public class BaseCampReceivesDamageUseCase
     {
@@ -13,13 +15,13 @@ namespace Core.Base
             LevelFinishedRepository levelFinishedRepository)
         {
             _baseCampRepository = baseCampRepository;
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _levelFinishedRepository = levelFinishedRepository;
             
             _eventDispatcher.Subscribe<BaseCampReceivedDamageEvent>(OnBaseCampReceivesDamage);
         }
 
-        private void OnBaseCampReceivesDamage(BaseCampReceivedDamageEvent damageReceivedEvent)
+        private void OnBaseCampReceivesDamage(BaseCampReceivedDamageEvent damageReceivedEvent) //TODO: change, create controller
         {
             _baseCampRepository.UpdateBaseHealth(damageReceivedEvent.Damage);
             //TODO: fire event updating health

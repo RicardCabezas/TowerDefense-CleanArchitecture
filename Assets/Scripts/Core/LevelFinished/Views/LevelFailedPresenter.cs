@@ -1,6 +1,6 @@
-using Core.Base;
 using Core.LevelFinished.Events;
 using Events;
+using Pool.BaseObjectRepresentation;
 
 namespace Core.LevelFinished.Views
 {
@@ -13,7 +13,7 @@ namespace Core.LevelFinished.Views
         {
             _view = view;
             _view.gameObject.SetActive(false);
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             
             _eventDispatcher.Subscribe<LevelFailedScreenCreatedEvent>(OnLevelFailedScreenCreated);   
             

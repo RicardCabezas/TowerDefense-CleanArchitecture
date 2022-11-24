@@ -1,36 +1,40 @@
-
-using System;
 using System.Threading.Tasks;
-using Core.Waves.Events;
+using Core.Creeps.Entities;
+using Core.Creeps.Events;
+using Core.SpawnerPoints.Entities;
+using Core.Waves.Entity;
 using Events;
 
-public class SpawnWaveUseCase
+namespace Core.Waves.UseCase
 {
-    private readonly IEventDispatcher _eventDispatcher;
-    private readonly WavesRepository _wavesRepository;
-    private readonly CreepRepository _creepRepository;
-    private readonly SpawnerPointsRepository _spawnerPointsRepository;
-
-    public SpawnWaveUseCase(WavesRepository wavesRepository)
+    public class SpawnWaveUseCase
     {
-        _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-        _wavesRepository = wavesRepository;
-        _creepRepository = ServiceLocator.Instance.GetService<CreepRepository>();
-        _spawnerPointsRepository = ServiceLocator.Instance.GetService<SpawnerPointsRepository>();
-    }
+        private readonly IEventDispatcher _eventDispatcher;
+        private readonly WavesRepository _wavesRepository;
+        private readonly CreepRepository _creepRepository;
+        private readonly SpawnerPointsRepository _spawnerPointsRepository;
 
-    public async void SpawnCreepsInWave()
-    {
-        var nextWave = _wavesRepository.GetNextWave();
-        
-        foreach (var creep in nextWave.CreepsConfig)
+        public SpawnWaveUseCase(WavesRepository wavesRepository)
         {
-            await Task.Delay(creep.SpawnDelayInMiliseconds);
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _wavesRepository = wavesRepository;
+            _creepRepository = ServiceLocator.ServiceLocator.Instance.GetService<CreepRepository>();
+            _spawnerPointsRepository = ServiceLocator.ServiceLocator.Instance.GetService<SpawnerPointsRepository>();
+        }
+
+        public async void SpawnCreepsInWave()
+        {
+            var nextWave = _wavesRepository.GetNextWave();
+        
+            foreach (var creep in nextWave.CreepsConfig)
+            {
+                await Task.Delay(creep.SpawnDelayInMiliseconds);
             
-            var spawnerPosition = _spawnerPointsRepository.GetSpawnerPointPosition(creep.SpawnPointId);
-            var creepEntity = _creepRepository.SpawnNewCreep(creep.CreepId, spawnerPosition);
+                var spawnerPosition = _spawnerPointsRepository.GetSpawnerPointPosition(creep.SpawnPointId);
+                var creepEntity = _creepRepository.SpawnNewCreep(creep.CreepId, spawnerPosition);
             
-            _eventDispatcher.Dispatch(new CreepSpawnedEvent(creepEntity));
+                _eventDispatcher.Dispatch(new CreepSpawnedEvent(creepEntity));
+            }
         }
     }
 }

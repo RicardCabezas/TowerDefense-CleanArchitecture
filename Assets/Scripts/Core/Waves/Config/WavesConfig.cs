@@ -1,7 +1,10 @@
 using System;
 
-[Serializable]
-public class WavesConfig
+namespace Core.Waves.Config
 {
-    public WaveConfig[] WaveConfigs;
+    [Serializable]
+    public class WavesConfig
+    {
+        public WaveConfig[] WaveConfigs;
+    }
 }

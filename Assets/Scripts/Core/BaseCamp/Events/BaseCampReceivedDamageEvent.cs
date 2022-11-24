@@ -1,6 +1,6 @@
 using Events;
 
-namespace Core.Base
+namespace Core.BaseCamp.Events
 {
     public struct BaseCampReceivedDamageEvent : BaseEvent //TODO: change by creep attacked event
     {

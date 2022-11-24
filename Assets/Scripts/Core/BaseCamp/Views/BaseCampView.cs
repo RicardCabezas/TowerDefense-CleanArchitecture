@@ -1,4 +1,4 @@
-using UnityEngine;
+using Pool.BaseObjectRepresentation;
 
 namespace Core.BaseCamp.Views
 {

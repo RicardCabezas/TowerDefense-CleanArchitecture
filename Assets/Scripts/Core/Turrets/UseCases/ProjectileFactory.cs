@@ -1,7 +1,6 @@
-using Core.Creeps.UseCase;
-using Core.Turrets.Configs;
-using Core.Turrets.Views;
-using Events;
+using Core.Turrets.Configs.Projectiles;
+using Core.Turrets.Views.Projectile;
+using Pool.BaseObjectRepresentation;
 
 namespace Core.Turrets.UseCases
 {
@@ -12,7 +11,7 @@ namespace Core.Turrets.UseCases
 
         public ProjectileFactory(ProjectilesConfiguration configuration)
         {
-            _assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
+            _assetCatalog = ServiceLocator.ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
             _configuration = configuration;
         }
 

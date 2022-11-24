@@ -1,4 +1,4 @@
-namespace Core.Turrets.Configs
+namespace Core.Turrets.Configs.Projectiles
 {
     public class ProjectileConfiguration
     {

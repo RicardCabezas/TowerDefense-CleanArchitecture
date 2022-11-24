@@ -1,6 +1,7 @@
-using Core.Base;
-using Core.LevelFinished.Events;
+using Core.BaseCamp.Events;
+using Core.Creeps.Events;
 using Core.LevelFinished.UseCases;
+using Core.Waves.Entity;
 using Events;
 
 namespace Core.LevelFinished.Controllers
@@ -18,8 +19,8 @@ namespace Core.LevelFinished.Controllers
             _levelFailedUseCase = levelFailedUseCase;
             _levelCompletedUseCase = levelCompletedUseCase;
             
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            _wavesRepository = ServiceLocator.Instance.GetService<WavesRepository>();
+            _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _wavesRepository = ServiceLocator.ServiceLocator.Instance.GetService<WavesRepository>();
 
             _eventDispatcher.Subscribe<BaseCampDestroyedEvent>(OnBaseCampDestroyed);
             

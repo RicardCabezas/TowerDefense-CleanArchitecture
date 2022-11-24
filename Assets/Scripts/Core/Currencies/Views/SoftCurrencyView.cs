@@ -1,3 +1,4 @@
+using Pool.BaseObjectRepresentation;
 using UnityEngine.UI;
 
 namespace Core.Currencies.Views
