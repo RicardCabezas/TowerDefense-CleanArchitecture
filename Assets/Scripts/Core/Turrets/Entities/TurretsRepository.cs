@@ -78,5 +78,10 @@ namespace Core.Turrets.Entities
         {
             return _pools[turretId].Get();
         }
+
+        public TurretEntity GetTurretEntity(int turretInstanceId)
+        {
+            return _turretEntities[turretInstanceId];
+        }
     }
 }

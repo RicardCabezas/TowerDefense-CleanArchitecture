@@ -19,7 +19,7 @@ namespace Core.Turrets.UseCases
 
         public void Spawn(string turretId, Vector3 position)
         {
-            var turret = _repository.SpawnNewTurret(turretId, position); //TODO: get world position
+            var turret = _repository.SpawnNewTurret(turretId, position);
             _eventDispatcher.Dispatch(new TurretSpawned(turret));
         }
     }

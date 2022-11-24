@@ -49,6 +49,12 @@ public class CreepRepository
         return _creepEntities[instanceID];
     }
     
+    public CreepEntity GetCreepEntity(int instanceID) 
+    {
+        return _creepEntities[instanceID];
+    }
+
+    
     public CreepView GetNewCreepView(string creepId) //TODO: move to presenter
     {
         return _pools[creepId].Get();

@@ -29,6 +29,6 @@ public class GameInstaller : MonoBehaviour
         WavesInstaller.Install(ref _repositories);
         BaseCampInstaller.Install(ref _repositories);
         LevelFinishedInstaller.Install();
-        TurretsInstaller.Install();
+        TurretsInstaller.Install((CreepRepository)_repositories[typeof(CreepRepository)]);
     }
 }

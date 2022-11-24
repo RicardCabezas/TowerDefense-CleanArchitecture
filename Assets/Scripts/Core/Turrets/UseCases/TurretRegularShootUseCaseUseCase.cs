@@ -2,11 +2,11 @@ using Core.Turrets.Entities;
 
 namespace Core.Turrets.UseCases
 {
-    public class TurretRegularShootUseCase : ITurretShoot
+    public class TurretRegularShootUseCaseUseCase : ITurretShootUseCase
     {
         private readonly TurretsRepository _repository;
 
-        public TurretRegularShootUseCase(TurretsRepository repository)
+        public TurretRegularShootUseCaseUseCase(TurretsRepository repository)
         {
             _repository = repository;
         }
@@ -16,7 +16,7 @@ namespace Core.Turrets.UseCases
         }
     }
     
-    public class FrozenTurretShootUseCase : ITurretShoot
+    public class FrozenTurretShootUseCaseUseCase : ITurretShootUseCase
     {
         public void Shoot()
         {

@@ -17,15 +17,15 @@ namespace Core.Turrets.Views
         {
             _repository = repository;
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            _eventDispatcher.Subscribe<TurretSpawned>(OnTurretSpawned);
+            _eventDispatcher.Subscribe<TurretTargetUpdated>(OnTargetUpdated);
         }
 
-        private void OnTurretSpawned(TurretSpawned eventInfo)
+        private void OnTargetUpdated(TurretTargetUpdated eventInfo)
         {
             //TODO: create ShootingTurretUseCaseFactory ->
-            var shootingTurret = new ShootingTurret()
+            var shootingTurret = new ShootingTurret
             {
-                ShootUseCase = new TurretRegularShootUseCase(_repository),
+                ShootUseCaseUseCase = new TurretRegularShootUseCaseUseCase(_repository),
                 TimeSinceLastShot = 0f,
                 TurretShootCooldown = eventInfo.Turret.Cooldown
             };
@@ -33,13 +33,14 @@ namespace Core.Turrets.Views
             _turretShoots.Add(shootingTurret);
         }
 
+
         public void Update() //TODO: call from installer
         {
             foreach (var turret in _turretShoots)
             {
                 if (turret.TimeSinceLastShot >= turret.TurretShootCooldown)
                 {
-                    turret.ShootUseCase.Shoot();
+                    turret.ShootUseCaseUseCase.Shoot();
                     turret.TimeSinceLastShot = 0;
                 }
                 
