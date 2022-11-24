@@ -14,13 +14,13 @@ namespace Core.Turrets.Views
         private readonly IEventDispatcher _eventDispatcher;
         private readonly TurretShootUseCaseUse _shootUseCase;
 
-        public TurretShootingController(TurretsRepository repository)
+        public TurretShootingController(TurretsRepository repository, ProjectilesRepository projectilesRepository)
         {
             _repository = repository;
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<TurretTargetUpdated>(OnTargetUpdated);
 
-            _shootUseCase = new TurretShootUseCaseUse(repository);
+            _shootUseCase = new TurretShootUseCaseUse(projectilesRepository);
         }
 
         private void OnTargetUpdated(TurretTargetUpdated eventInfo)

@@ -20,12 +20,15 @@ public class TurretsInstaller : MonoBehaviour
         var turretsRepository = new TurretsRepository(TurretsLocalConfig.TurretsConfig, ThumnailTurretsParent);
         ServiceLocator.Instance.RegisterService(turretsRepository);
 
+        var projectilesRepository = new ProjectilesRepository(TurretsLocalConfig.TurretsConfig);
+        ServiceLocator.Instance.RegisterService(projectilesRepository);
+
         var spawnTurretThumbnailsUseCase = new SpawnTurretSelectorUseCase();
 
         var updateTurretTargetUseCase = new UpdateTurretTargetUseCase(creepRepository, turretsRepository); 
         var updateTurretTargetController = new UpdateTurretTargetController(updateTurretTargetUseCase);
         
-        _turretShootingController = new TurretShootingController(turretsRepository);
+        _turretShootingController = new TurretShootingController(turretsRepository, projectilesRepository);
         _projectilesMovingController = new MovingProjectilesController();
         spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig, SpawnerPreviewerController);
     }

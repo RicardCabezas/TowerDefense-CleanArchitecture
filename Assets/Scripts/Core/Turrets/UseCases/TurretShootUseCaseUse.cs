@@ -7,10 +7,10 @@ namespace Core.Turrets.UseCases
 {
     public class TurretShootUseCaseUse
     {
-        private readonly TurretsRepository _repository;
+        private readonly ProjectilesRepository _repository;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public TurretShootUseCaseUse(TurretsRepository repository)
+        public TurretShootUseCaseUse(ProjectilesRepository repository)
         {
             _repository = repository;
             

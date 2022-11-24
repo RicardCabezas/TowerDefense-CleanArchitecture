@@ -28,8 +28,6 @@ public class CreepRepository
         var prefab = assetCatalog.LoadResource<CreepView>($"{AssetCatalog.Creeps}{config.PrefabId}");
         var creepGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<CreepGameRepresentation>(prefab);
         
-        
-
         var view = creepGameRepresentation.GameView as CreepView;
         var instanceID = view.GetInstanceID();
         

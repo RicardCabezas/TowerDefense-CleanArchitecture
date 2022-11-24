@@ -20,7 +20,7 @@ namespace Core.Turrets.Views
         private void OnCollidedWithCreep(int instanceId)
         {
             _useCase.Execute(instanceId, _view.GetInstanceID());//TODO: use factory to decide what type of projectile, create use case based on that
-            Object.Destroy(_view); //TODO: implement pool release
+            //Object.Destroy(_view); //TODO: implement pool release
         }
     }
 }

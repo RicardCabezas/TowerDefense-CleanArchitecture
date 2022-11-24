@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Core.Turrets.Views
 {
-    public class TurretPresenter
+    public class TurretPresenter : BasePresenter
     {
         private readonly TurretView _view;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public TurretPresenter(TurretView view, Vector3 position)
+        public TurretPresenter(TurretView view)
         {
             _view = view;
             
@@ -17,6 +17,10 @@ namespace Core.Turrets.Views
             _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned); //TODO: subscribe to turret spawned
 
 
+        }
+
+        public void UpdatePosition(Vector3 position)
+        {
             _view.transform.position = position;
         }
 

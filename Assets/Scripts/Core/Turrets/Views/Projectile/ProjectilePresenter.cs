@@ -3,7 +3,7 @@ using Events;
 
 namespace Core.Turrets.Views
 {
-    public class ProjectilePresenter
+    public class ProjectilePresenter : BasePresenter
     {
         private readonly ProjectileView _view;
         private readonly IEventDispatcher _eventDispatcher;

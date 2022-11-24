@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Turrets.Views
 {
-    public class ProjectileView : MonoBehaviour
+    public class ProjectileView : GameView
     {
         public Action<int> CollidedWithCreep;
 

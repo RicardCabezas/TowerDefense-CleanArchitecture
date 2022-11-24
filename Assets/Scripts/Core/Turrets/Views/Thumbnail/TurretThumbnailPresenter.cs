@@ -4,7 +4,7 @@ using Events;
 
 namespace Core.Turrets.Views
 {
-    public class TurretThumbnailPresenter
+    public class TurretThumbnailPresenter : BasePresenter
     {
         private readonly TurretThumbnailView _view;
         private readonly IEventDispatcher _eventDispatcher;

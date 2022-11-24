@@ -8,11 +8,11 @@ namespace Core.Creeps.UseCase
     public class CreepReceivedRegularProjectileUseCase : ICreepReceivedProjectile //TODO: create a frozen implementation that debuffs spead
     {
         private readonly CreepRepository _creepRepository;
-        private readonly TurretsRepository _turretsRepository;
+        private readonly ProjectilesRepository _turretsRepository;
 
         public CreepReceivedRegularProjectileUseCase()
         {
-            _turretsRepository = ServiceLocator.Instance.GetService<TurretsRepository>();
+            _turretsRepository = ServiceLocator.Instance.GetService<ProjectilesRepository>();
             _creepRepository = ServiceLocator.Instance.GetService<CreepRepository>();
         }
         public void Execute(int creepInstanceId, int projectileInstanceId)
