@@ -8,9 +8,6 @@ public class CreepRepository
     private readonly CreepsConfig _creepsConfig;
 
     private Dictionary<int, CreepEntity> _creepEntities = new Dictionary<int, CreepEntity>();
-    private Dictionary<int, CreepPresenter> _creepPresenters = new Dictionary<int, CreepPresenter>();
-
-    private Dictionary<string, GameObjectPool<CreepView>> _pools = new Dictionary<string, GameObjectPool<CreepView>>();
 
     private Dictionary<string, CreepConfig> _creepsById = new Dictionary<string, CreepConfig>();
 
@@ -18,13 +15,8 @@ public class CreepRepository
     {
         _creepsConfig = creepsConfig;
 
-        var assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog>();
-        
         foreach (var creep in _creepsConfig.Creeps)
         {
-            var prefab = assetCatalog.LoadResource<CreepView>($"{AssetCatalog.Creeps}{creep.PrefabId}");
-
-            _pools[creep.Id] = new GameObjectPool<CreepView>(prefab, 10);
             _creepsById[creep.Id] = creep;
         }
     }
@@ -32,12 +24,16 @@ public class CreepRepository
     public CreepEntity SpawnNewCreep(string creepId, Vector3 position)
     {
         var config = _creepsById[creepId];
-
-        var view = GetNewCreepView(creepId);
-        var instanceID = view.GetInstanceID();
-        _creepPresenters[instanceID] = new CreepPresenter(view);
+        var assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog>();
+        var prefab = assetCatalog.LoadResource<CreepView>($"{AssetCatalog.Creeps}{config.PrefabId}");
+        var creepGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<CreepGameRepresentation>(prefab);
         
-        _creepEntities[instanceID] = new CreepEntity
+        
+
+        var view = creepGameRepresentation.GameView as CreepView;
+        var instanceID = view.GetInstanceID();
+        
+        _creepEntities[instanceID] = new CreepEntity //TODO: add to CreepGameRepresentation
         {
             CurrentPosition = position,
             Health = config.Health,
@@ -54,12 +50,6 @@ public class CreepRepository
         return _creepEntities[instanceID];
     }
 
-    
-    public CreepView GetNewCreepView(string creepId) //TODO: move to presenter
-    {
-        return _pools[creepId].Get();
-    }
-    
     public CreepConfig GetCreepConfig(string creepId)
     {
         return _creepsById[creepId];

@@ -22,8 +22,6 @@ namespace Core.Turrets.Entities
         private Dictionary<int, ProjectileEntity> _projectileEntities = new Dictionary<int, ProjectileEntity>();
         private Dictionary<int, ProjectileController> _projectileControllers = new Dictionary<int, ProjectileController>();
 
-        private Dictionary<string, GameObjectPool<TurretView>> _pools = new Dictionary<string, GameObjectPool<TurretView>>();
-
         private Dictionary<string, TurretConfig> _turretsById = new Dictionary<string, TurretConfig>();
 
         private Dictionary<string, object> _projectilesById = new Dictionary<string, object>();
@@ -108,11 +106,6 @@ namespace Core.Turrets.Entities
             var instanceID = view.GetInstanceID();
             _turretThumbnailPresenters[instanceID] = new TurretThumbnailPresenter(view);
             _turretThumbnailControllers[instanceID] = new TurretThumbnailController(this, view, turretId, controller);
-        }
-    
-        public TurretView GetNewTurretView(string turretId) //TODO: move to presenter
-        {
-            return _pools[turretId].Get();
         }
 
         public TurretEntity GetTurretEntity(int turretInstanceId)

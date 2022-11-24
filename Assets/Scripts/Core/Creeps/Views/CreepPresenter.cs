@@ -1,6 +1,6 @@
 using Events;
 
-public class CreepPresenter
+public class CreepPresenter : BasePresenter
 {
     private readonly CreepView _view;
     private readonly IEventDispatcher _eventDispatcher;
