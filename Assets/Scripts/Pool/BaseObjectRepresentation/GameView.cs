@@ -7,10 +7,6 @@ namespace Pool.BaseObjectRepresentation
     {
         public Action Dispose;
 
-        public void Init()
-        {
-        }
-    
         private void OnDestroy()
         {
             Dispose?.Invoke();

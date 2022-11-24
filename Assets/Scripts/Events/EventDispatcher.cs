@@ -6,7 +6,6 @@ namespace Events
     public class EventDispatcher : IEventDispatcher
     {
         private readonly Dictionary<Type, dynamic> _events = new Dictionary<Type, dynamic>();
-        private readonly Dictionary<Type, int> boooo = new Dictionary<Type, int>();
 
         public void Subscribe<T>(Action<T> callback) where T : BaseEvent
         {
@@ -33,8 +32,8 @@ namespace Events
             var type = typeof(T);
             if (_events.ContainsKey(typeof(T)))
             {
-                var c = _events[type] as Action<T>;
-                c?.Invoke(arg);
+                var action = _events[type] as Action<T>;
+                action?.Invoke(arg);
             }
         }
     }

@@ -22,11 +22,11 @@ namespace Core.Turrets.UseCases
             _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
 
-        public void UpdateTarget(int creepInstanceId, int turretInstanceId) //TODO: find Entity
+        public void UpdateTarget(int creepInstanceId, int turretInstanceId)
         {
             var target = _creepRepository.GetCreepEntity(creepInstanceId);
             var turretEntity = _turretsRepository.GetTurretEntity(turretInstanceId);
-            turretEntity.Target = target; //TODO: move to repository (?)
+            turretEntity.Target = target;
 
             _eventDispatcher.Dispatch(new TurretTargetUpdated(turretEntity));
         }

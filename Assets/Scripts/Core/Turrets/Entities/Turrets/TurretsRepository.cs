@@ -66,12 +66,12 @@ namespace Core.Turrets.Entities
         
         
 
-        public void SpawnNewTurretThumbnail(string turretId, TurretSpawnerPreviewerController controller) //TODO: remove controller, move to group
+        public void SpawnNewTurretThumbnail(string turretId, TurretSpawnerPreviewerController controller)
         {
             var config = _turretsById[turretId];
             var prefab = _assetCatalog.LoadResource<TurretThumbnailView>(_turretsConfig.ThumbnailPrefabId);
 
-            var view = Object.Instantiate(prefab, _thumbnailTurretsParent); //TODO: extract from Repository
+            var view = Object.Instantiate(prefab, _thumbnailTurretsParent);
 
             var instanceID = view.GetInstanceID();
             _turretThumbnailPresenters[instanceID] = new TurretThumbnailPresenter(view);

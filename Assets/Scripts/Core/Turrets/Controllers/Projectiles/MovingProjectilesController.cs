@@ -27,7 +27,7 @@ namespace Core.Turrets.Controllers.Projectiles
             _movingProjectile.Remove(eventInfo.Projectile);
         }
 
-        private void OnProjectileSpawned(ProjectileSpawned eventInfo) //TODO: also remove
+        private void OnProjectileSpawned(ProjectileSpawned eventInfo)
         {
             _movingProjectile.Add(eventInfo.Projectile);
         }

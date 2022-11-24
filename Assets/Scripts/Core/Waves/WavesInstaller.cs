@@ -16,7 +16,7 @@ namespace Core.Waves
         {
             var serviceLocator = ServiceLocator.ServiceLocator.Instance;
 
-            var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView); //TODO: change this
+            var wavesRepository = new WavesRepository(WavesLocalConfig.WavesConfig, WavesView);
             serviceLocator.RegisterService(wavesRepository);
 
             var spawnWaveUseCase = new SpawnWaveUseCase(wavesRepository);

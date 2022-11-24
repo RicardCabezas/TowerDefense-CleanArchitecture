@@ -28,7 +28,7 @@ namespace Core.Turrets.Views.Thumbnail
             _view = null;
         }
 
-        private void OnTurretSelectorSpawned(TurretSelectorSpawned eventInfo) //TODO: remove, add init method
+        private void OnTurretSelectorSpawned(TurretSelectorSpawned eventInfo)
         {
             var turret = eventInfo.Turret;
 

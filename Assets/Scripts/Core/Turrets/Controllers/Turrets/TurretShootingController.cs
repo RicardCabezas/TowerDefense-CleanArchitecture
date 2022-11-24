@@ -33,12 +33,11 @@ namespace Core.Turrets.Controllers
 
         private void OnTargetUpdated(TurretTargetUpdated eventInfo)
         {
-            //TODO: create ShootingTurretUseCaseFactory ->
             _turretsShooting.Add(eventInfo.Turret);
         }
 
 
-        public void Update() //TODO: call from installer
+        public void Update()
         {
             foreach (var turret in _turretsShooting)
             {

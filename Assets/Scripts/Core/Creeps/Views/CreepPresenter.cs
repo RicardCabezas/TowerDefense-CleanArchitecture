@@ -21,7 +21,7 @@ namespace Core.Creeps.Views
             _view.Dispose += OnViewDisposed;
         }
 
-        private void OnCreepMoved(CreepMovedEvent eventInfo) //TODO: make a presenters container to avoid calling all presenters
+        private void OnCreepMoved(CreepMovedEvent eventInfo)
         {
             if(eventInfo.Creep.InstanceId != _view.GetInstanceID())
                 return;

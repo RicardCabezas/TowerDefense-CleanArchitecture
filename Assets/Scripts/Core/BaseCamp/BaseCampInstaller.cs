@@ -1,4 +1,5 @@
 using Core.BaseCamp.Configs;
+using Core.BaseCamp.Controllers;
 using Core.BaseCamp.Entities;
 using Core.BaseCamp.UseCases;
 using Core.LevelFinished.Configs;
@@ -24,6 +25,8 @@ namespace Core.BaseCamp
 
             var baseCampReceivesDamageUseCase =
                 new BaseCampReceivesDamageUseCase(baseCampRepository, levelFinishedRepository);
+
+            var baseCampController = new BaseCampController(baseCampReceivesDamageUseCase);
         }
     }
 }

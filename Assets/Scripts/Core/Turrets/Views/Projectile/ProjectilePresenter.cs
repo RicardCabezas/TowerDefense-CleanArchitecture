@@ -20,7 +20,7 @@ namespace Core.Turrets.Views.Projectile
             _view.Dispose += OnViewDisposed;
         }
 
-        private void OnProjectilesMoved(ProjectilesMoved eventInfo) //TODO: move outside
+        private void OnProjectilesMoved(ProjectilesMoved eventInfo)
         {
             if (_view.GetInstanceID() == eventInfo.ProjectileInstanceId)
             {

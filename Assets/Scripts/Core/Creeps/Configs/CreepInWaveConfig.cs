@@ -6,7 +6,7 @@ namespace Core.Creeps.Configs
     public class CreepInWaveConfig
     {
         public int SpawnDelayInMiliseconds;
-        public string CreepId; //TODO: accept an asset
+        public string CreepId;
         public string SpawnPointId;
     }
 }

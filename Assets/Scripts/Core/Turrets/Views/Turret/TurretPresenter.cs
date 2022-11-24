@@ -15,7 +15,7 @@ namespace Core.Turrets.Views.Turret
             _view = view;
             
             _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
-            _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned); //TODO: subscribe to turret spawned
+            _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned);
 
             _view.Dispose += OnViewDisposed;
         }

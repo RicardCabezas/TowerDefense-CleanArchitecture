@@ -17,14 +17,11 @@ namespace Core.BaseCamp.UseCases
             _baseCampRepository = baseCampRepository;
             _eventDispatcher = ServiceLocator.ServiceLocator.Instance.GetService<IEventDispatcher>();
             _levelFinishedRepository = levelFinishedRepository;
-            
-            _eventDispatcher.Subscribe<BaseCampReceivedDamageEvent>(OnBaseCampReceivesDamage);
         }
 
-        private void OnBaseCampReceivesDamage(BaseCampReceivedDamageEvent damageReceivedEvent) //TODO: change, create controller
+        public void ReceiveDamage(float damage)
         {
-            _baseCampRepository.UpdateBaseHealth(damageReceivedEvent.Damage);
-            //TODO: fire event updating health
+            _baseCampRepository.UpdateBaseHealth(damage);
 
             if (_baseCampRepository.GetBaseHealth() <= 0)
             {

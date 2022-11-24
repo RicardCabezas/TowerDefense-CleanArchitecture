@@ -25,7 +25,6 @@ namespace Core.Turrets.Controllers.SpawnTurret
             _turretId = turretId;
         }
         
-        //TODO: create an input config
         private void Update()
         {
             if (Input.GetMouseButtonUp(0))

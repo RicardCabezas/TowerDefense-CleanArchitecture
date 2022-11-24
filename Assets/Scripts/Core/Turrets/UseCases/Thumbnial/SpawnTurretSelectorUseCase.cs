@@ -20,7 +20,7 @@ namespace Core.Turrets.UseCases
         {
             foreach (var turret in turretsConfig.Turrets)
             {
-                turretsRepository.SpawnNewTurretThumbnail(turret.Id, turretSpawnerPreviewerController); //TODO: remove controller, move to group
+                turretsRepository.SpawnNewTurretThumbnail(turret.Id, turretSpawnerPreviewerController);
                 _eventDispatcher.Dispatch(new TurretSelectorSpawned(turret));
             }
         }

@@ -17,8 +17,6 @@ namespace Core.SpawnerPoints.Entities
                 {
                     Position = spawner.View.transform.position
                 };
-
-                new SpawnerPresenter(spawner.View);
             }
         }
 

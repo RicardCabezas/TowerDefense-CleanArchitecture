@@ -8,19 +8,14 @@ namespace Pool
     public static class PoolService
     {
         private static readonly Dictionary<Type, Stack<IGameElementRepresentation>> _pooledObjects = new Dictionary<Type, Stack<IGameElementRepresentation>>();
-        private static readonly GameObject _poolParent;
 
         public static IGameElementRepresentation Get<T>()
         {
             if (!_pooledObjects.TryGetValue(typeof(T), out var gameRepresentationObjectOfTypeT))
-            {
                 return null;
-            }
         
             if (gameRepresentationObjectOfTypeT.Count <= 0)
-            {
                 return null;
-            }
         
             return gameRepresentationObjectOfTypeT.Pop();
         }

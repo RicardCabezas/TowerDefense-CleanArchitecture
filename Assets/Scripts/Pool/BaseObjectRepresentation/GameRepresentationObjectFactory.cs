@@ -11,13 +11,8 @@ namespace Pool.BaseObjectRepresentation
             if (gameRepresentationObject != null)
             {
                 var view = gameRepresentationObject.GameView;
-                var presenter = gameRepresentationObject.Presenter;
-                var controller = gameRepresentationObject.Controller;
-
+                
                 view.gameObject.SetActive(true);
-                controller.Init(view, args);
-                presenter.Init(view, args);
-                view.Init();
                 return (T)gameRepresentationObject;
             }
 

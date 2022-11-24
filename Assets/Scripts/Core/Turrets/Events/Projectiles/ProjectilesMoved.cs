@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Turrets.Events
 {
-    public struct ProjectilesMoved : BaseEvent //TODO: have a projectiles presenter group or whatever composition to process the event onlye once
+    public struct ProjectilesMoved : BaseEvent
     {
         public int ProjectileInstanceId { get; }
         public Vector3 NewPosition { get; }

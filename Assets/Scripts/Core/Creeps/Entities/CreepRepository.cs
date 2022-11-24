@@ -36,7 +36,7 @@ namespace Core.Creeps.Entities
             var view = creepGameRepresentation.GameView as CreepView;
             var instanceID = view.GetInstanceID();
         
-            _creepEntities[instanceID] = new CreepEntity //TODO: add to CreepGameRepresentation
+            _creepEntities[instanceID] = new CreepEntity
             {
                 CurrentPosition = position,
                 Health = config.Health,

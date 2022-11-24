@@ -19,8 +19,7 @@ namespace ServiceLocator
         public void RegisterService<T>(T service)
         {
             var type = typeof(T);
-            Assert.IsFalse(_services.ContainsKey(type), 
-                $"Service {type} already registered");
+            Assert.IsFalse(_services.ContainsKey(type), $"Service {type} already registered");
         
             _services.Add(type, service);
         }

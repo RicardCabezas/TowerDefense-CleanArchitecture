@@ -12,7 +12,7 @@ namespace Core.Creeps.UseCase
         private readonly Transform _userBaseTransform;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public MoveCreepsUseCase(CreepRepository creepRepository, Transform userBaseTransform) //TODO: get from repository(?)
+        public MoveCreepsUseCase(CreepRepository creepRepository, Transform userBaseTransform)
         {
             _creepRepository = creepRepository;
             _userBaseTransform = userBaseTransform;
