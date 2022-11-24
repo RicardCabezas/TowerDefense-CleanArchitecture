@@ -6,15 +6,27 @@ namespace Core.Turrets.Views
 {
     public class TurretThumbnailPresenter : BasePresenter
     {
-        private readonly TurretThumbnailView _view;
-        private readonly IEventDispatcher _eventDispatcher;
+        private TurretThumbnailView _view;
+        private IEventDispatcher _eventDispatcher;
 
         public TurretThumbnailPresenter(TurretThumbnailView view)
         {
             _view = view;
             
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned);}
+            _eventDispatcher.Subscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned);
+
+
+            _view.Dispose += OnViewDisposed;
+        }
+
+        private void OnViewDisposed()
+        {
+            _eventDispatcher.Unsubscribe<TurretSelectorSpawned>(OnTurretSelectorSpawned);
+            
+            _eventDispatcher = null;
+            _view = null;
+        }
 
         private void OnTurretSelectorSpawned(TurretSelectorSpawned eventInfo)
         {

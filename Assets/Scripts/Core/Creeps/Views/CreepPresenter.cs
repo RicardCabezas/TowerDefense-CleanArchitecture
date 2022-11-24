@@ -2,14 +2,8 @@ using Events;
 
 public class CreepPresenter : BasePresenter
 {
-    private readonly CreepView _view;
-    private readonly IEventDispatcher _eventDispatcher;
-
-    //TODO: react and update view
-    //on unit received dmg
-    //on unit died
-    
-    //TODO: dispose when view destroyed
+    private CreepView _view;
+    private IEventDispatcher _eventDispatcher;
 
     public CreepPresenter(CreepView view)
     {
@@ -19,6 +13,8 @@ public class CreepPresenter : BasePresenter
         
         _eventDispatcher.Subscribe<CreepSpawnedEvent>(OnCreepSpawned);
         _eventDispatcher.Subscribe<CreepMovedEvent>(OnCreepMoved);
+        
+        _view.Dispose += OnViewDisposed;
     }
 
     private void OnCreepMoved(CreepMovedEvent eventInfo) //TODO: make a presenters container to avoid calling all presenters
@@ -33,5 +29,14 @@ public class CreepPresenter : BasePresenter
     private void OnCreepSpawned(CreepSpawnedEvent eventInfo)
     {
         _view.transform.position = eventInfo.Creep.CurrentPosition;
+    }
+    
+    private void OnViewDisposed()
+    {
+        _eventDispatcher.Unsubscribe<CreepSpawnedEvent>(OnCreepSpawned);
+        _eventDispatcher.Unsubscribe<CreepMovedEvent>(OnCreepMoved);        
+        
+        _eventDispatcher = null;
+        _view = null;
     }
 }

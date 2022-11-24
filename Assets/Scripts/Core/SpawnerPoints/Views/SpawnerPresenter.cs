@@ -2,7 +2,7 @@ using Events;
 
 namespace Core.SpawnerPoints.Views
 {
-    public class SpawnerPresenter : BasePresenter
+    public class SpawnerPresenter : BasePresenter //TODO: remove?
     {
         private readonly SpawnerView _view;
         private readonly IEventDispatcher _eventDispatcher;
@@ -11,9 +11,6 @@ namespace Core.SpawnerPoints.Views
 
         public SpawnerPresenter(SpawnerView view)
         {
-            _view = view;
-
-            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
         }
     }
 }

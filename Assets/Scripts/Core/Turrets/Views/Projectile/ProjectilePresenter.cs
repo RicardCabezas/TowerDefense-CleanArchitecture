@@ -5,8 +5,8 @@ namespace Core.Turrets.Views
 {
     public class ProjectilePresenter : BasePresenter
     {
-        private readonly ProjectileView _view;
-        private readonly IEventDispatcher _eventDispatcher;
+        private ProjectileView _view;
+        private IEventDispatcher _eventDispatcher;
 
         public ProjectilePresenter(ProjectileView view)
         {
@@ -15,6 +15,8 @@ namespace Core.Turrets.Views
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
         
             _eventDispatcher.Subscribe<ProjectilesMoved>(OnProjectilesMoved);
+            
+            _view.Dispose += OnViewDisposed;
         }
 
         private void OnProjectilesMoved(ProjectilesMoved eventInfo) //TODO: move outside
@@ -23,6 +25,14 @@ namespace Core.Turrets.Views
             {
                 _view.transform.position = eventInfo.NewPosition;
             }
+        }
+        
+        private void OnViewDisposed()
+        {
+            _eventDispatcher.Unsubscribe<ProjectilesMoved>(OnProjectilesMoved);
+            
+            _eventDispatcher = null;
+            _view = null;
         }
     }
 }
