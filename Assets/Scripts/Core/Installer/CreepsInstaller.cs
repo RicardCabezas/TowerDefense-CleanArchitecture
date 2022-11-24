@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Events;
 using UnityEngine;
 
 public class CreepsInstaller : MonoBehaviour
@@ -16,6 +17,9 @@ public class CreepsInstaller : MonoBehaviour
         var spawnerPointsRepository = new SpawnerPointsRepository(SpawnerPointsConfig.Spawners);
         repositories[typeof(SpawnerPointsRepository)] = spawnerPointsRepository;
         
+        
+        ServiceLocator.Instance.RegisterService(creepRepository);
+
         var moveCreepsUseCase = new MoveCreepsUseCase(creepRepository, UserBasePosition);
     }
 }

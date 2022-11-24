@@ -9,8 +9,4 @@ namespace Core.Turrets.Views
         public Text Price;
         public Button Button;
     }
-    
-    public class ProjectileView : MonoBehaviour
-    {
-    }
 }

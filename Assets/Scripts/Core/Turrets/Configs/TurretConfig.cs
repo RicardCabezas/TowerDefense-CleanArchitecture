@@ -14,5 +14,6 @@ namespace Core.Turrets.Configs
         
         public string PrefabId;
         public float Cooldown;
+        public string ProjectileId;
     }
 }

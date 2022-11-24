@@ -10,21 +10,31 @@ namespace Core.Turrets.Entities
     {
         private readonly TurretsConfig _turretsConfig;
         private readonly Transform _thumbnailTurretsParent;
+        private readonly ProjectilesConfiguration _projectilesConfiguration;
 
         private Dictionary<int, TurretEntity> _turretEntities = new Dictionary<int, TurretEntity>();
         private Dictionary<int, TurretPresenter> _turretPresenters = new Dictionary<int, TurretPresenter>();
+        
         private Dictionary<int, TurretThumbnailPresenter> _turretThumbnailPresenters = new Dictionary<int, TurretThumbnailPresenter>();
         private Dictionary<int, TurretThumbnailController> _turretThumbnailControllers = new Dictionary<int, TurretThumbnailController>();
+        
+        private Dictionary<int, ProjectilePresenter> _projectilePresenters = new Dictionary<int, ProjectilePresenter>();
+        private Dictionary<int, ProjectileEntity> _projectileEntities = new Dictionary<int, ProjectileEntity>();
+        private Dictionary<int, ProjectileController> _projectileControllers = new Dictionary<int, ProjectileController>();
 
         private Dictionary<string, GameObjectPool<TurretView>> _pools = new Dictionary<string, GameObjectPool<TurretView>>();
 
         private Dictionary<string, TurretConfig> _turretsById = new Dictionary<string, TurretConfig>();
+
+        private Dictionary<string, object> _projectilesById = new Dictionary<string, object>();
+
         private readonly AssetCatalog.AssetCatalog _assetCatalog;
 
         public TurretsRepository(TurretsConfig turretsConfig, Transform thumbnailTurretsParent)
         {
             _turretsConfig = turretsConfig;
             _thumbnailTurretsParent = thumbnailTurretsParent;
+            _projectilesConfiguration = turretsConfig.ProjectilesConfiguration;
 
             _assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
         
@@ -35,6 +45,9 @@ namespace Core.Turrets.Entities
                 //_pools[turret.Id] = new GameObjectPool<TurretView>(prefab, 10);
                 _turretsById[turret.Id] = turret;
             }
+
+            _projectilesById[_projectilesConfiguration.FrozenProjectile.Id] = _projectilesConfiguration.FrozenProjectile;
+            _projectilesById[_projectilesConfiguration.RegularProjectile.Id] = _projectilesConfiguration.RegularProjectile;
         }
     
         public TurretEntity SpawnNewTurret(string turretId, Vector3 position)
@@ -48,20 +61,43 @@ namespace Core.Turrets.Entities
             var instanceID = view.GetInstanceID();
             _turretPresenters[instanceID] = new TurretPresenter(view, position);
 
-            _turretEntities[instanceID] = new TurretEntity();
+            _turretEntities[instanceID] = new TurretEntity
+            {
+                TurretShootCooldown = config.Cooldown,
+                Position = position,
+                ProjectileId = config.ProjectileId,
+                Target = null,
+                TimeSinceLastShot = 0,
+            };
 
             return _turretEntities[instanceID];
         }
-
-        public void SpawnNewProjectile(string turretId)
-        {
-            var prefab = _assetCatalog.LoadResource<ProjectileView>(_turretsConfig.ProjectilesConfiguration.RegularProjectile.PrefabPath);
-            var view = Object.Instantiate(prefab); //TODO: pool
-            var instanceID = view.GetInstanceID();
-            new ProjectilePresenter(view);
-            new ProjectileController(view);
-        }
         
+        public ProjectileEntity SpawnNewProjectile(TurretEntity turretEntity) //TODO: move to new repo
+        {
+            var config = (ProjectileConfiguration)_projectilesById[turretEntity.ProjectileId];
+
+            //TODO: projectileFactory:
+            var prefab = _assetCatalog.LoadResource<ProjectileView>(_projectilesConfiguration.RegularProjectile.PrefabPath); //TODO: pool
+            var view = Object.Instantiate(prefab);
+            var instanceID = view.GetInstanceID();
+            
+            
+            _projectilePresenters[instanceID] = new ProjectilePresenter(view);
+            _projectileEntities[instanceID] = new ProjectileEntity
+            {
+                Id = config.Id,
+                InstanceId = instanceID,
+                Damage = config.Damage,
+                Speed = config.Speed,
+                Position = turretEntity.Position,
+                TargetPosition = turretEntity.Target.CurrentPosition
+            };
+            _projectileControllers[instanceID] = new ProjectileController(view);
+
+            return _projectileEntities[instanceID];
+        }
+
         public void SpawnNewTurretThumbnail(string turretId, TurretSpawnerPreviewerController controller) //TODO: remove controller, move to group
         {
             var config = _turretsById[turretId];
@@ -82,6 +118,17 @@ namespace Core.Turrets.Entities
         public TurretEntity GetTurretEntity(int turretInstanceId)
         {
             return _turretEntities[turretInstanceId];
+        }
+
+        public T GetProjectileConfig<T>(int instanceId)
+        {
+            var entity = _projectileEntities[instanceId];
+            return GetProjectileConfig<T>(entity.Id);
+        }
+        
+        public T GetProjectileConfig<T>(string projectileId)
+        {
+            return (T)_projectilesById[projectileId];
         }
     }
 }

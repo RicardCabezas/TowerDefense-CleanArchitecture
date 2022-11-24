@@ -12,4 +12,14 @@ namespace Core.Turrets.Events
             Turret = turret;
         }
     }
+    
+    public struct ProjectileSpawned : BaseEvent
+    {
+        public ProjectileEntity Projectile { get; }
+
+        public ProjectileSpawned(ProjectileEntity turret)
+        {
+            Projectile = turret;
+        }
+    }
 }

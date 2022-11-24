@@ -10,37 +10,33 @@ namespace Core.Turrets.Views
     public class TurretShootingController
     {
         private readonly TurretsRepository _repository;
-        List<ShootingTurret> _turretShoots = new List<ShootingTurret>();
+        List<TurretEntity> _turretsShooting = new List<TurretEntity>();
         private readonly IEventDispatcher _eventDispatcher;
+        private readonly TurretShootUseCaseUse _shootUseCase;
 
         public TurretShootingController(TurretsRepository repository)
         {
             _repository = repository;
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<TurretTargetUpdated>(OnTargetUpdated);
+
+            _shootUseCase = new TurretShootUseCaseUse(repository);
         }
 
         private void OnTargetUpdated(TurretTargetUpdated eventInfo)
         {
             //TODO: create ShootingTurretUseCaseFactory ->
-            var shootingTurret = new ShootingTurret
-            {
-                ShootUseCaseUseCase = new TurretRegularShootUseCaseUseCase(_repository),
-                TimeSinceLastShot = 0f,
-                TurretShootCooldown = eventInfo.Turret.Cooldown
-            };
-            
-            _turretShoots.Add(shootingTurret);
+            _turretsShooting.Add(eventInfo.Turret);
         }
 
 
         public void Update() //TODO: call from installer
         {
-            foreach (var turret in _turretShoots)
+            foreach (var turret in _turretsShooting)
             {
                 if (turret.TimeSinceLastShot >= turret.TurretShootCooldown)
                 {
-                    turret.ShootUseCaseUseCase.Shoot();
+                    _shootUseCase.Shoot(turret);
                     turret.TimeSinceLastShot = 0;
                 }
                 

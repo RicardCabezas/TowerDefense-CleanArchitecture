@@ -6,7 +6,7 @@ namespace Events
 {
     public class ServiceLocator
     {
-        public static ServiceLocator Instance => _instance ?? (_instance = new ServiceLocator());
+        public static ServiceLocator Instance => _instance ??= new ServiceLocator();
         private static ServiceLocator _instance;
 
         private readonly Dictionary<Type, object> _services;
@@ -29,9 +29,7 @@ namespace Events
         {
             var type = typeof(T);
             if (!_services.TryGetValue(type, out var service))
-            {
                 throw new Exception($"Service {type} not found");
-            }
 
             return (T) service;
         }
