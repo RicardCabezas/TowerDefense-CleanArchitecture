@@ -19,8 +19,6 @@ public class CreepsInstaller : MonoBehaviour
         var spawnerPointsRepository = new SpawnerPointsRepository(SpawnerPointsConfig.Spawners);
         serviceLocator.RegisterService(spawnerPointsRepository);
         
-        ServiceLocator.Instance.RegisterService(creepRepository);
-
         var moveCreepsUseCase = new MoveCreepsUseCase(creepRepository, UserBasePosition);
     }
 }
