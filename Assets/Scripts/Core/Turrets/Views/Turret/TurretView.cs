@@ -2,16 +2,7 @@ using UnityEngine;
 
 namespace Core.Turrets.Views
 {
-    public class TurretView : PoolableObject
+    public class TurretView : GameView
     {
-        internal override void Init()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        internal override void Release()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
