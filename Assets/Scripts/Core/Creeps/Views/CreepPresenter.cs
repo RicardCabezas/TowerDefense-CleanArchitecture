@@ -33,10 +33,17 @@ public class CreepPresenter : BasePresenter
     
     private void OnViewDisposed()
     {
-        _eventDispatcher.Unsubscribe<CreepSpawnedEvent>(OnCreepSpawned);
-        _eventDispatcher.Unsubscribe<CreepMovedEvent>(OnCreepMoved);        
-        
-        _eventDispatcher = null;
+        Dispose();
         _view = null;
+    }
+
+    public override void Dispose()
+    {
+        if (_eventDispatcher != null)
+        {
+            _eventDispatcher.Unsubscribe<CreepSpawnedEvent>(OnCreepSpawned);
+            _eventDispatcher.Unsubscribe<CreepMovedEvent>(OnCreepMoved);        
+            _eventDispatcher = null;
+        }
     }
 }

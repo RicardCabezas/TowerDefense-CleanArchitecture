@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core.Turrets.Configs;
+using Core.Turrets.UseCases;
 using Core.Turrets.Views;
 using Events;
 using UnityEngine;
@@ -9,33 +10,31 @@ namespace Core.Turrets.Entities
     public class ProjectilesRepository
     {
         private readonly ProjectilesConfiguration _projectilesConfiguration;
-        private Dictionary<int, ProjectilePresenter> _projectilePresenters = new Dictionary<int, ProjectilePresenter>();
         private Dictionary<int, ProjectileEntity> _projectileEntities = new Dictionary<int, ProjectileEntity>();
-        private Dictionary<int, ProjectileController> _projectileControllers = new Dictionary<int, ProjectileController>();
         private Dictionary<string, object> _projectilesById = new Dictionary<string, object>();
         private readonly AssetCatalog.AssetCatalog _assetCatalog;
+        private Dictionary<int, IGameElementRepresentation> _projectileGameElementRepresentations = new Dictionary<int, IGameElementRepresentation>();
+        private readonly ProjectileFactory _projectileFactory;
 
         public ProjectilesRepository(TurretsConfig turretsConfig)
         {
             _assetCatalog = ServiceLocator.Instance.GetService<AssetCatalog.AssetCatalog>();
 
             _projectilesConfiguration = turretsConfig.ProjectilesConfiguration;
-            
+            _projectileFactory = new ProjectileFactory(_projectilesConfiguration);
             _projectilesById[_projectilesConfiguration.FrozenProjectile.Id] = _projectilesConfiguration.FrozenProjectile;
             _projectilesById[_projectilesConfiguration.RegularProjectile.Id] = _projectilesConfiguration.RegularProjectile;
         }
 
-        public ProjectileEntity SpawnNewProjectile(TurretEntity turretEntity) //TODO: move to new repo
+        public ProjectileEntity SpawnNewProjectile(TurretEntity turretEntity)
         {
             var config = (ProjectileConfiguration)_projectilesById[turretEntity.ProjectileId];
 
-            var prefab = _assetCatalog.LoadResource<ProjectileView>(_projectilesConfiguration.RegularProjectile.PrefabPath);
-            var creepGameRepresentation = GameRepresentationObjectFactory.GameRepresentationObject<ProjectileGameElementRepresentation>(prefab);
+            var projectileRepresentation = _projectileFactory.Get(config);
 
-            var view = creepGameRepresentation.GameView as ProjectileView;
+            var view = projectileRepresentation.GameView as ProjectileView;
             var instanceID = view.GetInstanceID();
 
-            _projectilePresenters[instanceID] = new ProjectilePresenter(view);
             _projectileEntities[instanceID] = new ProjectileEntity
             {
                 Id = config.Id,
@@ -45,8 +44,8 @@ namespace Core.Turrets.Entities
                 Position = turretEntity.Position,
                 TargetPosition = turretEntity.Target.CurrentPosition
             };
-            _projectileControllers[instanceID] = new ProjectileController(view);
-
+            
+            _projectileGameElementRepresentations[instanceID] = projectileRepresentation;
             return _projectileEntities[instanceID];
         }
         
@@ -59,6 +58,16 @@ namespace Core.Turrets.Entities
         public T GetProjectileConfig<T>(string projectileId)
         {
             return (T)_projectilesById[projectileId];
+        }
+        
+        public void DestroyProjectile(int instanceID)
+        {
+            PoolService.StoreGameRepresentationObject<ProjectileRegularGameElementRepresentation>(_projectileGameElementRepresentations[instanceID]);
+        }
+
+        public ProjectileEntity GetProjectileEntity(int instanceId)
+        {
+            return _projectileEntities[instanceId];
         }
     }
 }

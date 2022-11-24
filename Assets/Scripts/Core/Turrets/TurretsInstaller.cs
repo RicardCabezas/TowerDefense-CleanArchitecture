@@ -32,6 +32,7 @@ public class TurretsInstaller : MonoBehaviour
         
         _turretShootingController = new TurretShootingController(turretsRepository, projectilesRepository);
         _projectilesMovingController = new MovingProjectilesController();
+        
         spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig, SpawnerPreviewerController);
     }
 

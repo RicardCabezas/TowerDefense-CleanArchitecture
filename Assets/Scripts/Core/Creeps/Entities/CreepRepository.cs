@@ -8,6 +8,7 @@ public class CreepRepository
     private readonly CreepsConfig _creepsConfig;
 
     private Dictionary<int, CreepEntity> _creepEntities = new Dictionary<int, CreepEntity>();
+    private Dictionary<int, CreepGameElementRepresentation> _creepGameElementRepresentations = new Dictionary<int, CreepGameElementRepresentation>();
 
     private Dictionary<string, CreepConfig> _creepsById = new Dictionary<string, CreepConfig>();
 
@@ -40,7 +41,14 @@ public class CreepRepository
             CurrentSpeed = config.Speed
         };
 
+        _creepGameElementRepresentations[instanceID] = creepGameRepresentation;
+
         return _creepEntities[instanceID];
+    }
+
+    public void DestroyCreep(int instanceID)
+    {
+        PoolService.StoreGameRepresentationObject<CreepGameElementRepresentation>(_creepGameElementRepresentations[instanceID]);
     }
     
     public CreepEntity GetCreepEntity(int instanceID) 

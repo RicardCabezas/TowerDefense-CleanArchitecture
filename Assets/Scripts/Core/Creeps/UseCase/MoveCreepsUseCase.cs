@@ -13,31 +13,23 @@ public class MoveCreepsUseCase
     {
         _creepRepository = creepRepository;
         _userBaseTransform = userBaseTransform;
-
         _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-        _eventDispatcher.Subscribe<CreepSpawnedEvent>(OnCreepSpawned);
     }
 
-    private void OnCreepSpawned(CreepSpawnedEvent eventInfo)
-    {
-        Move(eventInfo.Creep);
-    }
-
-    async void Move(CreepEntity creep)
+    public void Move(CreepEntity creep)
     {
         creep.TargetPosition = _userBaseTransform.position;
-        
-        while (Vector3.Distance(creep.CurrentPosition, _userBaseTransform.position) >= 1) //TODO: remove magic number
-        {
-            var newCreepPosition = Vector3.MoveTowards(
-                creep.CurrentPosition, creep.TargetPosition, creep.CurrentSpeed * Time.deltaTime);
-            creep.CurrentPosition = newCreepPosition;
-            
-            _eventDispatcher.Dispatch(new CreepMovedEvent(creep));
-            await Task.Yield();
-        }
+
+        var newCreepPosition = Vector3.MoveTowards(
+            creep.CurrentPosition, creep.TargetPosition, creep.CurrentSpeed * Time.deltaTime);
+        creep.CurrentPosition = newCreepPosition;
+
+        _eventDispatcher.Dispatch(new CreepMovedEvent(creep));
+
+        if ((Vector3.Distance(creep.CurrentPosition, _userBaseTransform.position) >= 1))
+            return;
 
         var damage = _creepRepository.GetCreepConfig(creep.Id).Damage;
-        _eventDispatcher.Dispatch(new BaseCampReceivedDamageEvent(damage)); //TODO: change event name
+        _eventDispatcher.Dispatch(new BaseCampReceivedDamageEvent(damage));
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Core.Turrets.Entities;
 using Core.Turrets.Events;
 using Core.Turrets.UseCases;
@@ -18,9 +19,16 @@ namespace Core.Turrets.Views
         {
             _repository = repository;
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            
             _eventDispatcher.Subscribe<TurretTargetUpdated>(OnTargetUpdated);
+            _eventDispatcher.Subscribe<CreepDestroyedEvent>(OnCreepDestroyed);
 
             _shootUseCase = new TurretShootUseCaseUse(projectilesRepository);
+        }
+
+        private void OnCreepDestroyed(CreepDestroyedEvent eventInfo)
+        {
+            _turretsShooting.RemoveAll(activeTurrets => activeTurrets.Target == eventInfo.Creep);
         }
 
         private void OnTargetUpdated(TurretTargetUpdated eventInfo)

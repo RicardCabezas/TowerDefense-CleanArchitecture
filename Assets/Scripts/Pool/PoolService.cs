@@ -24,15 +24,16 @@ public static class PoolService
         return gameRepresentationObjectOfTypeT.Pop();
     }
     
-    public static void StoreGameRepresentationObject(Type objectType, IGameElementRepresentation gameElementRepresentationObject)
+    public static void StoreGameRepresentationObject<T>(IGameElementRepresentation gameElementRepresentationObject)
     {
         gameElementRepresentationObject.GameView.gameObject.SetActive(false);
-            
-        if (!_pooledObjects.TryGetValue(objectType, out var controllerViewPairStackOfTypeT))
+        gameElementRepresentationObject.Controller.Dispose();
+        gameElementRepresentationObject.Presenter.Dispose();
+        if (!_pooledObjects.TryGetValue(typeof(T), out var controllerViewPairStackOfTypeT))
         {
             var stack = new Stack<IGameElementRepresentation>();
             stack.Push(gameElementRepresentationObject);
-            _pooledObjects.Add(objectType, stack);
+            _pooledObjects.Add(typeof(T), stack);
         }
         else
         {

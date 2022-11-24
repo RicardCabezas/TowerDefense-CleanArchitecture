@@ -4,6 +4,7 @@ public class BaseViewController
 {
     public void Init(GameView view, object args)
     {
-        throw new NotImplementedException();
     }
+
+    public virtual void Dispose() { }
 }

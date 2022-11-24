@@ -29,10 +29,17 @@ namespace Core.Turrets.Views
         
         private void OnViewDisposed()
         {
-            _eventDispatcher.Unsubscribe<ProjectilesMoved>(OnProjectilesMoved);
-            
-            _eventDispatcher = null;
+            Dispose();
             _view = null;
+        }
+        
+        public override void Dispose()
+        {
+            if (_eventDispatcher != null)
+            {
+                _eventDispatcher.Unsubscribe<ProjectilesMoved>(OnProjectilesMoved);
+                _eventDispatcher = null;
+            }
         }
     }
 }

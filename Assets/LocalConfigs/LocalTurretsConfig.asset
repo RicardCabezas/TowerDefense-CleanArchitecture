@@ -18,24 +18,24 @@ MonoBehaviour:
       RegularProjectile:
         Id: Regular
         Damage: 20
-        Speed: 20
+        Speed: 80
         PrefabPath: Bullet
       FrozenProjectile:
         Id: Frozen
         Damage: 0
-        Speed: 20
+        Speed: 50
         PrefabPath: Bullet
-        SpeedDebuff: 0.7
+        SpeedDebuff: 0.04
     Turrets:
     - Cost: 2
-      Id: Turret-regular
+      Id: Turret-freezing
       ThumbnailColor: {r: 1, g: 0, b: 0, a: 0}
-      PrefabId: Turret-regular
+      PrefabId: Turret-freezing
       Cooldown: 0.4
-      ProjectileId: Regular
+      ProjectileId: Frozen
     - Cost: 5
       Id: Turret-freezing
       ThumbnailColor: {r: 0, g: 0.92101526, b: 1, a: 0}
       PrefabId: Turret-freezing
       Cooldown: 0.4
-      ProjectileId: Regular
+      ProjectileId: Frozen

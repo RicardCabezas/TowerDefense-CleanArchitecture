@@ -18,6 +18,12 @@ namespace Core.Turrets.UseCases
             
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<ProjectileSpawned>(OnProjectileSpawned);
+            _eventDispatcher.Subscribe<ProjectileDestroyed>(OnProjectileDestroyed);
+        }
+
+        private void OnProjectileDestroyed(ProjectileDestroyed eventInfo)
+        {
+            _movingProjectile.Remove(eventInfo.Projectile);
         }
 
         private void OnProjectileSpawned(ProjectileSpawned eventInfo) //TODO: also remove

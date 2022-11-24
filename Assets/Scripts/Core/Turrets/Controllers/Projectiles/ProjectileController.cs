@@ -1,12 +1,14 @@
 using Core.Creeps.UseCase;
+using Core.Turrets.UseCases;
 using UnityEngine;
 
 namespace Core.Turrets.Views
 {
-    public class ProjectileController
+    public class ProjectileController : BaseViewController
     {
-        private ProjectileView _view;
-        private CreepReceivedRegularProjectileUseCase _useCase;
+        protected ProjectileView _view;
+        protected ICreepReceivedProjectile _useCase;
+        protected DestroyProjectileUseCase _destroyProjectile;
 
         public ProjectileController(ProjectileView view)
         {
@@ -14,21 +16,21 @@ namespace Core.Turrets.Views
 
             _view.CollidedWithCreep += OnCollidedWithCreep;
             _useCase = new CreepReceivedRegularProjectileUseCase();
-            
+            _destroyProjectile = new DestroyProjectileUseCase();
             _view.Dispose += OnViewDisposed;
         }
 
-        private void OnViewDisposed()
+        protected void OnViewDisposed()
         {
             _view.CollidedWithCreep -= OnCollidedWithCreep;
             _view = null;
             _useCase = null;
         }
 
-        private void OnCollidedWithCreep(int instanceId)
+        protected void OnCollidedWithCreep(int instanceId)
         {
-            _useCase.Execute(instanceId, _view.GetInstanceID());//TODO: use factory to decide what type of projectile, create use case based on that
-            //Object.Destroy(_view); //TODO: implement pool release
+            _useCase.Execute(instanceId, _view.GetInstanceID());
+            _destroyProjectile.Destroy(_view.GetInstanceID());
         }
     }
 }
