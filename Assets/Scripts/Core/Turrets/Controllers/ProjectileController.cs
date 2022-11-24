@@ -5,8 +5,8 @@ namespace Core.Turrets.Views
 {
     public class ProjectileController
     {
-        private readonly ProjectileView _view;
-        private readonly CreepReceivedRegularProjectileUseCase _useCase;
+        private ProjectileView _view;
+        private CreepReceivedRegularProjectileUseCase _useCase;
 
         public ProjectileController(ProjectileView view)
         {
@@ -14,7 +14,15 @@ namespace Core.Turrets.Views
 
             _view.CollidedWithCreep += OnCollidedWithCreep;
             _useCase = new CreepReceivedRegularProjectileUseCase();
+            
+            _view.Dispose += OnViewDisposed;
+        }
 
+        private void OnViewDisposed()
+        {
+            _view.CollidedWithCreep -= OnCollidedWithCreep;
+            _view = null;
+            _useCase = null;
         }
 
         private void OnCollidedWithCreep(int instanceId)

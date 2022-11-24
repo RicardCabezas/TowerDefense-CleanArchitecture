@@ -5,10 +5,10 @@ namespace Core.Turrets.Views
 {
     public class TurretThumbnailController
     {
-        private readonly TurretsRepository _repository;
-        private readonly TurretThumbnailView _view;
-        private readonly string _turretId;
-        private readonly TurretSpawnerPreviewerController _previewerController;
+        private TurretsRepository _repository;
+        private TurretThumbnailView _view;
+        private string _turretId;
+        private TurretSpawnerPreviewerController _previewerController;
 
         public TurretThumbnailController(
             TurretsRepository repository, 
@@ -25,6 +25,17 @@ namespace Core.Turrets.Views
             _view.Button.onClick.AddListener(OnClick);
             
             _previewerController.Init(spawnTurretUseCase, turretId);
+
+            _view.Dispose += OnViewDisposed;
+        }
+
+        private void OnViewDisposed()
+        {
+            _view.Button.onClick.RemoveAllListeners();
+            _view = null;
+            _previewerController = null;
+            _repository = null;
+            _turretId = null;
         }
 
         private void OnClick()
