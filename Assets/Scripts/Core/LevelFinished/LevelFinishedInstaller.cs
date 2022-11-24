@@ -7,7 +7,7 @@ namespace Core.LevelFinished
 {
     public class LevelFinishedInstaller : MonoBehaviour
     {
-        public LocalLevelFinishedConfig LocalLevelFinishedConfig;
+        [SerializeField] LocalLevelFinishedConfig LocalLevelFinishedConfig;
         
         public void Install()
         {

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _creepsConfig:
     Creeps:
-    - Speed: 1
+    - Speed: 2
       Health: 100
       PrefabId: Creeps/Creep-small
       Id: Small
       Damage: 1000
       Reward: 5
-    - Speed: 0.5
+    - Speed: 1
       Health: 100
       PrefabId: Creeps/Creep-big
       Id: Big

@@ -13,12 +13,12 @@ namespace Core.Installer
 {
     public class GameInstaller : MonoBehaviour
     {
-        public CreepsInstaller CreepsInstaller;
-        public WavesInstaller WavesInstaller;
-        public BaseCampInstaller BaseCampInstaller;
-        public LevelFinishedInstaller LevelFinishedInstaller;
-        public TurretsInstaller TurretsInstaller;
-        public CurrenciesInstaller CurrenciesInstaller;
+        [SerializeField] CreepsInstaller CreepsInstaller;
+        [SerializeField] WavesInstaller WavesInstaller;
+        [SerializeField] BaseCampInstaller BaseCampInstaller;
+        [SerializeField] LevelFinishedInstaller LevelFinishedInstaller;
+        [SerializeField] TurretsInstaller TurretsInstaller;
+        [SerializeField] CurrenciesInstaller CurrenciesInstaller;
 
         void Start()
         { 
@@ -28,14 +28,11 @@ namespace Core.Installer
             var assetCatalog = new AssetCatalog.AssetCatalog();
             ServiceLocator.ServiceLocator.Instance.RegisterService(assetCatalog);
         
-            IEconomySystem<SoftCurrency> softCurrencySystem = new EconomySystemSoftCurrency();
-            ServiceLocator.ServiceLocator.Instance.RegisterService(softCurrencySystem);
-        
+            CurrenciesInstaller.Install();
             CreepsInstaller.Install();
             WavesInstaller.Install();
             BaseCampInstaller.Install();
             TurretsInstaller.Install();
-            CurrenciesInstaller.Install();
             LevelFinishedInstaller.Install();
         }
     }

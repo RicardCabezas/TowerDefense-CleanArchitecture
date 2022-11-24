@@ -6,6 +6,6 @@ namespace EconomySystem.Config
     [Serializable]
     public class CurrenciesConfig
     {
-        public Currency[] Currencies;
+        public int InitialSoftCurrency;
     }
 }

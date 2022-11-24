@@ -10,9 +10,10 @@ namespace Core.Creeps
 {
     public class CreepsInstaller : MonoBehaviour
     {
-        public LocalCreepsConfig CreepsLocalConfig;
-        public LevelSpawnerPointsLocalConfig SpawnerPointsConfig;
-        public Transform UserBasePosition;
+        [SerializeField] LocalCreepsConfig CreepsLocalConfig;
+        [SerializeField] LevelSpawnerPointsLocalConfig SpawnerPointsConfig;
+        [SerializeField] Transform UserBasePosition;
+        
         private MovingCreepsController _movingCreepsController;
 
         public void Install()

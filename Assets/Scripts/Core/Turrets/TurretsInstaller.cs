@@ -11,11 +11,12 @@ namespace Core.Turrets
 {
     public class TurretsInstaller : MonoBehaviour
     {
-        public LocalTurretsConfig TurretsLocalConfig;
-        public Transform ThumnailTurretsParent;
-        public TurretSpawnerPreviewerController SpawnerPreviewerController;
-        private TurretShootingController _turretShootingController;
-        private MovingProjectilesController _projectilesMovingController;
+        [SerializeField] LocalTurretsConfig TurretsLocalConfig;
+        [SerializeField] Transform ThumnailTurretsParent;
+        [SerializeField] TurretSpawnerPreviewerController SpawnerPreviewerController;
+
+        TurretShootingController _turretShootingController;
+        MovingProjectilesController _projectilesMovingController;
 
         public void Install()
         {
@@ -29,13 +30,14 @@ namespace Core.Turrets
             var spawnTurretThumbnailsUseCase = new SpawnTurretSelectorUseCase();
 
             var creepRepository = serviceLocator.GetService<CreepRepository>();
-            var updateTurretTargetUseCase = new UpdateTurretTargetUseCase(creepRepository, turretsRepository); 
+            var updateTurretTargetUseCase = new UpdateTurretTargetUseCase(creepRepository, turretsRepository);
             var updateTurretTargetController = new UpdateTurretTargetController(updateTurretTargetUseCase);
-        
+
             _turretShootingController = new TurretShootingController(turretsRepository, projectilesRepository);
             _projectilesMovingController = new MovingProjectilesController();
-        
-            spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig, SpawnerPreviewerController);
+
+            spawnTurretThumbnailsUseCase.Spawn(turretsRepository, TurretsLocalConfig.TurretsConfig,
+                SpawnerPreviewerController);
         }
 
         private void Update()

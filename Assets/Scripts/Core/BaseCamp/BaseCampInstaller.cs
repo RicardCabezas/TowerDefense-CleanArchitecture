@@ -10,8 +10,8 @@ namespace Core.BaseCamp
 {
     public class BaseCampInstaller : MonoBehaviour
     {
-        public LocalBaseCampConfig BaseCampLocalConfig;
-        public LocalLevelFinishedConfig LevelFinishedLocalConfig;
+        [SerializeField] LocalBaseCampConfig BaseCampLocalConfig;
+        [SerializeField] LocalLevelFinishedConfig LevelFinishedLocalConfig;
 
         public void Install()
         {

@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800c0b6b0a5f499d85fd71b4d2141a17, type: 3}
   m_Name: LocalCurrenciesConfig
   m_EditorClassIdentifier: 
+  _currenciesConfig:
+    InitialSoftCurrency: 20

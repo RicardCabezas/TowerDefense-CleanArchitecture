@@ -9,8 +9,8 @@ namespace Core.Waves
 {
     public class WavesInstaller : MonoBehaviour
     {
-        public WavesLocalConfig WavesLocalConfig;
-        public WavesView WavesView;
+        [SerializeField] WavesLocalConfig WavesLocalConfig;
+        [SerializeField] WavesView WavesView;
 
         public void Install()
         {
