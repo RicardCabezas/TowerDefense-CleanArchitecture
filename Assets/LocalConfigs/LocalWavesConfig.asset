@@ -20,15 +20,36 @@ MonoBehaviour:
         SpawnPointId: 1
       - SpawnDelayInMiliseconds: 1474
         CreepId: Big
-        SpawnPointId: 1
+        SpawnPointId: 2
       - SpawnDelayInMiliseconds: 2466
         CreepId: Big
-        SpawnPointId: 1
+        SpawnPointId: 3
     - CreepsConfig:
-      - SpawnDelayInMiliseconds: 23
+      - SpawnDelayInMiliseconds: 383
+        CreepId: Small
+        SpawnPointId: 0
+      - SpawnDelayInMiliseconds: 1022
         CreepId: Small
         SpawnPointId: 1
+      - SpawnDelayInMiliseconds: 2097
+        CreepId: Small
+        SpawnPointId: 3
+      - SpawnDelayInMiliseconds: 3730
+        CreepId: Small
+        SpawnPointId: 2
     - CreepsConfig:
-      - SpawnDelayInMiliseconds: 1753
+      - SpawnDelayInMiliseconds: 646
+        CreepId: Small
+        SpawnPointId: 0
+      - SpawnDelayInMiliseconds: 1467
         CreepId: Small
         SpawnPointId: 1
+      - SpawnDelayInMiliseconds: 1116
+        CreepId: Small
+        SpawnPointId: 2
+      - SpawnDelayInMiliseconds: 1535
+        CreepId: Small
+        SpawnPointId: 3
+      - SpawnDelayInMiliseconds: 1825
+        CreepId: Small
+        SpawnPointId: 0

@@ -1480,6 +1480,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 948977150}
+  LocalCurrenciesConfig: {fileID: 11400000, guid: 8cc8e8b15c90949009370a54bf1fa2d6,
+    type: 2}
 --- !u!4 &1679901520
 Transform:
   m_ObjectHideFlags: 0

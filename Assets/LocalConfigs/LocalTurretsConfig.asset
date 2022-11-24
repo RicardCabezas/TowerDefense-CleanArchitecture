@@ -27,13 +27,13 @@ MonoBehaviour:
         PrefabPath: Bullet
         SpeedDebuff: 0.04
     Turrets:
-    - Cost: 2
+    - Cost: 5
       Id: Regular
       ThumbnailColor: {r: 1, g: 1, b: 1, a: 1}
       PrefabId: Turret-regular
       Cooldown: 1
       ProjectileId: Regular
-    - Cost: 3
+    - Cost: 5
       Id: Frozen
       ThumbnailColor: {r: 0, g: 0.92101526, b: 1, a: 1}
       PrefabId: Turret-freezing

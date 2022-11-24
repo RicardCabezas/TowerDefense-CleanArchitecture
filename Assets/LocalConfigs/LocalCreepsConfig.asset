@@ -19,10 +19,10 @@ MonoBehaviour:
       PrefabId: Creeps/Creep-small
       Id: Small
       Damage: 1000
-      Reward: 5
+      Reward: 1
     - Speed: 1
-      Health: 100
+      Health: 500
       PrefabId: Creeps/Creep-big
       Id: Big
       Damage: 1000
-      Reward: 5
+      Reward: 1
