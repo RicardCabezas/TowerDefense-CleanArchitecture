@@ -91,10 +91,3 @@ that decides which creep is and what behaviour it is affected by (moving, flying
 
 ##### Dependencies
 When I started the project I added the plugin Extenject since I believe that it makes a lot of sense in this kind of architectures where everything is decoupled and you end up having that many clases (it also helps with the testing). It helps reducing the verbose of the constructors and has a lot of helpful features as any other DI implementation. On the other hand, it also comes with some initial loading cost and it adds a lot of complexity on the setup. So, for production I would have use it, but I avoided it here because of the limited time. So, the project has some direct injection through the constructor but also has a ServiceLocator class helper. Again, in production I'd drop this in favor of a more elaborated DI tool.
-
-
- ##### Features
- Almost everything requested is functional. Altough, the code may contain some minor bugs due the limited time of the project. Known small things missing are: 
- - turret UI buttons not blocking interactability when clicked or when not having enough currency 
- - Projectiles don't update the position of their moving target. So if the target is faster they will not collide. Also they don't destroy themselves after X amount of time
- - ...
