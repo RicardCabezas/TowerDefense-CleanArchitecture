@@ -44,8 +44,7 @@ since in theory the will tackle a specific scenario, rather than grouping a lot 
 concatenated (use case calls another use case). They get the data from the Repositories. They can be called from the controllers. They don't know about the views or controllers.
 
 ### Controller
-This clases are in charge of starting the flow of the logic. They listen for the user inputs to call a specific use case. They can
- know the views since the must listen from them sometimes (buttons)
+This clases are in charge of starting the flow of the logic. They listen for the user inputs to call a specific use case. They can know the views since the must listen from them sometimes (buttons)
 
 ### Presenters
 They just listen for global events in order to update the views. They are not attached to any other class rather than the view. They shouldn't contain any logic rather than transforming raw data to be represented by the view.
@@ -71,7 +70,7 @@ The controller registers an input and calls the use case --> The use case does s
 -------------------------------
 
 
-Some other parts of the test I'll like to mention:
+Some other parts of the sample I'll like to mention:
 
 ##### `PoolService`
 Since the game has some objects that will be constantly being spawned and destroyed it must implement some type of pooling, this is what this service does. It's used to pool creeps and projectiles but potentially could pool any other object in the game.
